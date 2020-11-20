@@ -3,13 +3,26 @@ package modele.personnages;
 import java.awt.*;
 
 public abstract class Personnage {
-    private int pointsDeVie;
+    public int pointsDeVie;
     private float positionX;
     private float positionY;
     private boolean isDead;
     private Image image;
 
 //constructeur ?
+
+    public Personnage(){
+        isDead = false;
+        pointsDeVie = 3;
+    }
+
+    public int getPv(){
+        return this.pointsDeVie;
+    }
+
+    public void setIsDead(boolean bool){
+        isDead = bool;
+    }
 
     public void seFaireToucher(){
         this.pointsDeVie--;
