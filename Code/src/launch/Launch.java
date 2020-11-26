@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Launch extends Application{
     @Override
     public void start(Stage pS) throws Exception{
-        Parent container = FXMLLoader.load(getClass().getResource("/fxml/MainWindow.fxml"));
+        Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
         pS.setScene(new Scene(container));
         pS.setTitle("Escape the Covid");
         pS.show();
