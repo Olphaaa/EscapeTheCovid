@@ -16,6 +16,7 @@ public abstract class Personnage {
         pointsDeVie = 3;
     }
 
+    public void setPv(int pdv){this.pointsDeVie = pdv;}
     public int getPv(){
         return this.pointsDeVie;
     }

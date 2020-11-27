@@ -23,6 +23,5 @@ public class Carte {
         {
             rocher.set(i, new Rocher());
         }
-
     }
 }

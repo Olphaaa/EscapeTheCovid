@@ -9,7 +9,7 @@ import java.lang.reflect.Array;
 public class PersoPrincipal {
     private Arme a;
     private Protection p;
-    public String surnom;
+    public String pseudo;
 
     public PersoPrincipal(){
         this.a = null;
@@ -18,7 +18,7 @@ public class PersoPrincipal {
 
     public PersoPrincipal(String surnom){
         new PersoPrincipal();
-        this.surnom = surnom;
+        this.pseudo = surnom;
     }
 
     private void setArme(Arme a){
@@ -33,6 +33,6 @@ public class PersoPrincipal {
         int pdvAdvers = ia.getPv();
         pdvAdvers -= a.getPdd();
         if(pdvAdvers <= 0){ia.setIsDead(true); ia.disparition();}
-        else ia.setPdv(pdvAdvers);
+        else ia.setPv(pdvAdvers);
     }
 }

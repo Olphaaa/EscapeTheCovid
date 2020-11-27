@@ -14,12 +14,7 @@ public class Rocher{
 
     }
 
-    public float getPositionX(){
-        return this.positionX;
-    }
-
-    public float getPositionY(){
-        return this.positionY;
-    }
+    public float getPositionX(){return this.positionX;}
+    public float getPositionY(){return this.positionY;}
 
 }
