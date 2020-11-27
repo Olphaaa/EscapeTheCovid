@@ -10,6 +10,7 @@ public class Launch extends Application{
     @Override
     public void start(Stage pS) throws Exception{
         Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
+        container.getStylesheets().add("css/style.css");
         pS.setScene(new Scene(container));
         pS.setTitle("Escape the Covid");
         pS.show();
