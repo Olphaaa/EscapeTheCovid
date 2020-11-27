@@ -15,7 +15,7 @@ public class Launch extends Application{
         fenetrePrincipale = pS;
         Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
         container.getStylesheets().add("css/style.css");
-        pS.getIcons().add(new Image("ressource/images/icone.png"));
+        pS.getIcons().add(new Image("images/icone.png"));
         pS.setScene(new Scene(container));
         pS.setTitle("Escape the Covid");
         pS.show();
