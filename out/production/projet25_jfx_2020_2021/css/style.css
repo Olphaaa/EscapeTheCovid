@@ -10,7 +10,7 @@
     -fx-spacing :25;
 }
 .titre{
-    -fx-top: 150;
+    -fx-top: 150; /* ca ne marche pas, faire en sorte qe le titre ce décole du haut*/
 }
 
 

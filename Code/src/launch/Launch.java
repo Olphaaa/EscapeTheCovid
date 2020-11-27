@@ -7,8 +7,11 @@ import javafx.stage.Stage;
 
 
 public class Launch extends Application{
+    public static Stage fenetrePrincipale;
+
     @Override
     public void start(Stage pS) throws Exception{
+        fenetrePrincipale = pS;
         Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
         container.getStylesheets().add("css/style.css");
         pS.setScene(new Scene(container));
