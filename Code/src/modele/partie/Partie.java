@@ -1,7 +1,7 @@
 package modele.partie;
 
 import modele.carte.Carte;
-import modele.personnages.PersoPrincipal;
+import modele.entite.personnages.PersoPrincipal;
 
 public class Partie{
     public float temps;

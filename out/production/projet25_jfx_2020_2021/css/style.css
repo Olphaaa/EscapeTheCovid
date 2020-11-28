@@ -6,11 +6,17 @@
     -fx-background-size: cover;
 }
 
+.map{
+    -fx-background-image: url('/images/bg/map.png');
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+    -fx-background-attachment: fixed;
+    -fx-background-size: cover;
+}
+
 .boutons{
     -fx-spacing :25;
 }
-.titre{
-    -fx-top: 150; /* ca ne marche pas, faire en sorte qe le titre ce décole du haut*/
+.blocBlanc{
+    -fx-background-color: rgba(255,255,255,0.70);
 }
-
-

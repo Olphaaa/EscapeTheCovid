@@ -18,17 +18,44 @@
         </Text>
     </VBox>
 </top>
-    <center>
-    <VBox alignment="CENTER">
-         <Text fill="white" strokeType="OUTSIDE" strokeWidth="0.0" text="Scores:       Kills:       Name:">
+<center>
+    <VBox alignment="TOP_CENTER" style="-fx-min-width: 400px; -fx-max-width: 400px;" styleClass="blocBlanc">
+         <VBox alignment="CENTER">
+            <children>
+               <HBox alignment="TOP_CENTER" prefWidth="200.0">
+                  <children>
+                     <Label text="Meilleur score: " />
+                     <Label text="Score" />
+                     <Label layoutX="38.0" layoutY="10.0" text="par " />
+                     <Label layoutX="38.0" layoutY="10.0" text="Username " />
+                     <Label layoutX="66.0" layoutY="10.0" text="le " />
+                     <Label layoutX="122.0" layoutY="10.0" text="XX/XX/XXXX" />
+                  </children>
+               </HBox>
+               <ListView prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.15);">
+                  <VBox.margin>
+                     <Insets left="10.0" right="10.0" />
+                  </VBox.margin>
+               </ListView>
+              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickRetour" text="Back" textAlignment="CENTER">
+                  <padding>
+                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin>
+              </Button>
+            </children>
             <VBox.margin>
-               <Insets bottom="200.0" />
-            </VBox.margin></Text>
-    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="144.0" mnemonicParsing="false" onAction="#clickRetour" text="Back" textAlignment="CENTER" BorderPane.alignment="CENTER">
-        <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-        </padding>
-    </Button>
+               <Insets />
+            </VBox.margin>
+            <padding>
+               <Insets bottom="15.0" top="15.0" />
+            </padding>
+         </VBox>
+         <BorderPane.margin>
+            <Insets bottom="50.0" top="10.0" />
+         </BorderPane.margin>
     </VBox>
 </center>
 </BorderPane>
