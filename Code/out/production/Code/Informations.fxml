@@ -21,7 +21,7 @@
     <center>
     <VBox alignment="CENTER">
                  <Text fill="white" text="A game from:" />
-                 <Text text="" />
+                 <Text />
                  <Text fill="white" text="Olivier Banc" />
                  <Text fill="white" text="Mommalier Victor">
             <VBox.margin>
