@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TableauScores">
+<top>
+    <VBox alignment="CENTER">
+        <Text fill="WHITE" layoutX="233.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titre" text="Scoreboards" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="24.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="15.0" />
+            </VBox.margin>
+        </Text>
+    </VBox>
+</top>
+    <center>
+    <VBox alignment="CENTER">
+         <Text fill="white" strokeType="OUTSIDE" strokeWidth="0.0" text="Scores:       Kills:       Name:">
+            <VBox.margin>
+               <Insets bottom="200.0" />
+            </VBox.margin></Text>
+    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="144.0" mnemonicParsing="false" onAction="#clickRetour" text="Back" textAlignment="CENTER" BorderPane.alignment="CENTER">
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+    </Button>
+    </VBox>
+</center>
+</BorderPane>
