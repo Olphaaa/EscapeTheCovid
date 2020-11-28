@@ -1,7 +1,6 @@
 package view;
 
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,10 +11,16 @@ import javafx.stage.Stage;
 import launch.Launch;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class SetupPartie {
+    public static Stage game = Launch.fenetrePrincipale;
 
+    @FXML
+    private static ChoiceBox<String> choiceDifficulty;
+    @FXML
+    private static TextField surnomField;
 
     @FXML
     public void clickRetour(ActionEvent actionEvent) throws IOException {
@@ -25,7 +30,6 @@ public class SetupPartie {
     }
 
     public void clickStart(ActionEvent actionEvent) throws IOException {
-        Stage game = new Stage();
         game.getIcons().add(new Image("images/icone.png"));
         game.setTitle("Escape the Covid");
         Launch.fenetrePrincipale.close();
@@ -34,6 +38,5 @@ public class SetupPartie {
         container.getStylesheets().add("css/style.css");
         game.setScene(new Scene(container));
         game.show();
-
     }
 }

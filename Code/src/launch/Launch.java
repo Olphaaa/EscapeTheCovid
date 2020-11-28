@@ -13,7 +13,7 @@ public class Launch extends Application{
     @Override
     public void start(Stage pS) throws Exception{
         fenetrePrincipale = pS;
-        Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
+        Parent container = FXMLLoader.load(getClass().getResource("/PartieVue.fxml"));
         container.getStylesheets().add("css/style.css");
         pS.getIcons().add(new Image("images/icone.png"));
         pS.setScene(new Scene(container));

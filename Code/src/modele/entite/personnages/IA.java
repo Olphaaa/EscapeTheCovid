@@ -6,6 +6,7 @@ public class IA extends Personnage{
     public IA(){
         isInfect = false;
     }
+
     public void disparition(){
         /*PAS ENCORE FAIT*/
     }
