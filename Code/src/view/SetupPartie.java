@@ -7,8 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import launch.Launch;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class SetupPartie {
@@ -22,8 +25,15 @@ public class SetupPartie {
     }
 
     public void clickStart(ActionEvent actionEvent) throws IOException {
+        Stage game = new Stage();
+        game.getIcons().add(new Image("images/icone.png"));
+        game.setTitle("Escape the Covid");
+        Launch.fenetrePrincipale.close();
+
         Parent container = FXMLLoader.load(getClass().getResource("/PartieVue.fxml"));
         container.getStylesheets().add("css/style.css");
-        Launch.fenetrePrincipale.setScene(new Scene(container));
+        game.setScene(new Scene(container));
+        game.show();
+
     }
 }
