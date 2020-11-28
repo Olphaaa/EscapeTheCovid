@@ -1,15 +1,10 @@
-package modele.personnages;
+package modele.entite.personnages;
 
-import java.awt.*;
+import modele.entite.Entite;
 
-public abstract class Personnage {
+public abstract class Personnage extends Entite {
     public int pointsDeVie;
-    private float positionX;
-    private float positionY;
     private boolean isDead;
-    private Image image;
-
-//constructeur ?
 
     public Personnage(){
         isDead = false;

@@ -1,6 +1,4 @@
-package modele.personnages;
-
-import java.util.Random;
+package modele.entite.personnages;
 
 public class IA extends Personnage{
     private boolean isInfect;

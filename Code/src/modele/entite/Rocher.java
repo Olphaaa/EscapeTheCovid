@@ -1,4 +1,4 @@
-package modele.carte;
+package modele.entite;
 
 import java.awt.*;
 

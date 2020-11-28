@@ -1,12 +1,9 @@
-package modele.personnages;
+package modele.entite.personnages;
 
-import modele.equipements.Equipement;
-import modele.equipements.armes.Arme;
-import modele.equipements.protections.Protection;
+import modele.entite.equipements.armes.Arme;
+import modele.entite.equipements.protections.Protection;
 
-import java.lang.reflect.Array;
-
-public class PersoPrincipal {
+public class PersoPrincipal extends Personnage{
     private Arme a;
     private Protection p;
     public String pseudo;

@@ -1,6 +1,4 @@
-package modele.equipements.protections;
-
-import java.awt.*;
+package modele.entite.equipements.protections;
 
 public class Visiaire extends Protection {
 

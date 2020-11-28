@@ -1,5 +1,7 @@
 package modele.carte;
 
+import modele.entite.Rocher;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
