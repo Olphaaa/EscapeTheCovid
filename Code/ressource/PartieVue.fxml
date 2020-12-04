@@ -13,7 +13,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                         <Label text="Kill: " />
-                        <Label text="Label" />
+                        <Label text="Label: " />
                   </HBox>
             </VBox>
       </VBox>

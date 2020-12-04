@@ -3,6 +3,7 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,16 +20,18 @@ import javafx.scene.input.KeyEvent;
 
 public class PartieVue {
 
+    @FXML
     public Button startButton;
+
     private String pseudo;
     private int nivDifficulte;
+
     Manager m = new Manager();
     Scene partie = SetupPartie.game.getScene();
 
     public void onStart(ActionEvent actionEvent) {
         startButton.setVisible(false);
         Manager.nvllePartie();
-
     }
 
 

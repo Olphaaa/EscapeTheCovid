@@ -23,7 +23,9 @@ public class Manager {
 
     public void touche(KeyEvent keyEvent){
         Deplaceur d = new Deplaceur();
-        if(keyEvent.getCode() == KeyCode.Z || keyEvent.getCode() == KeyCode.UP)
+        if(keyEvent.getCode() == KeyCode.Z || keyEvent.getCode() == KeyCode.UP){
             d.deplacerHaut(perso);
+            //System.out.println("z pushed");
+        }
     }
 }
