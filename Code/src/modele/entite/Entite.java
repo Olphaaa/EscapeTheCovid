@@ -6,7 +6,7 @@ import java.awt.*;
 
 public abstract class Entite {
     private Position p;
-    private Image image;
+    private String image;
 
     public float getpositionX() {
         return this.p.getX();
@@ -22,9 +22,14 @@ public abstract class Entite {
 
     public void setImage(String path){
         if ("perso".equals(path)) {
-            this.image = new Image("/images/perso/ppRien.png");
+            this.image = "/images/perso/ppRien.png";
+        } else {
+            this.image = "images/perso/iaMalade.png";
         }
-        this.image = new Image("images/perso/iaMalade.png");
 
+    }
+
+    public String getImage() {
+        return image;
     }
 }

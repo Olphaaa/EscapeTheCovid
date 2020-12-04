@@ -1,6 +1,8 @@
 package modele;
 
+import javafx.scene.image.ImageView;
 import modele.entite.Entite;
+
 
 public class Deplaceur {
     public Position futurHaut(Entite e){
@@ -19,8 +21,9 @@ public class Deplaceur {
         return new Position(e.getpositionX(),e.getpositionY()+3);
     }
 
-    public void deplacerHaut(Entite e){
+    public void deplacerHaut(Entite e, ImageView imV){
         e.setP(futurHaut(e));
+        imV.setTranslateY(3);
     }
 
     public void deplacerBas(Entite e){
