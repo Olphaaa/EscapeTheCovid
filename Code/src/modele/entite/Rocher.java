@@ -10,8 +10,8 @@ public class Rocher extends Entite{
 
 
     public Rocher(){
-        float randX= ThreadLocalRandom.current().nextInt(10,800+1);
-        float randY= ThreadLocalRandom.current().nextInt(10,400+1);
+        float randX= ThreadLocalRandom.current().nextInt(45,1000-80);
+        float randY= ThreadLocalRandom.current().nextInt(45,710-100);
         //System.out.println(randX + ","+randY);
         super.setP(new Position(randX,randY));
         // pour l'image aléatoire:

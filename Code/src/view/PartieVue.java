@@ -28,7 +28,7 @@ public class PartieVue {
     public BorderPane map;
 
     private String pseudo;
-    private int nivDifficulte = 1; //todo a changer une fois le niveau de diff importé
+    private int nivDifficulte = 3; //todo a changer une fois le niveau de diff importé
 
     private final Manager m = new Manager();
     private final Scene partie = SetupPartie.game.getScene();
@@ -40,7 +40,7 @@ public class PartieVue {
 
         startButton.setVisible(false);
         m.spawnPerso();
-        m.spawnRocher(nivDifficulte*5);
+        m.spawnRocher(nivDifficulte*10);
 
         map.getChildren().add(m.imVPerso);
         for (ImageView imageView: m.imVRocherList) {

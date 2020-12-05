@@ -45,7 +45,6 @@ public class Manager {
         //System.out.println(r.getpositionX()+","+r.getpositionY());
         for (int i = 0 ; i < nivDifficulte ; i++){
             r = new Rocher();
-            System.out.println(r.getImage());
             Class<?> cl = this.getClass();
             InputStream is = cl.getResourceAsStream(r.getImage());
             Image im = new Image(is,50,50,true,true);
@@ -53,7 +52,6 @@ public class Manager {
             imVRocher.setX(r.getpositionX());
             imVRocher.setY(r.getpositionY());
             imVRocherList.add(imVRocher);
-            System.out.println(imVRocher);
             //todo ↑ voir si il faut ajouter les imageView dans une liste pour pouvoir afficher cette liste plus tard dans la fenêtre de la partie
         }
     }

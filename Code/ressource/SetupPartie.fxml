@@ -35,9 +35,9 @@
             </TextField>
 
             <ChoiceBox fx:id="choiceDifficulty" prefWidth="150.0" value="Difficulty Level" >
-                <String fx:value="Vaccinated"/>
-                <String fx:value="Hooded"/>
-                <String fx:value="Naked"/>
+                <String fx:value="Masque + visière  (1)"/>
+                <String fx:value="Masque    (2)"/>
+                <String fx:value="Sans rien (3)"/>
                 <VBox.margin>
                     <Insets bottom="10.0" />
                 </VBox.margin>
