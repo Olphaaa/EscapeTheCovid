@@ -2,6 +2,8 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
 import javafx.fxml.FXML;
@@ -26,7 +28,7 @@ public class PartieVue {
     public BorderPane map;
 
     private String pseudo;
-    private int nivDifficulte;
+    private int nivDifficulte = 1; //todo a changer une fois le niveau de diff importé
 
     private final Manager m = new Manager();
     private final Scene partie = SetupPartie.game.getScene();
@@ -38,7 +40,12 @@ public class PartieVue {
 
         startButton.setVisible(false);
         m.spawnPerso();
-        map.getChildren().add(m.imV);
+        m.spawnRocher(nivDifficulte*5);
+
+        map.getChildren().add(m.imVPerso);
+        for (ImageView imageView: m.imVRocherList) {
+            map.getChildren().add(imageView);
+        }
     }
 
     private void addListeners() {

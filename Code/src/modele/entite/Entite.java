@@ -23,13 +23,19 @@ public abstract class Entite {
     public void setImage(String path){
         if ("perso".equals(path)) {
             this.image = "/images/perso/ppRien.png";
-        } else {
-            this.image = "images/perso/iaMalade.png";
+        }else if ("rocher1".equals(path)){
+            this.image="/images/rocher/rock1.png";
+        }else if ("rocher2".equals(path)){
+            this.image="/images/rocher/rock2.png";
+        }else if ("rocher3".equals(path)){
+            this.image= "/images/rocher/rock3.png";
+        }else if ("rocher4".equals((path))){
+            this.image = "/images/rocher/rock4.png";
         }
-
     }
 
     public String getImage() {
         return image;
     }
+
 }

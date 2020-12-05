@@ -33,7 +33,6 @@ public class SetupPartie {
         game.getIcons().add(new Image("images/icone.png"));
         game.setTitle("Escape the Covid");
         Launch.fenetrePrincipale.close();
-
         Parent container = FXMLLoader.load(getClass().getResource("/PartieVue.fxml"));
         container.getStylesheets().add("css/style.css");
         game.setScene(new Scene(container));
