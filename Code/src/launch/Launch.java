@@ -14,13 +14,14 @@ public class Launch extends Application{
     @Override
     public void start(Stage pS) throws Exception{
         fenetrePrincipale = pS;
-        Parent container = FXMLLoader.load(getClass().getResource("/SetupPartie.fxml"));
+        Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
         Scene scene = new Scene(container);
         container.getStylesheets().add("css/style.css");
         pS.getIcons().add(new Image("images/icone.png"));
+
+
         pS.setScene(scene);
         pS.setTitle("Escape the Covid");
         pS.show();
-
     }
 }

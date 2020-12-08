@@ -22,19 +22,22 @@ public class Deplaceur {
     }
 
     public void deplacerHaut(Entite e, ImageView imV){
-        e.setP(futurHaut(e));
-        imV.setTranslateY(3);
+
+        //e.setP(futurHaut(e));
+        //imV.setTranslateY(3);
+        imV.setY(imV.getY()-5);
+
     }
 
-    public void deplacerBas(Entite e){
-        e.setP(futurBas(e));
+    public void deplacerBas(Entite e, ImageView imV)    {
+        imV.setY(imV.getY()+5);
     }
 
-    public void deplacerGauche(Entite e){
-        e.setP(futurGauche(e));
+    public void deplacerGauche(Entite e, ImageView imV){
+        imV.setX(imV.getX()-5);
     }
 
-    public void deplacerDroit(Entite e){
-        e.setP(futurDroit(e));
+    public void deplacerDroit(Entite e, ImageView imV){
+        imV.setX(imV.getX()+5);
     }
 }

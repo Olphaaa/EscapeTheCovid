@@ -34,7 +34,7 @@
                 </VBox.margin>
             </TextField>
 
-            <ChoiceBox fx:id="choiceDifficulty" prefWidth="150.0" value="Difficulty Level" >
+            <ChoiceBox fx:id="choiceDifficulty" prefWidth="150.0" value="Difficulté" >
                 <String fx:value="Masque + visière  (1)"/>
                 <String fx:value="Masque    (2)"/>
                 <String fx:value="Sans rien (3)"/>

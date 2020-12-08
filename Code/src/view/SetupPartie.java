@@ -25,7 +25,7 @@ public class SetupPartie {
     public void clickRetour(ActionEvent actionEvent) throws IOException {
         Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
         container.getStylesheets().add("css/style.css");
-        Launch.fenetrePrincipale.setScene(new Scene(container));
+        Launch.fenetrePrincipale.getScene().setRoot(container);
     }
 
     @FXML
@@ -33,6 +33,7 @@ public class SetupPartie {
         game.getIcons().add(new Image("images/icone.png"));
         game.setTitle("Escape the Covid");
         Launch.fenetrePrincipale.close();
+        //System.out.println(choiceDifficulty.getValue());
         Parent container = FXMLLoader.load(getClass().getResource("/PartieVue.fxml"));
         container.getStylesheets().add("css/style.css");
         game.setScene(new Scene(container));

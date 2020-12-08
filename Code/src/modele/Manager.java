@@ -58,10 +58,30 @@ public class Manager {
 
     public void touche(KeyEvent keyEvent){
         Deplaceur d = new Deplaceur();
-        if(keyEvent.getCode() == KeyCode.Z || keyEvent.getCode() == KeyCode.UP){
-            d.deplacerHaut(perso,imVPerso);
-            System.out.println("hello world");
+        System.out.printf("hello");
+        switch (keyEvent.getCode()){
+            case Z:
+                d.deplacerHaut(perso,imVPerso);
+                break;
+            case Q:
+                d.deplacerGauche(perso,imVPerso);
+                break;
+            case D:
+                d.deplacerDroit(perso,imVPerso);
+                break;
+            case S:
+                d.deplacerBas(perso,imVPerso);
+                break;
+            default:
+                System.out.printf("mauvaise touche");
+                break;
         }
+
+
     }
+
+
+
+
 
 }
