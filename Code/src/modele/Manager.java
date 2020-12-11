@@ -49,15 +49,19 @@ public class Manager {
         Deplaceur d = new Deplaceur();
         switch (keyEvent.getCode()){
             case Z:
+            case UP:
                 d.deplacerHaut(perso);
                 break;
             case Q:
+            case LEFT:
                 d.deplacerGauche(perso);
                 break;
             case D:
+            case RIGHT:
                 d.deplacerDroit(perso);
                 break;
             case S:
+            case DOWN:
                 d.deplacerBas(perso);
                 break;
             default:
