@@ -1,5 +1,6 @@
 package view;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -11,13 +12,16 @@ import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 import launch.Launch;
 import modele.Manager;
 import modele.entite.Rocher;
+import modele.entite.equipements.protections.Protection;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 
 
 public class PartieVue{
@@ -30,7 +34,7 @@ public class PartieVue{
     public Label temps;
     @FXML
     public BorderPane map;
-    private Integer i=0;
+    private Integer sec=0;
 
 
     private String pseudo;
@@ -42,6 +46,11 @@ public class PartieVue{
     public PartieVue(){
 
     }
+/*
+    public void initialize() {
+        temps.setText().bind(tabScore.lesScoresProperty());
+    }
+*/
 
     public void onStart(ActionEvent actionEvent) {
         ((Button)actionEvent.getSource()).getScene().setOnKeyPressed(e->{
@@ -54,6 +63,7 @@ public class PartieVue{
         startButton.setVisible(false);
         m.spawnPerso();
         m.spawnRocher(nivDifficulte*10);
+
 /*
         for (ImageView imageView: m.imVRocherList) {
             map.getChildren().add(imageView);
@@ -65,20 +75,47 @@ public class PartieVue{
         //map.getChildren().add(m.imVPerso);
         map.getChildren().add(m.perso.getImView());
 
-        tps.scheduleAtFixedRate(task,1000,1000);
 
+        setTimer();
     }
 
-    Timer tps = new Timer();
-    TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            i++;
-            System.out.println("second="+i);
-        }
-    };
+    public void setTimer(){
+        Timer tps = new Timer();
+        Timeline tl = new Timeline( new KeyFrame( Duration.seconds(1), ev -> {
+            sec ++;
+            temps.setText(sec.toString());
+            if (sec == 2){
+                m.spawnProtection();
+                map.getChildren().add(m.protection.getImView());
+            }
+        }));
+        tl.setCycleCount(Animation.INDEFINITE);
+        tl.play();
 
-    private void changeTemps() {
+
+        /*
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                sec++;
+                //changeTemps(i);
+                //m.spawnEquipement();
+                if (sec == 2)
+                {
+                    try{
+                        truc();
+                    }catch (Exception e)
+                    {
+                        System.out.println(e.getMessage());
+                    }
+                    System.out.println(sec);
+                }
+            }
+        };
+        tps.scheduleAtFixedRate(task,1000,1000);*/
+    }
+
+    private void changeTemps(Integer i) {
         temps.setText(i.toString());
     }
 

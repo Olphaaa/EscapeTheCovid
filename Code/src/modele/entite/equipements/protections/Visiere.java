@@ -7,15 +7,15 @@ import modele.Position;
 import java.io.InputStream;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Masque extends Protection {
+public class Visiere extends Protection {
 
-    public Masque(){
-        this.niveauProtection = 1;
-        this.tauxApparition = (float) 0.60;
+    public Visiere(){
+        this.niveauProtection = 2;
+        this.tauxApparition = (float) 0.30;
 
         float randX= ThreadLocalRandom.current().nextInt(45,1000-80);
         float randY= ThreadLocalRandom.current().nextInt(45,710-100);
-        super.setImage("masque");
+        super.setImage("visiere");
 
         Class<?> cl = this.getClass();
         InputStream is = cl.getResourceAsStream(getImage());

@@ -49,6 +49,12 @@ public abstract class Entite {
             this.image= "/images/rocher/rock3.png";
         }else if ("rocher4".equals((path))){
             this.image = "/images/rocher/rock4.png";
+        }else if ("masque".equals((path))){
+            this.image = "/images/protection/masque.png";
+        }else if ("combinaison".equals(path)){
+            this.image = "/images/protection/combinaison.png";
+        }else if ("visiere".equals(path)){
+            this.image = "/images/protection/visiere.png";
         }
     }
 

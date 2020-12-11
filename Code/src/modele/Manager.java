@@ -1,20 +1,18 @@
 package modele;
 
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
-import javafx.scene.PointLight;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import modele.entite.Rocher;
+import modele.entite.equipements.protections.Combinaison;
+import modele.entite.equipements.protections.Masque;
+import modele.entite.equipements.protections.Protection;
+import modele.entite.equipements.protections.Visiere;
 import modele.entite.personnages.PersoPrincipal;
 import javafx.scene.image.ImageView;
-import modele.entite.personnages.Personnage;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
+
 
 public class Manager {
     public float temps;
@@ -24,8 +22,12 @@ public class Manager {
     private Rocher r;
     public List<ImageView> imVRocherList = new ArrayList<>();
     public List<Rocher> listRocher = new ArrayList<>();
+    public List<Protection> listProtection = new ArrayList<>();
+    public Protection protection;
     public ImageView imVPerso;
     public ImageView imVRocher;
+
+    private Boolean up,down,left, right;
 
     public Manager(){
 
@@ -44,7 +46,19 @@ public class Manager {
             listRocher.add(r);
         }
     }
-
+    public void spawnProtection() {
+        Protection p;
+        Random rand = new Random();
+        double taux = rand.nextFloat();
+        if (taux > 0 && taux < 0.10){
+            p = new Combinaison();
+        }else if (taux >=0.10 && taux <0.40){
+            p = new Visiere();
+        }else {
+            p = new Masque();
+        }
+        protection = p;
+    }
     public void touche(KeyEvent keyEvent){
         Deplaceur d = new Deplaceur();
         switch (keyEvent.getCode()){
@@ -68,5 +82,9 @@ public class Manager {
                 System.out.printf("mauvaise touche");
                 break;
         }
+
     }
+
+
+
 }
