@@ -2,6 +2,7 @@ package modele;
 
 import javafx.scene.image.ImageView;
 import modele.entite.Entite;
+import modele.entite.personnages.PersoPrincipal;
 
 
 public class Deplaceur {
@@ -21,23 +22,21 @@ public class Deplaceur {
         return new Position(e.getpositionX(),e.getpositionY()+3);
     }
 
-    public void deplacerHaut(Entite e, ImageView imV){
+    public void deplacerHaut(PersoPrincipal e){
 
         //e.setP(futurHaut(e));
-        //imV.setTranslateY(3);
-        imV.setY(imV.getY()-5);
-
+        e.setPPerso(new Position(e.getpositionX(), e.getpositionY()-7));
     }
 
-    public void deplacerBas(Entite e, ImageView imV)    {
-        imV.setY(imV.getY()+5);
+    public void deplacerBas(PersoPrincipal e){
+        e.setPPerso(new Position(e.getpositionX(), e.getpositionY()+7));
     }
 
-    public void deplacerGauche(Entite e, ImageView imV){
-        imV.setX(imV.getX()-5);
+    public void deplacerGauche(PersoPrincipal e){
+        e.setPPerso(new Position(e.getpositionX()-7, e.getpositionY()));
     }
 
-    public void deplacerDroit(Entite e, ImageView imV){
-        imV.setX(imV.getX()+5);
+    public void deplacerDroit(PersoPrincipal e){
+        e.setPPerso(new Position(e.getpositionX()+7, e.getpositionY()));
     }
 }

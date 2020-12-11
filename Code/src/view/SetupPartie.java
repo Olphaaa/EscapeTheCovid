@@ -37,6 +37,7 @@ public class SetupPartie {
         Parent container = FXMLLoader.load(getClass().getResource("/PartieVue.fxml"));
         container.getStylesheets().add("css/style.css");
         game.setScene(new Scene(container));
+
         game.show();
     }
 }

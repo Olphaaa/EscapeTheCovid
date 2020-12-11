@@ -1,5 +1,7 @@
 package modele.entite.personnages;
 
+import javafx.scene.image.ImageView;
+import modele.Position;
 import modele.entite.Entite;
 
 public abstract class Personnage extends Entite {
@@ -10,6 +12,7 @@ public abstract class Personnage extends Entite {
         isDead = false;
         pointsDeVie = 3;
     }
+
 
     public void setPv(int pdv){this.pointsDeVie = pdv;}
     public int getPv(){

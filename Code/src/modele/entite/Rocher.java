@@ -1,8 +1,11 @@
 package modele.entite;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import modele.Position;
+import modele.entite.personnages.PersoPrincipal;
 
-import javax.swing.text.html.ImageView;
+import java.io.InputStream;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -12,15 +15,14 @@ public class Rocher extends Entite{
     public Rocher(){
         float randX= ThreadLocalRandom.current().nextInt(45,1000-80);
         float randY= ThreadLocalRandom.current().nextInt(45,710-100);
-        //System.out.println(randX + ","+randY);
-        super.setP(new Position(randX,randY));
-        // pour l'image aléatoire:
-
-
         super.setImage(this.setImageRand(this));
-        //System.out.println(this.getImage());
-        /*positionX = ... FAIRE LE RANDOM SELON LA TAILLE DE LA CARTE*/
-        /*positionY = ... FAIRE LE RANDOM SELON LA TAILLE DE LA CARTE*/
+
+        Class<?> cl = this.getClass();
+        InputStream is = cl.getResourceAsStream(getImage());
+        Image im = new Image(is,50,50,true,true);
+        this.setImView(new ImageView(im));
+
+        this.setPPerso(new Position(randX,randY));
     }
 
     private String setImageRand(Rocher r){
@@ -41,5 +43,6 @@ public class Rocher extends Entite{
         }
         return r.getImage();
     }
+
 
 }

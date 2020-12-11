@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import launch.Launch;
 import modele.Manager;
+import modele.entite.Rocher;
 
 import javax.swing.*;
 import java.awt.event.KeyListener;
@@ -44,8 +45,6 @@ public class PartieVue{
     public void onStart(ActionEvent actionEvent) {
         ((Button)actionEvent.getSource()).getScene().setOnKeyPressed(e->{
             m.touche(e);
-
-            System.out.println(e.getCode());
         });
 
         temps.setText("0");
@@ -54,12 +53,16 @@ public class PartieVue{
         startButton.setVisible(false);
         m.spawnPerso();
         m.spawnRocher(nivDifficulte*10);
-
+/*
         for (ImageView imageView: m.imVRocherList) {
             map.getChildren().add(imageView);
-        }
-        map.getChildren().add(m.imVPerso);
+        }*/
 
+        for(Rocher r : m.listRocher){
+            map.getChildren().add(r.getImView());
+        }
+        //map.getChildren().add(m.imVPerso);
+        map.getChildren().add(m.perso.getImView());
     }
 
 

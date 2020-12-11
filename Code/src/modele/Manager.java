@@ -2,12 +2,15 @@ package modele;
 
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
+import javafx.scene.PointLight;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import modele.entite.Rocher;
 import modele.entite.personnages.PersoPrincipal;
 import javafx.scene.image.ImageView;
+import modele.entite.personnages.Personnage;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +20,10 @@ public class Manager {
     public float temps;
     public int nivDifficulte;
     public int nbKill;
-    private PersoPrincipal perso;
+    public PersoPrincipal perso;
     private Rocher r;
     public List<ImageView> imVRocherList = new ArrayList<>();
+    public List<Rocher> listRocher = new ArrayList<>();
     public ImageView imVPerso;
     public ImageView imVRocher;
 
@@ -27,61 +31,38 @@ public class Manager {
 
     }
 
-    public void spawnPerso() {
+    public void spawnPerso(){
         perso = new PersoPrincipal("jean");
-        perso.setImage("perso");
-        Class<?> cl = this.getClass();
-        InputStream is = cl.getResourceAsStream(perso.getImage());
-        Image im = new Image(is,50,50,true,true);
-        imVPerso = new ImageView(im);
-        imVPerso.setX(200);
-        imVPerso.setY(200);
-        //Position p = new Position(100,100);
-        //perso.setP(p);
+        perso.setPPerso(new Position(45,315)); // point de départ du personnage
+        Deplaceur d = new Deplaceur();
     }
 
     public void spawnRocher(int nivDifficulte){
-        //Image im;
-        //System.out.println(r.getpositionX()+","+r.getpositionY());
-        for (int i = 0 ; i < nivDifficulte ; i++){
+        for (int i = 0 ; i < nivDifficulte ; i++)
+        {
             r = new Rocher();
-            Class<?> cl = this.getClass();
-            InputStream is = cl.getResourceAsStream(r.getImage());
-            Image im = new Image(is,50,50,true,true);
-            imVRocher = new ImageView(im);
-            imVRocher.setX(r.getpositionX());
-            imVRocher.setY(r.getpositionY());
-            imVRocherList.add(imVRocher);
-            //todo ↑ voir si il faut ajouter les imageView dans une liste pour pouvoir afficher cette liste plus tard dans la fenêtre de la partie
+            listRocher.add(r);
         }
     }
 
     public void touche(KeyEvent keyEvent){
         Deplaceur d = new Deplaceur();
-        System.out.printf("hello");
         switch (keyEvent.getCode()){
             case Z:
-                d.deplacerHaut(perso,imVPerso);
+                d.deplacerHaut(perso);
                 break;
             case Q:
-                d.deplacerGauche(perso,imVPerso);
+                d.deplacerGauche(perso);
                 break;
             case D:
-                d.deplacerDroit(perso,imVPerso);
+                d.deplacerDroit(perso);
                 break;
             case S:
-                d.deplacerBas(perso,imVPerso);
+                d.deplacerBas(perso);
                 break;
             default:
                 System.out.printf("mauvaise touche");
                 break;
         }
-
-
     }
-
-
-
-
-
 }
