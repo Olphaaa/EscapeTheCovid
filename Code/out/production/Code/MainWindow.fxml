@@ -9,7 +9,7 @@
 
 <BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindow">
    <top>
-      <Text fill="WHITE" layoutX="233.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titre" text="Escape the Covid" BorderPane.alignment="CENTER">
+         <Text fill="WHITE" layoutX="233.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titre" text="Escape the Covid" BorderPane.alignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
@@ -28,7 +28,7 @@
          <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="187.0" mnemonicParsing="false" onAction="#onTabScore" text="Tableau de scores" textAlignment="CENTER" BorderPane.alignment="CENTER">
             <padding>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
+         </padding>
          </Button>
          <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="236.0" mnemonicParsing="false" onAction="#onInformations" text="Informations" textAlignment="CENTER" BorderPane.alignment="CENTER">
             <padding>
