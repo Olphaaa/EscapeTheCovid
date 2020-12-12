@@ -29,6 +29,8 @@ public class PartieVue{
     @FXML
     public Label kill;
     @FXML
+    public Label pseud;
+    @FXML
     public Label temps;
     @FXML
     public BorderPane map;
@@ -42,7 +44,7 @@ public class PartieVue{
     private final Scene partie = Launch.fenetrePrincipale.getScene();
 
     public PartieVue(){
-        //System.out.println(m.getNivDifficulte());
+
     }
 
 
@@ -51,6 +53,8 @@ public class PartieVue{
 
         temps.setText("0");
         kill.setText("0");
+        pseud.setText(m.getPseudo());
+
 
         startButton.setVisible(false);
         m.spawnPerso();

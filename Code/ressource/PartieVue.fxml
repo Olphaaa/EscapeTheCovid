@@ -15,6 +15,10 @@
                         <Label text="Kill: " />
                         <Label fx:id="kill" text="/" />
                   </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <Label text="Pseudo: " />
+                        <Label fx:id="pseud" text="/" />
+                  </HBox>
             </VBox>
       </VBox>
    </top>
