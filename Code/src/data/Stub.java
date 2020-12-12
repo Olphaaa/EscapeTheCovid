@@ -1,11 +1,10 @@
 package data;
 
-import modele.tableauScore.Score;
-import modele.tableauScore.TableauScore;
+import modele.properties.Score;
+import modele.properties.TableauScore;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.Date;
 
 public class Stub {
     public TableauScore creerTableau(){

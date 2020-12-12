@@ -35,9 +35,7 @@ public abstract class Entite {
         this.imView.setX(p.getX());
         this.imView.setY(p.getY());
     }
-    public void setP(Position p){
-        this.p = p;
-    }
+
     public void setImage(String path){
         if ("perso".equals(path)) {
             this.image = "/images/perso/ppRien.png";
@@ -55,6 +53,10 @@ public abstract class Entite {
             this.image = "/images/protection/combinaison.png";
         }else if ("visiere".equals(path)){
             this.image = "/images/protection/visiere.png";
+        }else if("iaMalade".equals(path)){
+            this.image = "/images/perso/iaMalade.png";
+        }else if("iaRien".equals(path)){
+            this.image = "/images/perso/iaRien.png";
         }
     }
 

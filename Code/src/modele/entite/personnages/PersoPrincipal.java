@@ -11,17 +11,11 @@ import java.io.InputStream;
 public class PersoPrincipal extends Personnage{
     private Arme a;
     private Protection p;
-    public String pseudo;
 
 
     public PersoPrincipal(){
         this.a = null;
         this.p= null;
-    }
-
-    public PersoPrincipal(String surnom){
-        new PersoPrincipal();
-        this.pseudo = surnom;
         this.setImage("perso");
         Class<?> cl = this.getClass();
         InputStream is = cl.getResourceAsStream(getImage());

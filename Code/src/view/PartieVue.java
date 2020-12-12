@@ -3,7 +3,6 @@ package view;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.IntegerProperty;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -12,15 +11,14 @@ import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 import launch.Launch;
 import modele.Manager;
 import modele.entite.Rocher;
-import modele.entite.equipements.protections.Protection;
+
 
 import java.util.Timer;
-import java.util.TimerTask;
+
 
 
 
@@ -40,46 +38,47 @@ public class PartieVue{
     private String pseudo;
     private int nivDifficulte = 3; //todo a changer une fois le niveau de diff importé
 
-    private final Manager m = new Manager();
+    public static final Manager m = new Manager();
     private final Scene partie = Launch.fenetrePrincipale.getScene();
 
     public PartieVue(){
+        //System.out.println(m.getNivDifficulte());
+    }
 
-    }
-/*
-    public void initialize() {
-        temps.setText().bind(tabScore.lesScoresProperty());
-    }
-*/
 
     public void onStart(ActionEvent actionEvent) {
-        ((Button)actionEvent.getSource()).getScene().setOnKeyPressed(e->{
-            m.touche(e);
-        });
+        ((Button)actionEvent.getSource()).getScene().setOnKeyPressed(m::touche);
 
         temps.setText("0");
         kill.setText("0");
 
         startButton.setVisible(false);
         m.spawnPerso();
-        m.spawnRocher(nivDifficulte*10);
+        m.spawnRocher();
 
-/*
-        for (ImageView imageView: m.imVRocherList) {
-            map.getChildren().add(imageView);
-        }*/
 
         for(Rocher r : m.listRocher){
             map.getChildren().add(r.getImView());
         }
-        //map.getChildren().add(m.imVPerso);
         map.getChildren().add(m.perso.getImView());
 
 
         setTimer();
+        spawnIA();
     }
 
-    public void setTimer(){
+    private void spawnIA() {
+        Timeline tl = new Timeline( new KeyFrame( Duration.seconds(1), ev -> {
+            if (sec%3 == 0){
+                m.spawnIA();
+                map.getChildren().add(m.ia.getImView());
+            }
+        }));
+        tl.setCycleCount(Animation.INDEFINITE);
+        tl.play();
+    }
+
+    private void setTimer(){
         Timer tps = new Timer();
         Timeline tl = new Timeline( new KeyFrame( Duration.seconds(1), ev -> {
             sec ++;
@@ -115,8 +114,5 @@ public class PartieVue{
         tps.scheduleAtFixedRate(task,1000,1000);*/
     }
 
-    private void changeTemps(Integer i) {
-        temps.setText(i.toString());
-    }
 
 }

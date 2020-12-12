@@ -1,13 +1,18 @@
 package modele;
 
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.input.KeyEvent;
 import modele.entite.Rocher;
 import modele.entite.equipements.protections.Combinaison;
 import modele.entite.equipements.protections.Masque;
 import modele.entite.equipements.protections.Protection;
 import modele.entite.equipements.protections.Visiere;
+import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
-import javafx.scene.image.ImageView;
+import modele.properties.NiveauDifficulte;
+import modele.properties.Score;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,36 +21,39 @@ import java.util.Random;
 
 public class Manager {
     public float temps;
-    public int nivDifficulte;
     public int nbKill;
-    public PersoPrincipal perso;
-    private Rocher r;
-    public List<ImageView> imVRocherList = new ArrayList<>();
-    public List<Rocher> listRocher = new ArrayList<>();
-    public List<Protection> listProtection = new ArrayList<>();
-    public Protection protection;
-    public ImageView imVPerso;
-    public ImageView imVRocher;
 
-    private Boolean up,down,left, right;
+    public PersoPrincipal perso;
+    public Protection protection;
+    private Rocher r;
+    public IA ia;
+
+    public List<Rocher> listRocher = new ArrayList<>();
+    public List<IA> listIA = new ArrayList<>();
+
+    private final StringProperty pseudo = new SimpleStringProperty();
+    public String getPseudo(){return pseudo.get();}
+    public StringProperty pseudoProperty(){return pseudo;}
+    public void setPseudo(String pseudo){this.pseudo.set(pseudo);}
+
+    public String nivDifficulte;
 
     public Manager(){
-
     }
 
     public void spawnPerso(){
-        perso = new PersoPrincipal("jean");
+        perso = new PersoPrincipal();
         perso.setPPerso(new Position(45,315)); // point de départ du personnage
-        Deplaceur d = new Deplaceur();
     }
 
-    public void spawnRocher(int nivDifficulte){
-        for (int i = 0 ; i < nivDifficulte ; i++)
+    public void spawnRocher(){
+        for (int i = 0 ; i < 10 ; i++)
         {
             r = new Rocher();
             listRocher.add(r);
         }
     }
+
     public void spawnProtection() {
         Protection p;
         Random rand = new Random();
@@ -59,6 +67,12 @@ public class Manager {
         }
         protection = p;
     }
+
+    public void spawnIA() {
+        ia = new IA();
+        listIA.add(ia);
+    }
+
     public void touche(KeyEvent keyEvent){
         Deplaceur d = new Deplaceur();
         switch (keyEvent.getCode()){
@@ -79,12 +93,10 @@ public class Manager {
                 d.deplacerBas(perso);
                 break;
             default:
-                System.out.printf("mauvaise touche");
+                System.out.print("mauvaise touche");
                 break;
         }
 
     }
-
-
 
 }

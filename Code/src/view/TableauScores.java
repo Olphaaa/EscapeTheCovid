@@ -7,8 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import launch.Launch;
-import modele.tableauScore.Score;
-import modele.tableauScore.TableauScore;
+import modele.properties.TableauScore;
 
 import  javafx.scene.control.ListView;
 import java.io.IOException;
