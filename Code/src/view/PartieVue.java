@@ -49,8 +49,8 @@ public class PartieVue{
 
 
     public void onStart(ActionEvent actionEvent) {
-        ((Button)actionEvent.getSource()).getScene().setOnKeyPressed(m::touche);
-
+        ((Button)actionEvent.getSource()).getScene().setOnKeyPressed(m::testPressed);
+        ((Button)actionEvent.getSource()).getScene().setOnKeyReleased(m::testRealesed);
         temps.setText("0");
         kill.setText("0");
         pseud.setText(m.getPseudo());

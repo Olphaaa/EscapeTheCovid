@@ -3,6 +3,7 @@ package modele;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import modele.entite.Rocher;
 import modele.entite.equipements.protections.Combinaison;
@@ -73,7 +74,9 @@ public class Manager {
         listIA.add(ia);
     }
 
-    public void touche(KeyEvent keyEvent){
+
+
+    /*public void touche(KeyEvent keyEvent){
         Deplaceur d = new Deplaceur();
         switch (keyEvent.getCode()){
             case Z:
@@ -96,7 +99,37 @@ public class Manager {
                 System.out.print("mauvaise touche");
                 break;
         }
-
+    }*/
+    public boolean up,down,left,right;
+    public void touche(KeyEvent k){
+        Deplaceur d = new Deplaceur();
+        if (up)
+        {
+            d.deplacerHaut(perso);
+        }
+        if (down){
+            d.deplacerBas(perso);
+        }
+        if (left){
+            d.deplacerGauche(perso);
+        }
+        if(right){
+            d.deplacerDroit(perso);
+        }
+    }
+    public void testRealesed(KeyEvent k){
+        if(k.getCode() == KeyCode.Z) up = false;
+        if(k.getCode() == KeyCode.Q) left = false;
+        if(k.getCode() == KeyCode.S) down = false;
+        if(k.getCode() == KeyCode.D) right = false;
+        touche(k);
+    }
+    public void testPressed(KeyEvent k){
+        if(k.getCode() == KeyCode.Z) up = true;
+        if(k.getCode() == KeyCode.Q) left = true;
+        if(k.getCode() == KeyCode.S) down = true;
+        if(k.getCode() == KeyCode.D) right = true;
+        touche(k);
     }
 
 }
