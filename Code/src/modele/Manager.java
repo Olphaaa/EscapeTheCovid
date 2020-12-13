@@ -23,7 +23,7 @@ import java.util.Random;
 public class Manager {
     public float temps;
     public int nbKill;
-
+    private int nivDiff;
     public PersoPrincipal perso;
     public Protection protection;
     private Rocher r;
@@ -33,11 +33,10 @@ public class Manager {
     public List<IA> listIA = new ArrayList<>();
 
     private final StringProperty pseudo = new SimpleStringProperty();
-    public String getPseudo(){return pseudo.get();}
-    public StringProperty pseudoProperty(){return pseudo;}
-    public void setPseudo(String pseudo){this.pseudo.set(pseudo);}
+        public String getPseudo(){return pseudo.get();}
+        public void setPseudo(String pseudo){this.pseudo.set(pseudo);}
+        public StringProperty pseudoProperty(){return pseudo;}
 
-    public String nivDifficulte;
 
     public Manager(){
     }
@@ -47,8 +46,15 @@ public class Manager {
         perso.setPPerso(new Position(45,315)); // point de départ du personnage
     }
 
+    public int getNivDiff() {
+        return nivDiff;
+    }
+    public void setNivDiff(int i) {
+        this.nivDiff = i;
+    }
+
     public void spawnRocher(){
-        for (int i = 0 ; i < 10 ; i++)
+        for (int i = 0 ; i < 7*this.nivDiff ; i++)
         {
             r = new Rocher();
             listRocher.add(r);
@@ -74,33 +80,7 @@ public class Manager {
         listIA.add(ia);
     }
 
-
-
-    /*public void touche(KeyEvent keyEvent){
-        Deplaceur d = new Deplaceur();
-        switch (keyEvent.getCode()){
-            case Z:
-            case UP:
-                d.deplacerHaut(perso);
-                break;
-            case Q:
-            case LEFT:
-                d.deplacerGauche(perso);
-                break;
-            case D:
-            case RIGHT:
-                d.deplacerDroit(perso);
-                break;
-            case S:
-            case DOWN:
-                d.deplacerBas(perso);
-                break;
-            default:
-                System.out.print("mauvaise touche");
-                break;
-        }
-    }*/
-    public boolean up,down,left,right;
+    private boolean up,down,left,right;
     public void touche(KeyEvent k){
         Deplaceur d = new Deplaceur();
         if (up)
@@ -131,5 +111,6 @@ public class Manager {
         if(k.getCode() == KeyCode.D) right = true;
         touche(k);
     }
+
 
 }

@@ -35,16 +35,16 @@ public class PartieVue{
     @FXML
     public BorderPane map;
     private Integer sec=0;
-
+    private int cptIa;
+    private int nbSpawnIA;
 
     private String pseudo;
-    private int nivDifficulte = 3; //todo a changer une fois le niveau de diff importé
 
     public static final Manager m = new Manager();
     private final Scene partie = Launch.fenetrePrincipale.getScene();
 
     public PartieVue(){
-
+        nbSpawnIA=5+(m.getNivDiff()*3);
     }
 
 
@@ -59,23 +59,25 @@ public class PartieVue{
         startButton.setVisible(false);
         m.spawnPerso();
         m.spawnRocher();
+        m.spawnIA(); // fait spawn le premier IA
 
-
-        for(Rocher r : m.listRocher){
+        for(Rocher r : m.listRocher)
             map.getChildren().add(r.getImView());
-        }
         map.getChildren().add(m.perso.getImView());
-
+        map.getChildren().add(m.ia.getImView());
 
         setTimer();
         spawnIA();
     }
 
-    private void spawnIA() {
+    private void spawnIA() { //todo voir s'il faut bien séparer les deux timer, parce qu'une fois les ia tous spawn, ce timer ne sert a rien...
         Timeline tl = new Timeline( new KeyFrame( Duration.seconds(1), ev -> {
-            if (sec%3 == 0){
-                m.spawnIA();
-                map.getChildren().add(m.ia.getImView());
+            if (sec%10  == 0){
+                if (cptIa <= nbSpawnIA-1) {
+                    m.spawnIA();
+                    map.getChildren().add(m.ia.getImView());
+                    cptIa++;
+                }
             }
         }));
         tl.setCycleCount(Animation.INDEFINITE);
