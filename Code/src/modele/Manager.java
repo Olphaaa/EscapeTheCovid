@@ -98,17 +98,17 @@ public class Manager {
         }
     }
     public void testRealesed(KeyEvent k){
-        if(k.getCode() == KeyCode.Z) up = false;
-        if(k.getCode() == KeyCode.Q) left = false;
-        if(k.getCode() == KeyCode.S) down = false;
-        if(k.getCode() == KeyCode.D) right = false;
+        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP) up = false;
+        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT) left = false;
+        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN) down = false;
+        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT) right = false;
         touche(k);
     }
     public void testPressed(KeyEvent k){
-        if(k.getCode() == KeyCode.Z) up = true;
-        if(k.getCode() == KeyCode.Q) left = true;
-        if(k.getCode() == KeyCode.S) down = true;
-        if(k.getCode() == KeyCode.D) right = true;
+        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP) up = true;
+        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT) left = true;
+        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN) down = true;
+        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT) right = true;
         touche(k);
     }
 

@@ -6,15 +6,15 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
-import launch.Launch;
+import modele.Deplaceur;
 import modele.Manager;
 import modele.entite.Rocher;
+import modele.entite.personnages.IA;
 
 
 import java.util.Timer;
@@ -36,12 +36,10 @@ public class PartieVue{
     public BorderPane map;
     private Integer sec=0;
     private int cptIa;
-    private int nbSpawnIA;
+    private final int nbSpawnIA;
 
-    private String pseudo;
 
     public static final Manager m = new Manager();
-    private final Scene partie = Launch.fenetrePrincipale.getScene();
 
     public PartieVue(){
         nbSpawnIA=5+(m.getNivDiff()*3);
@@ -68,6 +66,7 @@ public class PartieVue{
 
         setTimer();
         spawnIA();
+        deplacementIA();
     }
 
     private void spawnIA() { //todo voir s'il faut bien séparer les deux timer, parce qu'une fois les ia tous spawn, ce timer ne sert a rien...
@@ -84,6 +83,21 @@ public class PartieVue{
         tl.play();
     }
 
+    private void deplacementIA(){
+        Deplaceur d = new Deplaceur();
+        Timeline depIA = new Timeline( new KeyFrame( Duration.seconds(0.1), ev -> {
+            for (IA ia: m.listIA) {
+                if(ia.getpositionY() < 45 ){d.deplacerDroit(ia);}
+                else if(ia.getpositionX() > 900 ){d.deplacerBas(ia);}
+                //else if(ia.getpositionX() < 45 ){d.deplacerBas(ia);}
+                else{d.deplacerHaut(ia);}
+                System.out.println(ia.getpositionX());
+            }
+        }));
+        depIA.setCycleCount(Animation.INDEFINITE);
+        depIA.play();
+    }
+
     private void setTimer(){
         Timer tps = new Timer();
         Timeline tl = new Timeline( new KeyFrame( Duration.seconds(1), ev -> {
@@ -96,28 +110,6 @@ public class PartieVue{
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
-
-
-        /*
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                sec++;
-                //changeTemps(i);
-                //m.spawnEquipement();
-                if (sec == 2)
-                {
-                    try{
-                        truc();
-                    }catch (Exception e)
-                    {
-                        System.out.println(e.getMessage());
-                    }
-                    System.out.println(sec);
-                }
-            }
-        };
-        tps.scheduleAtFixedRate(task,1000,1000);*/
     }
 
 

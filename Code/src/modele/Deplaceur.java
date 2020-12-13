@@ -22,21 +22,17 @@ public class Deplaceur {
         return new Position(e.getpositionX(),e.getpositionY()+3);
     }
 
-    public void deplacerHaut(PersoPrincipal e){
+    public void deplacerHaut(Entite e){ e.setPPerso(new Position(e.getpositionX(), e.getpositionY()-7)); }
 
-        //e.setP(futurHaut(e));
-        e.setPPerso(new Position(e.getpositionX(), e.getpositionY()-7));
-    }
-
-    public void deplacerBas(PersoPrincipal e){
+    public void deplacerBas(Entite e){
         e.setPPerso(new Position(e.getpositionX(), e.getpositionY()+7));
     }
 
-    public void deplacerGauche(PersoPrincipal e){
+    public void deplacerGauche(Entite e){
         e.setPPerso(new Position(e.getpositionX()-7, e.getpositionY()));
     }
 
-    public void deplacerDroit(PersoPrincipal e){
+    public void deplacerDroit(Entite e){
         e.setPPerso(new Position(e.getpositionX()+7, e.getpositionY()));
     }
 }
