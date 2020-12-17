@@ -2,7 +2,6 @@ package modele.entite.personnages;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import modele.Position;
 import modele.entite.equipements.armes.Arme;
 import modele.entite.equipements.protections.Protection;
 
@@ -16,13 +15,10 @@ public class PersoPrincipal extends Personnage{
     public PersoPrincipal(){
         this.a = null;
         this.p= null;
-        this.setImage("perso");
-        Class<?> cl = this.getClass();
-        InputStream is = cl.getResourceAsStream(getImage());
-        Image im = new Image(is,50,50,true,true);
-        this.setImView(new ImageView(im));
+        this.setImage("perso.png");
+        this.setX(45);
+        this.setY(375);
     }
-
 
 
     private void setArme(Arme a){

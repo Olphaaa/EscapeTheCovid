@@ -1,67 +1,35 @@
 package modele.entite;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import modele.Position;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.Node;
 
-import java.awt.*;
+public abstract class Entite extends Node {
 
-public abstract class Entite {
-    private Position p;
+    protected DoubleProperty x = new SimpleDoubleProperty();
+        public double getX() {return x.get();}
+        public DoubleProperty xProperty() {return x;}
+        public void setX(double x) {this.x.set(x);}
+
+    protected DoubleProperty y = new SimpleDoubleProperty();
+        public double getY() {return y.get();}
+        public DoubleProperty yProperty() {return y;}
+        public void setY(double y) {this.y.set(y);}
+
     private String image;
-    private ImageView imView;
 
-    public ImageView getImView() {
-        return imView;
+    protected int maxWidth=50;
+    protected int maxHeight=50;
+
+
+    public void setPPerso(double x, double y) {
+        this.setX(x);
+        this.setY(y);
     }
 
-    public void setImView(ImageView imView) {
-        this.imView = imView;
-    }
-
-    public float getpositionX() {
-        return this.p.getX();
-    }
-
-    public float getpositionY() {
-        return this.p.getY();
-    }
-
-    public Position getPosition(){
-        return this.p;
-    }
-
-    public void setPPerso(Position p) { //todo voir si on peux faire une méthode setP differente pour le Personnage et le Rocher
-        this.p = p;
-        this.imView.setX(p.getX());
-        this.imView.setY(p.getY());
-    }
-
-    public void setImage(String path){
-        if ("perso".equals(path)) {
-            this.image = "/images/perso/ppRien.png";
-        }else if ("rocher1".equals(path)){
-            this.image="/images/rocher/rock1.png";
-        }else if ("rocher2".equals(path)){
-            this.image="/images/rocher/rock2.png";
-        }else if ("rocher3".equals(path)){
-            this.image= "/images/rocher/rock3.png";
-        }else if ("rocher4".equals((path))){
-            this.image = "/images/rocher/rock4.png";
-        }else if ("masque".equals((path))){
-            this.image = "/images/protection/masque.png";
-        }else if ("combinaison".equals(path)){
-            this.image = "/images/protection/combinaison.png";
-        }else if ("visiere".equals(path)){
-            this.image = "/images/protection/visiere.png";
-        }else if("iaMalade".equals(path)){
-            this.image = "/images/perso/iaMalade.png";
-        }else if("iaRien".equals(path)){
-            this.image = "/images/perso/iaRien.png";
-        }
-    }
-
+    public void setImage(String path){this.image = path;}
     public String getImage() {
         return image;
     }
-
+    public int getMaxWidth() {return maxWidth;}
+    public int getMaxHeight() {return maxHeight;}
 }

@@ -1,85 +1,70 @@
 package modele;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import modele.entite.Rocher;
-import modele.entite.equipements.protections.Combinaison;
-import modele.entite.equipements.protections.Masque;
-import modele.entite.equipements.protections.Protection;
-import modele.entite.equipements.protections.Visiere;
-import modele.entite.personnages.IA;
+import modele.boucleur.Boucleur;
+import modele.boucleur.BoucleurSimple;
+import modele.createur.CreateurEntite;
+import modele.createur.CreateurSimple;
+import modele.deplaceur.Deplaceur;
+import modele.entite.Entite;
 import modele.entite.personnages.PersoPrincipal;
-import modele.properties.NiveauDifficulte;
-import modele.properties.Score;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 
-public class Manager {
-    public float temps;
+
+public class Manager implements InvalidationListener {
     public int nbKill;
     private int nivDiff;
     public PersoPrincipal perso;
-    public Protection protection;
-    private Rocher r;
-    public IA ia;
 
-    public List<Rocher> listRocher = new ArrayList<>();
-    public List<IA> listIA = new ArrayList<>();
+    private StringProperty temps = new SimpleStringProperty();
+        public String getTemps() {return temps.get();}
+        public StringProperty tempsProperty() {return temps;}
+        public void setTemps(String temps) {this.temps.set(temps);}
 
-    private final StringProperty pseudo = new SimpleStringProperty();
+    private StringProperty pseudo = new SimpleStringProperty();
         public String getPseudo(){return pseudo.get();}
         public void setPseudo(String pseudo){this.pseudo.set(pseudo);}
         public StringProperty pseudoProperty(){return pseudo;}
 
 
+    public int getNivDiff() {return nivDiff;}
+    public void setNivDiff(int i) {this.nivDiff = i;}
+
+    private CreateurEntite leCreateur = new CreateurSimple();
+    private Carte carte = new Carte();
+    private Boucleur leBoucleur = new BoucleurSimple();
+
+
     public Manager(){
-    }
+        leCreateur.creerPersoPrincipal(carte);
 
-    public void spawnPerso(){
-        perso = new PersoPrincipal();
-        perso.setPPerso(new Position(45,315)); // point de départ du personnage
-    }
-
-    public int getNivDiff() {
-        return nivDiff;
-    }
-    public void setNivDiff(int i) {
-        this.nivDiff = i;
-    }
-
-    public void spawnRocher(){
         for (int i = 0 ; i < 7*this.nivDiff ; i++)
         {
-            r = new Rocher();
-            listRocher.add(r);
+            leCreateur.creerRocher(carte);
         }
+
+        temps.set(String.valueOf(0));
+
+        leBoucleur.addListener(this);
+        leBoucleur.setActif(true);
+        new Thread(leBoucleur).start();
     }
 
-    public void spawnProtection() {
-        Protection p;
-        Random rand = new Random();
-        double taux = rand.nextFloat();
-        if (taux > 0 && taux < 0.10){
-            p = new Combinaison();
-        }else if (taux >=0.10 && taux <0.40){
-            p = new Visiere();
-        }else {
-            p = new Masque();
-        }
-        protection = p;
+    @Override
+    public void invalidated(Observable observable) {
+        int tps= Integer.parseInt(temps.get())+1;
+        temps.set(String.valueOf(tps));
+        if(tps % 3 == 0){leCreateur.creerIA(carte);}
     }
 
-    public void spawnIA() {
-        ia = new IA();
-        listIA.add(ia);
-    }
+    public ObservableList<Entite> getListeEntite() {return carte.getLesEntites();}
 
+    // DEPLACEMENT
     private boolean up,down,left,right;
     public void touche(KeyEvent k){
         Deplaceur d = new Deplaceur();

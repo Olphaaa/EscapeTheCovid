@@ -1,7 +1,7 @@
 package data;
 
-import modele.properties.Score;
-import modele.properties.TableauScore;
+import modele.score.Score;
+import modele.score.TableauScore;
 
 import java.time.LocalDateTime;
 import java.time.Month;

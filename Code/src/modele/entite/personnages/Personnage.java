@@ -1,7 +1,5 @@
 package modele.entite.personnages;
 
-import javafx.scene.image.ImageView;
-import modele.Position;
 import modele.entite.Entite;
 
 public abstract class Personnage extends Entite {

@@ -1,4 +1,4 @@
-package modele.properties;
+package modele.score;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
