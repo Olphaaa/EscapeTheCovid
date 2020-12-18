@@ -4,18 +4,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.InputStream;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 
 public class IA extends Personnage{
     private boolean isInfect;
+    Random rand = new Random();
 
     public IA(){
         isInfect = false;
-        super.setImage("iaRien.png");
+        super.setImage("/images/perso/iaRien.png");
 
-        float randX= ThreadLocalRandom.current().nextInt(45,1000-80);
-        float randY= ThreadLocalRandom.current().nextInt(45,710-100);
+        float randX= rand.nextInt(920)+45;
+        float randY= rand.nextInt(610)+45;
         this.setPPerso(randX, randY);
 
     }
@@ -28,7 +30,7 @@ public class IA extends Personnage{
 
     public void setInfect(boolean bool){
         isInfect = bool;
-        super.setImage("iaMalade.png");
+        super.setImage("/images/perso/iaMalade.png");
 
     }
 }

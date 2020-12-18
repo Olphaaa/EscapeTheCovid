@@ -14,11 +14,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import modele.createur.CreateurSimple;
 import modele.deplaceur.Deplaceur;
 import modele.Manager;
 import modele.entite.Entite;
 import modele.entite.Rocher;
 import modele.entite.personnages.IA;
+import modele.spawner.Spawner;
+import modele.spawner.SpawnerSimple;
 
 
 import java.util.Timer;
@@ -43,19 +46,22 @@ public class PartieVue{
     public static final Manager m = new Manager();
 
     public void initialize(){
+
         kill.setText("0");
         pseud.setText(m.getPseudo());
         temps.textProperty().bind(m.tempsProperty());
+        Spawner spw = new SpawnerSimple();
+
+        spw.spanwRocher((CreateurSimple) m.getLeCreateur(),m.getCarte(),m.getNivDiff());
 
         for (Entite entite : m.getListeEntite()) {
-            System.out.println(entite.getImage());
             ImageView entiteAAfficher = new ImageView();
             entiteAAfficher.setImage(new Image(getClass().getResource(entite.getImage()).toExternalForm()));
             entiteAAfficher.layoutXProperty().bind(entite.xProperty());
             entiteAAfficher.layoutYProperty().bind(entite.yProperty());
             entiteAAfficher.setFitHeight(entite.getMaxHeight());
             entiteAAfficher.setFitWidth(entite.getMaxWidth());
-            map.getChildren().add(entite);
+            map.getChildren().add(entiteAAfficher);
         }
 
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
@@ -67,7 +73,7 @@ public class PartieVue{
                     entiteAAfficher.layoutYProperty().bind(e.yProperty());
                     entiteAAfficher.setFitHeight(e.getMaxHeight());
                     entiteAAfficher.setFitWidth(e.getMaxWidth());
-                    map.getChildren().add(e);
+                    map.getChildren().add(entiteAAfficher);
                 }
             }
         );

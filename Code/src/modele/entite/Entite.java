@@ -3,7 +3,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 
-public abstract class Entite extends Node {
+public abstract class Entite {
 
     protected DoubleProperty x = new SimpleDoubleProperty();
         public double getX() {return x.get();}

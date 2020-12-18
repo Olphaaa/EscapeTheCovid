@@ -3,8 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="map" prefHeight="710.0" prefWidth="1000.0" styleClass="map" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PartieVue">
-   <top>
+<Pane fx:id="map" prefHeight="710.0" prefWidth="1000.0" styleClass="map" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PartieVue">
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-max-width: 150px; -fx-max-height: 50px; -fx-background-color: rgba(255,255,255,0.75); -fx-border-color: black; -fx-border-radius: 2px;">
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -21,8 +20,4 @@
                   </HBox>
             </VBox>
       </VBox>
-   </top>
-   <center>
-      <Button mnemonicParsing="false" text="START" fx:id="startButton" onAction="#onStart" BorderPane.alignment="CENTER" />
-   </center>
-</BorderPane>
+</Pane>

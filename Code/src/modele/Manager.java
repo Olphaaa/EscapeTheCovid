@@ -13,7 +13,10 @@ import modele.createur.CreateurSimple;
 import modele.deplaceur.Deplaceur;
 import modele.entite.Entite;
 import modele.entite.personnages.PersoPrincipal;
-
+import modele.spawner.Spawner;
+import modele.spawner.SpawnerSimple;
+import view.PartieVue;
+import view.SetupPartie;
 
 
 public class Manager implements InvalidationListener {
@@ -35,18 +38,17 @@ public class Manager implements InvalidationListener {
     public int getNivDiff() {return nivDiff;}
     public void setNivDiff(int i) {this.nivDiff = i;}
 
+    public CreateurEntite getLeCreateur() {return leCreateur;}
+    public Carte getCarte() {return carte;}
+
     private CreateurEntite leCreateur = new CreateurSimple();
     private Carte carte = new Carte();
     private Boucleur leBoucleur = new BoucleurSimple();
+    private Spawner leSpawner = new SpawnerSimple();
 
 
     public Manager(){
         leCreateur.creerPersoPrincipal(carte);
-
-        for (int i = 0 ; i < 7*this.nivDiff ; i++)
-        {
-            leCreateur.creerRocher(carte);
-        }
 
         temps.set(String.valueOf(0));
 
@@ -59,7 +61,7 @@ public class Manager implements InvalidationListener {
     public void invalidated(Observable observable) {
         int tps= Integer.parseInt(temps.get())+1;
         temps.set(String.valueOf(tps));
-        if(tps % 3 == 0){leCreateur.creerIA(carte);}
+        leCreateur.creerIA(carte);
     }
 
     public ObservableList<Entite> getListeEntite() {return carte.getLesEntites();}

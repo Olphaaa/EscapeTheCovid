@@ -15,7 +15,7 @@ public class PersoPrincipal extends Personnage{
     public PersoPrincipal(){
         this.a = null;
         this.p= null;
-        this.setImage("perso.png");
+        this.setImage("/images/perso/ppRien.png");
         this.setX(45);
         this.setY(375);
     }
