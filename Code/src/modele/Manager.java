@@ -57,6 +57,10 @@ public class Manager implements InvalidationListener {
         new Thread(leBoucleur).start();
     }
 
+    public void stopBoucleur(){
+        leBoucleur.setActif(false);
+    }
+
     @Override
     public void invalidated(Observable observable) {
         int tps= Integer.parseInt(temps.get())+1;

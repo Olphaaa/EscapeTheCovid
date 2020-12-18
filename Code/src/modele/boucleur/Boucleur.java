@@ -14,7 +14,7 @@ public abstract class Boucleur implements Runnable, Observable {
     protected boolean actif = false;
     public boolean isActif() {return actif;}
     public void setActif(boolean actif) {this.actif = actif;}
-
+    protected int sec;
 
     @Override
     public void addListener(InvalidationListener invalidationListener) {

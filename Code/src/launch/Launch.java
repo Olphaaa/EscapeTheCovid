@@ -6,11 +6,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import modele.Manager;
 
 
 public class Launch extends Application{
     public static Stage fenetrePrincipale;
-
     @Override
     public void start(Stage pS) throws Exception{
         fenetrePrincipale = pS;
@@ -24,4 +24,5 @@ public class Launch extends Application{
         pS.setTitle("Escape the Covid");
         pS.show();
     }
+
 }

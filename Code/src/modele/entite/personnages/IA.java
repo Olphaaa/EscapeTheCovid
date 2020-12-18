@@ -31,6 +31,5 @@ public class IA extends Personnage{
     public void setInfect(boolean bool){
         isInfect = bool;
         super.setImage("/images/perso/iaMalade.png");
-
     }
 }
