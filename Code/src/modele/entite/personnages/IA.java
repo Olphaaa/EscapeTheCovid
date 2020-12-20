@@ -15,11 +15,9 @@ public class IA extends Personnage{
     public IA(){
         isInfect = false;
         super.setImage("/images/perso/iaRien.png");
-
-        float randX= rand.nextInt(920)+45;
-        float randY= rand.nextInt(610)+45;
+        float randX= rand.nextInt(895 - 24)+24;
+        float randY= rand.nextInt(605 - 24)+24;
         this.setPPerso(randX, randY);
-
     }
 
     public void disparition(){

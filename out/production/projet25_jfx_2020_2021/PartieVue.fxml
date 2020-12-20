@@ -20,4 +20,5 @@
                   </HBox>
             </VBox>
       </VBox>
+   <Button fx:id="startButton" alignment="CENTER" contentDisplay="CENTER" layoutX="480.0" layoutY="343.0" mnemonicParsing="false" text="Start" onAction="#onStart" />
 </Pane>

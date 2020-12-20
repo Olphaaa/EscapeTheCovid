@@ -10,7 +10,11 @@ import modele.entite.personnages.PersoPrincipal;
 
 public class CreateurSimple extends CreateurEntite{
     @Override
-    public void creerPersoPrincipal(Carte carte) {carte.ajouterEntites(new PersoPrincipal());}
+    public PersoPrincipal creerPersoPrincipal(Carte carte) {
+        PersoPrincipal perso = new PersoPrincipal();
+        carte.ajouterEntites(perso);
+        return perso;
+    }
 
     @Override
     public void creerIA(Carte carte) {carte.ajouterEntites(new IA()); }

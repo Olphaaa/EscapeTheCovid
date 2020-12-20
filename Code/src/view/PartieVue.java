@@ -6,12 +6,15 @@ import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import launch.Launch;
@@ -30,7 +33,7 @@ import java.util.Timer;
 
 
 
-public class PartieVue extends Launch {
+public class PartieVue{
 
     @FXML
     private Button startButton;
@@ -88,17 +91,23 @@ public class PartieVue extends Launch {
             }
         }
         );
+        m.getLeCollisionneur().widthProperty().bind(map.widthProperty());
+        m.getLeCollisionneur().heightProperty().bind(map.heightProperty());
     }
 
     public void onStart(ActionEvent actionEvent) {
+        startButton.setVisible(false);
         ((Button)actionEvent.getSource()).getScene().setOnKeyPressed(m::testPressed);
         ((Button)actionEvent.getSource()).getScene().setOnKeyReleased(m::testRealesed);
+        m.startBoucleur();
     }
-    @Override //todo ne fonctionne pas (il servirait a arreter le boucleur)
-    public void stop() throws Exception {
-        m.stopBoucleur();
-        super.stop();
+/*
+    @FXML
+    private void appuie(KeyEvent keyEvent) {
+        System.out.println(keyEvent.getCode());
+
     }
+*/
 
 /*
     private void deplacementIA(){

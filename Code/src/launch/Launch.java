@@ -7,10 +7,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import modele.Manager;
+import view.PartieVue;
 
 
 public class Launch extends Application{
     public static Stage fenetrePrincipale;
+    private static Manager m = new Manager();
     @Override
     public void start(Stage pS) throws Exception{
         fenetrePrincipale = pS;
@@ -18,11 +20,14 @@ public class Launch extends Application{
         Scene scene = new Scene(container);
         container.getStylesheets().add("css/style.css");
         pS.getIcons().add(new Image("images/icone.png"));
-
-
         pS.setScene(scene);
         pS.setTitle("Escape the Covid");
         pS.show();
     }
 
+    @Override
+    public void stop() throws Exception {
+        PartieVue.m.stopBoucleur();
+        super.stop();
+    }
 }

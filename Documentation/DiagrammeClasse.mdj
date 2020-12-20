@@ -4395,7 +4395,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 133,
-											"top": 1255,
+											"top": 1240,
 											"width": 256.17236328125,
 											"height": 13,
 											"text": "+getPv(): int",
@@ -4412,10 +4412,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 133,
-											"top": 1270,
+											"top": 1255,
 											"width": 256.17236328125,
 											"height": 13,
-											"text": "+setPdv(int pdv)",
+											"text": "+setPv(int pv)",
 											"horizontalAlignment": 0
 										}
 									],
@@ -4423,7 +4423,7 @@
 									"left": 128,
 									"top": 1220,
 									"width": 266.17236328125,
-									"height": 68
+									"height": 53
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -4663,7 +4663,7 @@
 											"top": 1419,
 											"width": 256.17236328125,
 											"height": 13,
-											"text": "+detInfect(boolean bool)",
+											"text": "+isInfect(boolean bool)",
 											"horizontalAlignment": 0
 										}
 									],
@@ -11923,7 +11923,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF1+lSXyyFr4No="
 									},
-									"name": "int pv"
+									"name": "int pv",
+									"type": ""
 								}
 							]
 						}
@@ -12021,7 +12022,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF11lzM5N0IpBk="
 									},
-									"name": "boolean bool"
+									"name": "boolean bool",
+									"type": ""
 								}
 							]
 						}

@@ -1,14 +1,22 @@
 package modele.deplaceur;
 
+import collisionneur.Collisionneur;
 import modele.entite.Entite;
 
 
-public class Deplaceur {
+public abstract class Deplaceur {
 
-    protected int pas = 7;
+    protected int pas;
+    protected Collisionneur leCollisionneur;
 
-    public void deplacerHaut(Entite e){ e.setPPerso(e.getX(), e.getY()-pas); }
-    public void deplacerBas(Entite e){e.setPPerso(e.getX(), e.getY()+pas);}
-    public void deplacerGauche(Entite e){e.setPPerso(e.getX()-pas, e.getY());}
-    public void deplacerDroit(Entite e){e.setPPerso(e.getX()+pas, e.getY());}
+    public Deplaceur(Collisionneur leCollisionneur){
+        this.leCollisionneur = leCollisionneur;
+    }
+
+    //public Deplaceur(Collisionneur leCollisionneur){this.leCollisionneur = leCollisionneur;}
+
+    public abstract void deplacerHaut(Entite e);
+    public abstract void deplacerBas(Entite e);
+    public abstract void deplacerGauche(Entite e);
+    public abstract void deplacerDroit(Entite e);
 }
