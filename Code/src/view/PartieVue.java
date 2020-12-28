@@ -45,6 +45,8 @@ public class PartieVue{
     private Label temps;
     @FXML
     private Pane map;
+    @FXML
+    private Label vie;
 
 
     public static final Manager m = new Manager();
@@ -54,6 +56,8 @@ public class PartieVue{
         kill.setText("0");
         pseud.setText(m.getPseudo());
         temps.textProperty().bind(m.tempsProperty());
+        vie.textProperty().bind(m.vieProperty());
+
         Spawner spw = new SpawnerSimple();
 
         spw.spanwRocher((CreateurSimple) m.getLeCreateur(),m.getCarte(),m.getNivDiff());

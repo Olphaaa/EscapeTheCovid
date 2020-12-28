@@ -1,5 +1,6 @@
 package modele;
 
+import javafx.beans.value.ObservableValue;
 import modele.collisionneur.Collisionneur;
 import modele.collisionneur.CollisionneurSimple;
 import javafx.beans.InvalidationListener;
@@ -36,6 +37,11 @@ public class Manager implements InvalidationListener {
         public void setPseudo(String pseudo){this.pseudo.set(pseudo);}
         public StringProperty pseudoProperty(){return pseudo;}
 
+    private StringProperty vie = new SimpleStringProperty();
+        public String getVie(){return vie.get();}
+        public void setVie(String vie){this.vie.set(vie);}
+        public StringProperty vieProperty(){return vie;}
+
 
     public int getNivDiff() {return nivDiff;}
     public void setNivDiff(int i) {this.nivDiff = i;}
@@ -53,7 +59,7 @@ public class Manager implements InvalidationListener {
     public Manager(){
         perso = leCreateur.creerPersoPrincipal(carte);
         temps.set(String.valueOf(0));
-
+        vie.setValue(String.valueOf(perso.getPv()));
     }
 
     public void startBoucleur(){
@@ -70,6 +76,7 @@ public class Manager implements InvalidationListener {
     public void invalidated(Observable observable) {
         int tps= Integer.parseInt(temps.get())+1;
         temps.set(String.valueOf(tps));
+        vie.set(String.valueOf(perso.getPv()));
         if((tps%1==0 && nbIA<=5+(nivDiff*3)-1) && nbIA <1){
             leCreateur.creerIA(carte);
             nbIA++;
@@ -115,4 +122,6 @@ public class Manager implements InvalidationListener {
     public Collisionneur getLeCollisionneur() {
         return leCollisionneur;
     }
+
+
 }

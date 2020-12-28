@@ -10,6 +10,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class IA extends Personnage{
     private boolean isInfect;
+
+    public boolean isInfect() {
+        return isInfect;
+    }
+
     Random rand = new Random();
 
     public IA(){
