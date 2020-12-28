@@ -1,6 +1,6 @@
 package modele.deplaceur;
 
-import collisionneur.Collisionneur;
+import modele.collisionneur.Collisionneur;
 import modele.entite.Entite;
 
 

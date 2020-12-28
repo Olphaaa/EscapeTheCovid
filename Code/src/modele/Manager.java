@@ -1,7 +1,7 @@
 package modele;
 
-import collisionneur.Collisionneur;
-import collisionneur.CollisionneurSimple;
+import modele.collisionneur.Collisionneur;
+import modele.collisionneur.CollisionneurSimple;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.*;
@@ -18,8 +18,6 @@ import modele.entite.Entite;
 import modele.entite.personnages.PersoPrincipal;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
-import view.PartieVue;
-import view.SetupPartie;
 
 
 public class Manager implements InvalidationListener {
@@ -49,7 +47,7 @@ public class Manager implements InvalidationListener {
     private Carte carte = new Carte();
     private Boucleur leBoucleur = new BoucleurSimple();
     private Spawner leSpawner = new SpawnerSimple();
-    private Collisionneur leCollisionneur = new CollisionneurSimple();
+    private Collisionneur leCollisionneur = new CollisionneurSimple(carte);
     private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur);
 
     public Manager(){
@@ -72,7 +70,7 @@ public class Manager implements InvalidationListener {
     public void invalidated(Observable observable) {
         int tps= Integer.parseInt(temps.get())+1;
         temps.set(String.valueOf(tps));
-        if(tps%5==0 && nbIA<=5+(nivDiff*3)-1){
+        if((tps%1==0 && nbIA<=5+(nivDiff*3)-1) && nbIA <1){
             leCreateur.creerIA(carte);
             nbIA++;
         }

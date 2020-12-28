@@ -1,7 +1,6 @@
 package modele.deplaceur;
 
-import collisionneur.Collisionneur;
-import collisionneur.CollisionneurSimple;
+import modele.collisionneur.Collisionneur;
 import modele.entite.Entite;
 
 public class DeplaceurSimple extends Deplaceur {

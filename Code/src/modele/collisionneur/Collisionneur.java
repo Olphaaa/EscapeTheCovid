@@ -1,8 +1,8 @@
-package collisionneur;
+package modele.collisionneur;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import modele.entite.Entite;
+import modele.Carte;
 
 public abstract class Collisionneur {
 
@@ -16,6 +16,12 @@ public abstract class Collisionneur {
         public DoubleProperty heightProperty() {return height;}
         public void setHeight(double height) {this.height.set(height);}
 
+    protected Carte laCarte;
+
+    public Collisionneur(Carte laCarte){
+        this.laCarte = laCarte;
+    }
+
     public abstract boolean canMove(double x, double y);
-    public abstract Entite isPresent(double x, double y);
+    public abstract boolean isPresent(double x, double y);
 }
