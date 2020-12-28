@@ -1,6 +1,8 @@
 package modele;
 
 import javafx.beans.value.ObservableValue;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import modele.collisionneur.Collisionneur;
 import modele.collisionneur.CollisionneurSimple;
 import javafx.beans.InvalidationListener;
@@ -80,6 +82,10 @@ public class Manager implements InvalidationListener {
         if((tps%1==0 && nbIA<=5+(nivDiff*3)-1) && nbIA <1){
             leCreateur.creerIA(carte);
             nbIA++;
+        }
+        if (perso.getPv()==0){
+            //todo faire en sorte d'afficher la page game over une fois la partie terminée
+            stopBoucleur();
         }
     }
 
