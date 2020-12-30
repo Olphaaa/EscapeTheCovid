@@ -15,11 +15,17 @@ import modele.collisionneur.CollisionneurSimple;
 import modele.createur.CreateurEntite;
 import modele.createur.CreateurSimple;
 import modele.deplaceur.Deplaceur;
+import modele.deplaceur.DeplaceurIA;
 import modele.deplaceur.DeplaceurSimple;
 import modele.entite.Entite;
+import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
+import modele.ramasseur.Ramasseur;
+import modele.ramasseur.RamasseurSimple;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
+
+import java.util.Iterator;
 
 
 public class Manager implements InvalidationListener {
@@ -54,6 +60,7 @@ public class Manager implements InvalidationListener {
     private CreateurEntite leCreateur = new CreateurSimple();
     private Carte carte = new Carte();
     private Boucleur leBoucleur = new BoucleurSimple();
+    //private Boucleur leBoucleurIA = new BoucleurIA();// todo a voir plus tard
     private Spawner leSpawner = new SpawnerSimple();
     private Collisionneur leCollisionneur = new CollisionneurSimple(carte,this);
     private Ramasseur leRamasseur = new RamasseurSimple(carte);
@@ -88,7 +95,44 @@ public class Manager implements InvalidationListener {
             //todo faire en sorte d'afficher la page game over une fois la partie terminée
             stopBoucleur();
         }
+
+
+
+        if (perso.getPv() == 3 && perso.isEquiped()){
+            perso.setImage("/images/perso/ppRien.png");
+            perso.setProtection(null);
+            perso.setEquiped(false);
+            nbProtection = 0;
+        }
+
+        if (tps%2==0 && nbProtection<1 && !perso.isEquiped()){
+            nbProtection = 1;
+            leSpawner.spawnProtection((CreateurSimple) leCreateur, carte);
+        }
+        //deplacementDesIa();
     }
+
+    private void deplacementDesIa() {
+        Iterator<Entite> it = carte.getLesEntites().iterator();
+        while (it.hasNext()){
+            Entite e = it.next();
+            if (e instanceof IA){
+                if (e.getX() < ((IA) e).getDestX()){
+                   leDeplaceurIA.deplacerDroit(e);
+                }
+                if (e.getX() > ((IA) e).getDestX()){
+                    leDeplaceurIA.deplacerDroit(e);
+                }
+                if (e.getY()< ((IA) e).getDestY()){
+                    leDeplaceurIA.deplacerDroit(e);
+                }
+                if (e.getY()> ((IA) e).getDestY()){
+                    leDeplaceurIA.deplacerDroit(e);
+                }
+            }
+        }
+    }
+
 
     public ObservableList<Entite> getListeEntite() {return carte.getLesEntites();}
 

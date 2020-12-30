@@ -4,11 +4,11 @@ import modele.collisionneur.Collisionneur;
 import modele.entite.Entite;
 import modele.ramasseur.Ramasseur;
 
-public class DeplaceurSimple extends Deplaceur {
+public class DeplaceurIA extends Deplaceur{
 
-    public DeplaceurSimple(Collisionneur leCollisionneur, Ramasseur leRamasseur){
+    public DeplaceurIA(Collisionneur leCollisionneur, Ramasseur leRamasseur){//todo voir s'il faut quand meme le ramasseur
         super(leCollisionneur, leRamasseur);
-        pas=7;
+        pas = 10;
     }
 
     public void deplacerHaut(Entite e){
@@ -16,7 +16,6 @@ public class DeplaceurSimple extends Deplaceur {
             e.setPPerso(e.getX(), e.getY()-pas);
         }
     }
-
 
     public void deplacerBas(Entite e){
         if (leCollisionneur.canMove(e.getX(), e.getY()+pas)){
@@ -28,12 +27,11 @@ public class DeplaceurSimple extends Deplaceur {
         if (leCollisionneur.canMove(e.getX()-pas, e.getY())){
             e.setPPerso(e.getX()-pas, e.getY());
         }
-
     }
+
     public void deplacerDroit(Entite e){
         if (leCollisionneur.canMove(e.getX()+pas, e.getY())){
             e.setPPerso(e.getX()+pas, e.getY());
         }
-
     }
 }

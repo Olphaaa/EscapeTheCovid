@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 
 public class Score {
 
-    //property
-
     private IntegerProperty score = new SimpleIntegerProperty();
         public Integer getScore(){return score.get();}
         public IntegerProperty scoreProperty(){return score;}

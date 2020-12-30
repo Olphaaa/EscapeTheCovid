@@ -5,6 +5,6 @@ import modele.createur.CreateurSimple;
 import modele.entite.Entite;
 
 public abstract class Spawner {
-    public abstract void spanwProtection(CreateurSimple cs, Carte carte);
-    public abstract void spanwRocher(CreateurSimple cs, Carte carte, int difficulte);
+    public abstract void spawnProtection(CreateurSimple cs, Carte carte);
+    public abstract void spawnRocher(CreateurSimple cs, Carte carte, int difficulte);
 }

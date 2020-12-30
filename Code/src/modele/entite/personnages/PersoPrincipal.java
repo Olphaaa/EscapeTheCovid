@@ -22,7 +22,37 @@ public class PersoPrincipal extends Personnage{
         this.setY(375);
     }
 
+    public void ajouterEquipement(Equipement e){
+        switch (e.getNom()){
+          case "Masque":
+              Masque masque = (Masque) e;
+              this.setImage("/images/perso/ppMasque.png");
+              this.setProtection(masque);
+              this.setEquiped(true);
+              break;
 
+            case "Visiere":
+                Visiere visiere = (Visiere) e;
+                this.setImage("/images/perso/ppRien.png");//todo ajouter l'image du perso avec la visiere
+                this.setProtection(visiere);
+                this.setEquiped(true);
+                break;
+
+            case "Combinaison":
+                Combinaison combinaison = (Combinaison) e;
+                this.setImage("/images/perso/ppCombi.png");
+                this.setProtection(combinaison);
+                this.setEquiped(true);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public void setEquiped(boolean bool){
+        this.isEquiped = bool;
+    }
     private void setArme(Arme a){
         this.a = a;
     }
