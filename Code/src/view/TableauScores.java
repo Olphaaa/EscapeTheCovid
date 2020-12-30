@@ -21,7 +21,7 @@ public class TableauScores {
     private TableauScore tabScore = stub.creerTableau();
 
     public void initialize(){
-        listeScores.itemsProperty().bind(tabScore.lesScoresProperty());
+        //listeScores.itemsProperty().bind(tabScore.lesScoresProperty());
     }
 
     @FXML

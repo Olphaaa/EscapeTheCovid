@@ -1,7 +1,6 @@
 package modele.entite;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.Node;
 
 public abstract class Entite {
 

@@ -10,8 +10,8 @@ import java.util.Iterator;
 
 public class CollisionneurSimple extends Collisionneur {
 
-    public CollisionneurSimple(Carte laCarte) {
-        super(laCarte);
+    public CollisionneurSimple(Carte laCarte, Manager m) {
+        super(laCarte,m);
     }
 
     @Override

@@ -13,4 +13,9 @@ public class Masque extends Protection {
 
         this.setPPerso(randX,randY);
     }
+
+    @Override
+    public String getNom() {
+        return "Masque";
+    }
 }

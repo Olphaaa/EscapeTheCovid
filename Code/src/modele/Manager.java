@@ -1,18 +1,17 @@
 package modele;
 
-import javafx.beans.value.ObservableValue;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import modele.collisionneur.Collisionneur;
-import modele.collisionneur.CollisionneurSimple;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.property.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import modele.boucleur.Boucleur;
+import modele.boucleur.BoucleurIA;
 import modele.boucleur.BoucleurSimple;
+import modele.collisionneur.Collisionneur;
+import modele.collisionneur.CollisionneurSimple;
 import modele.createur.CreateurEntite;
 import modele.createur.CreateurSimple;
 import modele.deplaceur.Deplaceur;
@@ -27,6 +26,7 @@ public class Manager implements InvalidationListener {
     public int nbKill;
     private int nivDiff;
     private int nbIA;
+    private int nbProtection = 0;
     public PersoPrincipal perso;
 
     private StringProperty temps = new SimpleStringProperty();
@@ -55,9 +55,10 @@ public class Manager implements InvalidationListener {
     private Carte carte = new Carte();
     private Boucleur leBoucleur = new BoucleurSimple();
     private Spawner leSpawner = new SpawnerSimple();
-    private Collisionneur leCollisionneur = new CollisionneurSimple(carte);
-    private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur);
-
+    private Collisionneur leCollisionneur = new CollisionneurSimple(carte,this);
+    private Ramasseur leRamasseur = new RamasseurSimple(carte);
+    private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
+    private Deplaceur leDeplaceurIA = new DeplaceurIA(leCollisionneur, leRamasseur);// todo voir s'il faut bien le ramasseur
     public Manager(){
         perso = leCreateur.creerPersoPrincipal(carte);
         temps.set(String.valueOf(0));

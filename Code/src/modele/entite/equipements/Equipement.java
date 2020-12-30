@@ -10,4 +10,6 @@ public abstract class Equipement extends Entite {
     public void setIdEquipement(int idEquipement) {
         this.idEquipement = idEquipement;
     }
+
+    public abstract String getNom();
 }

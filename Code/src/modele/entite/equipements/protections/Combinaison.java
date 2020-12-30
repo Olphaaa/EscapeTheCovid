@@ -13,4 +13,9 @@ public class Combinaison extends Protection{
 
         this.setPPerso(randX,randY);
     }
+
+    @Override
+    public String getNom() {
+        return "Combinaison";
+    }
 }

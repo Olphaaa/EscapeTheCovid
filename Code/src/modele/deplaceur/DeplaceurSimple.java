@@ -2,6 +2,7 @@ package modele.deplaceur;
 
 import modele.collisionneur.Collisionneur;
 import modele.entite.Entite;
+import modele.ramasseur.Ramasseur;
 
 public class DeplaceurSimple extends Deplaceur {
 

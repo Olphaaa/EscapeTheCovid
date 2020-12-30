@@ -14,4 +14,9 @@ public class Visiere extends Protection {
 
         this.setPPerso(randX,randY);
     }
+
+    @Override
+    public String getNom() {
+        return "Visiere";
+    }
 }

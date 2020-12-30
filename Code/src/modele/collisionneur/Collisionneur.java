@@ -3,6 +3,7 @@ package modele.collisionneur;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import modele.Carte;
+import modele.Manager;
 
 public abstract class Collisionneur {
 
@@ -17,9 +18,12 @@ public abstract class Collisionneur {
         public void setHeight(double height) {this.height.set(height);}
 
     protected Carte laCarte;
+    protected Manager leManager;
 
-    public Collisionneur(Carte laCarte){
+
+    public Collisionneur(Carte laCarte, Manager m){
         this.laCarte = laCarte;
+        this.leManager = m;
     }
 
     public abstract boolean canMove(double x, double y);

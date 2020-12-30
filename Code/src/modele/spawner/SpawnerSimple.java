@@ -8,7 +8,7 @@ import java.util.Random;
 public class SpawnerSimple extends Spawner {
 
     @Override
-    public void spanwProtection(CreateurSimple cs, Carte carte) {
+    public void spawnProtection(CreateurSimple cs, Carte carte) {
             Random rand = new Random();
             double taux = rand.nextFloat();
             if (taux > 0 && taux < 0.10){
@@ -21,7 +21,7 @@ public class SpawnerSimple extends Spawner {
     }
 
     @Override
-    public void spanwRocher(CreateurSimple cs, Carte carte, int difficulte) {
+    public void spawnRocher(CreateurSimple cs, Carte carte, int difficulte) {
         for (int i = 0 ; i < 7*difficulte ; i++)
         {
             cs.creerRocher(carte);

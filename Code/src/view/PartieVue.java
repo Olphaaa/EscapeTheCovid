@@ -1,36 +1,21 @@
 package view;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
-
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
-import launch.Launch;
-import modele.createur.CreateurSimple;
-import modele.deplaceur.Deplaceur;
 import modele.Manager;
+import modele.createur.CreateurSimple;
 import modele.entite.Entite;
-import modele.entite.Rocher;
-import modele.entite.personnages.IA;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
 
-
-import java.util.Timer;
-
-
+import java.util.Iterator;
 
 
 public class PartieVue{
@@ -59,42 +44,39 @@ public class PartieVue{
         vie.textProperty().bind(m.vieProperty());
 
         Spawner spw = new SpawnerSimple();
+        spw.spawnRocher((CreateurSimple) m.getLeCreateur(),m.getCarte(),m.getNivDiff());
 
-        spw.spanwRocher((CreateurSimple) m.getLeCreateur(),m.getCarte(),m.getNivDiff());
-
-        /*m.getListeEntite().addListener(new ListChangeListener<Entite>() {
-            @Override
-            public void onChanged(Change<? extends Entite> change) {
-                change.getAddedSubList();
-                change.next();
-                change.getAddedSubList().
-            }
-        });*/
 
         for (Entite entite : m.getListeEntite()) {
-            ImageView entiteAAfficher = new ImageView();
-            entiteAAfficher.setImage(new Image(getClass().getResource(entite.getImage()).toExternalForm()));
-            entiteAAfficher.layoutXProperty().bind(entite.xProperty());
-            entiteAAfficher.layoutYProperty().bind(entite.yProperty());
-            entiteAAfficher.setFitHeight(entite.getMaxHeight());
-            entiteAAfficher.setFitWidth(entite.getMaxWidth());
-            //System.out.println(entite.xProperty()+", "+entite.yProperty());
-            map.getChildren().add(entiteAAfficher);
+            update(entite);
         }
 
+
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
-            change.next();
-            for (Entite e : change.getAddedSubList()) {
-                ImageView entiteAAfficher = new ImageView();
-                entiteAAfficher.setImage(new Image(getClass().getResource(e.getImage()).toExternalForm()));
-                entiteAAfficher.layoutXProperty().bind(e.xProperty());
-                entiteAAfficher.layoutYProperty().bind(e.yProperty());
-                entiteAAfficher.setFitHeight(e.getMaxHeight());
-                entiteAAfficher.setFitWidth(e.getMaxWidth());
-                map.getChildren().add(entiteAAfficher);
-            }
-        }
+           change.next();
+
+                for (Entite e : change.getAddedSubList()) {
+                    update(e);
+                }
+
+                for (Entite e : change.getList()){
+                    update(e);
+                }
+
+                for (Entite e : change.getRemoved()) {
+                    Iterator<Node> unIterateur = map.getChildren().iterator();
+                    while (unIterateur.hasNext()) {
+                        Node leNode = unIterateur.next();
+                        if (leNode.getUserData() == e) {
+                                unIterateur.remove();
+                            }
+                        }
+                    }
+                }
+
+
         );
+
         m.getLeCollisionneur().widthProperty().bind(map.widthProperty());
         m.getLeCollisionneur().heightProperty().bind(map.heightProperty());
     }
@@ -105,28 +87,15 @@ public class PartieVue{
         ((Button)actionEvent.getSource()).getScene().setOnKeyReleased(m::testRealesed);
         m.startBoucleur();
     }
-/*
-    @FXML
-    private void appuie(KeyEvent keyEvent) {
-        System.out.println(keyEvent.getCode());
 
+    private void update(Entite e){
+        ImageView entiteAAfficher = new ImageView();
+        entiteAAfficher.setUserData(e);
+        entiteAAfficher.setImage(new Image(getClass().getResource(e.getImage()).toExternalForm()));
+        entiteAAfficher.layoutXProperty().bind(e.xProperty());
+        entiteAAfficher.layoutYProperty().bind(e.yProperty());
+        entiteAAfficher.setFitHeight(e.getMaxHeight());
+        entiteAAfficher.setFitWidth(e.getMaxWidth());
+        map.getChildren().add(entiteAAfficher);
     }
-*/
-
-/*
-    private void deplacementIA(){
-        Deplaceur d = new Deplaceur();
-        Timeline depIA = new Timeline( new KeyFrame( Duration.seconds(0.1), ev -> {
-            for (Entite ia: m.getListeEntite()) {
-                if(ia.getX() < 45 ){d.deplacerDroit(ia);}
-                else if(ia.getX() > 900 ){d.deplacerBas(ia);}
-
-                else{d.deplacerHaut(ia);}
-
-            }
-        }));
-        depIA.setCycleCount(Animation.INDEFINITE);
-        depIA.play();
-    }
-*/
 }

@@ -24,4 +24,5 @@ public abstract class Personnage extends Entite {
     public void seFaireToucher(){
         this.pointsDeVie--;
     }
+
 }
