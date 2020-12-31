@@ -11,6 +11,7 @@ import modele.boucleur.Boucleur;
 import modele.boucleur.BoucleurIA;
 import modele.boucleur.BoucleurSimple;
 import modele.collisionneur.Collisionneur;
+import modele.collisionneur.CollisionneurIA;
 import modele.collisionneur.CollisionneurSimple;
 import modele.createur.CreateurEntite;
 import modele.createur.CreateurSimple;
@@ -32,7 +33,8 @@ public class Manager implements InvalidationListener {
     public int nbKill;
     private int nivDiff;
     private int nbIA;
-    private int nbProtection = 0;
+    private int nbProtection;
+    private int cptTemps;
     public PersoPrincipal perso;
 
     private StringProperty temps = new SimpleStringProperty();
@@ -60,12 +62,13 @@ public class Manager implements InvalidationListener {
     private CreateurEntite leCreateur = new CreateurSimple();
     private Carte carte = new Carte();
     private Boucleur leBoucleur = new BoucleurSimple();
-    //private Boucleur leBoucleurIA = new BoucleurIA();// todo a voir plus tard
+    private Boucleur leBoucleurIA = new BoucleurIA();// todo a voir plus tard
     private Spawner leSpawner = new SpawnerSimple();
     private Collisionneur leCollisionneur = new CollisionneurSimple(carte,this);
+    private Collisionneur leCollisionneurIA = new CollisionneurIA(carte,this);
     private Ramasseur leRamasseur = new RamasseurSimple(carte);
     private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
-    private Deplaceur leDeplaceurIA = new DeplaceurIA(leCollisionneur, leRamasseur);// todo voir s'il faut bien le ramasseur
+    private Deplaceur leDeplaceurIA = new DeplaceurIA(leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
     public Manager(){
         perso = leCreateur.creerPersoPrincipal(carte);
         temps.set(String.valueOf(0));
@@ -74,8 +77,11 @@ public class Manager implements InvalidationListener {
 
     public void startBoucleur(){
         leBoucleur.addListener(this);
+        leBoucleurIA.addListener(this);
         leBoucleur.setActif(true);
+        leBoucleurIA.setActif(true);
         new Thread(leBoucleur).start();
+        new Thread(leBoucleurIA).start();
     }
 
     public void stopBoucleur(){
@@ -87,14 +93,14 @@ public class Manager implements InvalidationListener {
         int tps= Integer.parseInt(temps.get())+1;
         temps.set(String.valueOf(tps));
         vie.set(String.valueOf(perso.getPv()));
-        if((tps%1==0 && nbIA<=5+(nivDiff*3)-1) && nbIA <1){
+        if((tps%5==0 && nbIA<=5+(nivDiff*3)-1)  && nbIA<2){
             leCreateur.creerIA(carte);
             nbIA++;
         }
-        if (perso.getPv()==0){
+        /*if (perso.getPv()==0){
             //todo faire en sorte d'afficher la page game over une fois la partie terminée
             stopBoucleur();
-        }
+        }*/
 
 
 
@@ -109,26 +115,28 @@ public class Manager implements InvalidationListener {
             nbProtection = 1;
             leSpawner.spawnProtection((CreateurSimple) leCreateur, carte);
         }
-        //deplacementDesIa();
+        deplacementDesIa();
     }
 
-    private void deplacementDesIa() {
-        Iterator<Entite> it = carte.getLesEntites().iterator();
+    public void deplacementDesIa() {
+        Iterator<IA> it = carte.getLesIA().iterator();
         while (it.hasNext()){
             Entite e = it.next();
-            if (e instanceof IA){
-                if (e.getX() < ((IA) e).getDestX()){
-                   leDeplaceurIA.deplacerDroit(e);
-                }
-                if (e.getX() > ((IA) e).getDestX()){
-                    leDeplaceurIA.deplacerDroit(e);
-                }
-                if (e.getY()< ((IA) e).getDestY()){
-                    leDeplaceurIA.deplacerDroit(e);
-                }
-                if (e.getY()> ((IA) e).getDestY()){
-                    leDeplaceurIA.deplacerDroit(e);
-                }
+            //System.out.println(e.getX() + ", "+e.getY()+" → "+ ((IA) e).getDestX()+", "+((IA) e).getDestY());
+            if (e.getX() < ((IA) e).getDestX()){
+               leDeplaceurIA.deplacerDroit(e);
+            }
+            if (e.getX() > ((IA) e).getDestX()){
+                leDeplaceurIA.deplacerGauche(e);
+            }
+            if (e.getY()< ((IA) e).getDestY()){
+                leDeplaceurIA.deplacerBas(e);
+            }
+            if (e.getY()> ((IA) e).getDestY()){
+                leDeplaceurIA.deplacerHaut(e);
+            }
+            if (e.getX()> ((IA) e).getDestX()-40 && e.getX() < ((IA) e).getDestX()+40 && e.getX() > ((IA) e).getDestX()-40 && e.getX()< ((IA) e).getDestX()+40){
+                ((IA) e).resetDest();
             }
         }
     }
@@ -140,8 +148,7 @@ public class Manager implements InvalidationListener {
     private boolean up,down,left,right;
 
     public void touche(){
-        if (up)
-        {
+        if (up)        {
             leDeplaceur.deplacerHaut(perso);
         }
         if (down){

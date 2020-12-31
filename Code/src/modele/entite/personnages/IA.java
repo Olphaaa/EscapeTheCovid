@@ -35,7 +35,7 @@ public class IA extends Personnage{
 
     public void resetDest(){
         destX = rand.nextInt(895 - 24)+24;
-        destY = rand.nextInt(895 - 24)+24;
+        destY = rand.nextInt(605 - 24)+24;
     }
     public double getDestX(){
         return destX;

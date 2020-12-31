@@ -28,4 +28,7 @@ public abstract class Boucleur implements Runnable, Observable {
     protected void  timeBeep(){
         lesObservateur.forEach(o -> Platform.runLater(() -> o.invalidated(this)));
     }
+    protected  void Beep(){
+        lesObservateur.forEach(o -> Platform.runLater(() -> o.invalidated(this)));
+    }
 }

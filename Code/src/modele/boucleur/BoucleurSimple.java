@@ -7,7 +7,7 @@ public class BoucleurSimple extends Boucleur{
         while (super.actif){
             timeBeep();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 actif = false;
             }

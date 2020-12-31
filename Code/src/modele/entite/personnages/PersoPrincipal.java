@@ -33,7 +33,7 @@ public class PersoPrincipal extends Personnage{
 
             case "Visiere":
                 Visiere visiere = (Visiere) e;
-                this.setImage("/images/perso/ppRien.png");//todo ajouter l'image du perso avec la visiere
+                this.setImage("/images/perso/ppVisiere.png");//todo ajouter l'image du perso avec la visiere
                 this.setProtection(visiere);
                 this.setEquiped(true);
                 break;
@@ -48,6 +48,10 @@ public class PersoPrincipal extends Personnage{
             default:
                 break;
         }
+    }
+
+    public void retirerEquipement() {
+        this.setProtection(null);
     }
 
     public void setEquiped(boolean bool){
@@ -72,4 +76,6 @@ public class PersoPrincipal extends Personnage{
     public boolean isEquiped() {
         return isEquiped;
     }
+
+
 }
