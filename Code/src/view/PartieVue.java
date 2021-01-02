@@ -63,6 +63,7 @@ public class PartieVue{
                     update(e);
                 }
 
+
                 for (Entite e : change.getRemoved()) {
                     Iterator<Node> unIterateur = map.getChildren().iterator();
                     while (unIterateur.hasNext()) {

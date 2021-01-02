@@ -17,6 +17,7 @@ public class TableauScore {
         private void setLesScores(ObservableList<Score> lesScores) {this.lesScores.set(lesScores);}
 
 
+    public ObservableList<Score> getListScoreObs() {return listScoreObs;}
 
     public void ajouterScore(Score score) {
         listScoreObs.add(score);
