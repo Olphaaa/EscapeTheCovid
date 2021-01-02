@@ -68,7 +68,7 @@ public class Manager implements InvalidationListener {
     private Collisionneur leCollisionneurIA = new CollisionneurIA(carte,this);
     private Ramasseur leRamasseur = new RamasseurSimple(carte);
     private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
-    private Deplaceur leDeplaceurIA = new DeplaceurIA(leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
+    private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
     public Manager(){
         perso = leCreateur.creerPersoPrincipal(carte);
         temps.set(String.valueOf(0));
@@ -95,6 +95,7 @@ public class Manager implements InvalidationListener {
         vie.set(String.valueOf(perso.getPv()));
         if((tps%5==0 && nbIA<=5+(nivDiff*3)-1)  && nbIA<2){
             leCreateur.creerIA(carte);
+            ((IA)carte.getLesIA().get(0)).setInfect(true);
             nbIA++;
         }
         /*if (perso.getPv()==0){
@@ -123,19 +124,19 @@ public class Manager implements InvalidationListener {
         while (it.hasNext()){
             Entite e = it.next();
             //System.out.println(e.getX() + ", "+e.getY()+" → "+ ((IA) e).getDestX()+", "+((IA) e).getDestY());
-            if (e.getX() < ((IA) e).getDestX()){
-               leDeplaceurIA.deplacerDroit(e);
+            if (e.getX() < ((IA) e).getDestX()) {
+                leDeplaceurIA.deplacerDroit(e);
             }
-            if (e.getX() > ((IA) e).getDestX()){
+            if (e.getX() > ((IA) e).getDestX()) {
                 leDeplaceurIA.deplacerGauche(e);
             }
-            if (e.getY()< ((IA) e).getDestY()){
+            if (e.getY() < ((IA) e).getDestY()) {
                 leDeplaceurIA.deplacerBas(e);
             }
-            if (e.getY()> ((IA) e).getDestY()){
+            if (e.getY() > ((IA) e).getDestY()) {
                 leDeplaceurIA.deplacerHaut(e);
             }
-            if (e.getX()> ((IA) e).getDestX()-40 && e.getX() < ((IA) e).getDestX()+40 && e.getX() > ((IA) e).getDestX()-40 && e.getX()< ((IA) e).getDestX()+40){
+            if (e.getX() > ((IA) e).getDestX() - 40 && e.getX() < ((IA) e).getDestX() + 40 && e.getX() > ((IA) e).getDestX() - 40 && e.getX() < ((IA) e).getDestX() + 40) {
                 ((IA) e).resetDest();
             }
         }

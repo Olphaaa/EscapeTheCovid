@@ -35,4 +35,18 @@ public class CollisionneurIA extends Collisionneur{
         }
         return true;
     }
+
+    public void contaminerAuContacte(Entite entite){
+        Iterator<Entite> it = laCarte.getLesEntites().iterator();
+        while (it.hasNext()){
+            Entite e = it.next();
+            if (e instanceof IA && !entite.equals(e) && !((IA)entite).isInfect())
+                if (entite.getX() > e.getX()-40 && entite.getX() < e.getX()+40 && entite.getY()>e.getY()-40 && entite.getY()<e.getY()+40){
+                    if (((IA) e).isInfect()){
+                        ((IA) entite).setInfect(true);//todo l'image ne se met pas a jour au contacte (mais le chemin chamge)
+                        System.out.println(entite.toString() + " est infecté!, son image: " + e.getImage());
+                    }
+                }
+        }
+    }
 }

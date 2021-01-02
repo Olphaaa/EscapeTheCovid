@@ -21,7 +21,7 @@ public class TableauScores {
     private TableauScore tabScore = stub.creerTableau();
 
     public void initialize(){
-        //listeScores.itemsProperty().bind(tabScore.lesScoresProperty());
+        listeScores.itemsProperty().bind(tabScore.lesScoresProperty());
     }
 
     @FXML
@@ -30,7 +30,4 @@ public class TableauScores {
         container.getStylesheets().add("css/style.css");
         Launch.fenetrePrincipale.setScene(new Scene(container));
     }
-
-
-
 }

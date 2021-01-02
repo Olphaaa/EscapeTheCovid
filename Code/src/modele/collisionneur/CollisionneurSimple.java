@@ -36,14 +36,14 @@ public class CollisionneurSimple extends Collisionneur {
             if (x > e.getX()-40 && x < e.getX()+40 && y>e.getY()-40 && y<e.getY()+40){
                 if (e instanceof Protection){
                     PersoPrincipal pp = ((PersoPrincipal)  laCarte.getLesEntites().get(0));
-                    pp.retirerEquipement();//todo les images se superposent (je pense que c'est pour ca qu'au bout d'un moment le jeu lag)
+                    //pp.retirerEquipement();//todo les images se superposent (je pense que c'est pour ca qu'au bout d'un moment le jeu lag)
                     pp.ajouterEquipement((Equipement) e);
                     pp.setPv(pp.getPv()+pp.getProtection().niveauProtection);
                     leManager.setVie(String.valueOf(pp.getPv()+pp.getProtection().niveauProtection));
                     laCarte.supprimerEntites(e);
                     return true;
                 }
-                if (e instanceof IA /*&& ((IA) e).isInfect()*/){ // si on rencontre une IA alors... todo enlever le /**/ une fois la contamination faite
+                if (e instanceof IA && ((IA) e).isInfect()){
                     PersoPrincipal pp = ((PersoPrincipal)  laCarte.getLesEntites().get(0));
                     pp.seFaireToucher();
                     pp.setX(45);

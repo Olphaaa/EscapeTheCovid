@@ -13,6 +13,7 @@ import view.PartieVue;
 public class Launch extends Application{
     public static Stage fenetrePrincipale;
     private static Manager m = new Manager();
+
     @Override
     public void start(Stage pS) throws Exception{
         fenetrePrincipale = pS;
