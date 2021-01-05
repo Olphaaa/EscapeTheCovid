@@ -19,19 +19,14 @@ public class SerializerFile extends Serializer {
     @Override
     public void SauvegarderDonnee(Score score) {
         try {
-
             FileWriter leWritter = new FileWriter(System.getProperty("user.dir")+"/src/data/scores.txt", true);
-
-
-                String ligneFichier = score.toStringFile();
-                leWritter.write("\n"+ligneFichier);
-                leWritter.close();
+            String ligneFichier = score.toStringFile();
+            leWritter.write("\n"+ligneFichier);
+            leWritter.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
@@ -39,22 +34,21 @@ public class SerializerFile extends Serializer {
         TableauScore lesScores = new TableauScore();
 
         try {
-            //String path = System.getProperty("user.dir");
-
             File file = new File(System.getProperty("user.dir")+"/src/data/scores.txt");
+            if(!file.exists()){return null;}
             Scanner leScanner = new Scanner(file);
             while (leScanner.hasNextLine()) {
                 String data = leScanner.nextLine();
                 String[] tabScoreSplit = data.split(";");
-                
+
                 int scoreFichier = Integer.parseInt(tabScoreSplit[0]);
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                LocalDateTime dateFichier = LocalDateTime.parse(tabScoreSplit[2], formatter);
-
-
-                Score score = new Score(scoreFichier,tabScoreSplit[1], dateFichier);
-                lesScores.ajouterScore(score);
+                try {
+                    LocalDateTime dateFichier = LocalDateTime.parse(tabScoreSplit[2], formatter);
+                    Score score = new Score(scoreFichier, tabScoreSplit[1], dateFichier);
+                    lesScores.ajouterScore(score);
+                }catch (Exception ignored){}
             }
             leScanner.close();
 
