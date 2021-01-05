@@ -32,6 +32,6 @@ public class Score {
 
     @Override
     public String toString() {
-        return pseudo.get() + ": " + score.get() + " fait le " + date.getDayOfMonth() + "/"+date.getMonth() + "/"+date.getYear();
+        return pseudo.get() + ": " + score.get() + " fait le " + date.getDayOfMonth() + "/"+date.getMonth() + "/"+date.getYear() + "  "+date.getHour()+":"+date.getHour();
     }
 }

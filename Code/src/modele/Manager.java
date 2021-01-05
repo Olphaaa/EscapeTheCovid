@@ -93,7 +93,7 @@ public class Manager implements InvalidationListener {
         int tps= Integer.parseInt(temps.get())+1;
         temps.set(String.valueOf(tps));
         vie.set(String.valueOf(perso.getPv()));
-        if((tps%5==0 && nbIA<=5+(nivDiff*3)-1)  && nbIA<2){
+        if((tps%100==0 && nbIA<=5+(nivDiff*3)-1)){
             leCreateur.creerIA(carte);
             ((IA)carte.getLesIA().get(0)).setInfect(true);
             nbIA++;

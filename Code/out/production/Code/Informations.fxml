@@ -48,7 +48,7 @@
                </ImageView>
                <ImageView fitHeight="150.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@images/protection/visière.png" />
+                     <Image url="@images/protection/visiere.png" />
                   </image>
                </ImageView>
                <ImageView fitHeight="150.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
