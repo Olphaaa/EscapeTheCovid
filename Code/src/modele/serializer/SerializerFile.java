@@ -5,8 +5,7 @@ import javafx.collections.ObservableList;
 import modele.score.Score;
 import modele.score.TableauScore;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
@@ -18,8 +17,21 @@ import java.util.Scanner;
 
 public class SerializerFile extends Serializer {
     @Override
-    public void SauvegarderDonnee(ObservableList<Score> score) {
-        super.SauvegarderDonnee(score);
+    public void SauvegarderDonnee(Score score) {
+        try {
+
+            FileWriter leWritter = new FileWriter(System.getProperty("user.dir")+"/src/data/scores.txt", true);
+
+
+                String ligneFichier = score.toStringFile();
+                leWritter.write("\n"+ligneFichier);
+                leWritter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override
@@ -27,9 +39,9 @@ public class SerializerFile extends Serializer {
         TableauScore lesScores = new TableauScore();
 
         try {
-            String path = System.getProperty("user.dir");
+            //String path = System.getProperty("user.dir");
 
-            File file = new File(path+"/src/data/scores.txt");
+            File file = new File(System.getProperty("user.dir")+"/src/data/scores.txt");
             Scanner leScanner = new Scanner(file);
             while (leScanner.hasNextLine()) {
                 String data = leScanner.nextLine();

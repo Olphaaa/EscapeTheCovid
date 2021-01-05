@@ -34,4 +34,21 @@ public class Score {
     public String toString() {
         return pseudo.get() + ": " + score.get() + " fait le " + date.getDayOfMonth() + "/"+date.getMonth() + "/"+date.getYear() + "  "+date.getHour()+":"+date.getHour();
     }
+
+    public String toStringFile(){
+        String hour;
+        String minutes;
+
+        if(this.date.getHour()<10){hour = "0"+this.date.getHour();}
+        else{hour = String.valueOf(this.date.getHour());}
+
+        if(this.date.getHour()<10){minutes = "0"+this.date.getMinute();}
+        else{minutes = String.valueOf(this.date.getMinute());}
+
+        return this.getScore() +";"+this.getPseudo()+";"+this.date.getYear()+"-"+this.date.getMonth().getValue() + "-"+this.date.getDayOfMonth()+ " "+hour+":"+minutes;
+    }
+
+    public LocalDateTime getDate() {
+        return this.date;
+    }
 }

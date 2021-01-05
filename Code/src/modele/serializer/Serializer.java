@@ -8,6 +8,6 @@ public abstract class Serializer {
 
     public TableauScore chargerDonnee() {return null;}
 
-    public void SauvegarderDonnee(ObservableList<Score> score){}
+    public void SauvegarderDonnee(Score score){}
 
 }

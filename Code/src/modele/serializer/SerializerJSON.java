@@ -13,7 +13,7 @@ public class SerializerJSON extends Serializer {
     }
 
     @Override
-    public void SauvegarderDonnee(ObservableList<Score> score) {
+    public void SauvegarderDonnee(Score score) {
         super.SauvegarderDonnee(score);
     }
 }
