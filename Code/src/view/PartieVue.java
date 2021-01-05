@@ -40,7 +40,7 @@ public class PartieVue{
 
         kill.setText("0");
         pseud.setText(m.getPseudo());
-        temps.textProperty().bind(m.tempsProperty());
+        temps.textProperty().bind(m.secondesProperty());
         vie.textProperty().bind(m.vieProperty());
 
         Spawner spw = new SpawnerSimple();

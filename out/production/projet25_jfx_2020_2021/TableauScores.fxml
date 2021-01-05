@@ -35,7 +35,7 @@
                             <Label layoutX="38.0" layoutY="10.0" text="par " />
                             <Label layoutX="38.0" layoutY="10.0" text="Username " />
                             <Label layoutX="66.0" layoutY="10.0" text="le " />
-                            <Label layoutX="122.0" layoutY="10.0" text="XX/XX/XXXX" />
+                            <Label layoutX="122.0" layoutY="10.0" text="XX/XX/XXXX XX:XX" />
                         </children>
                     </HBox>
 

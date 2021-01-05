@@ -25,7 +25,7 @@ public class MainWindow {
         Launch.fenetrePrincipale.setScene(new Scene(container));
     }
 
-
+    @FXML//todo a été rajouté
     public void onNewGame(ActionEvent actionEvent) throws IOException {
         Parent container = FXMLLoader.load(getClass().getResource("/SetupPartie.fxml"));
         container.getStylesheets().add("css/style.css");
