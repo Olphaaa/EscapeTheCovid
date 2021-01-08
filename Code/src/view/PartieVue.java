@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import modele.Manager;
 import modele.createur.CreateurSimple;
 import modele.entite.Entite;
+import modele.entite.personnages.IA;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
 
@@ -54,28 +55,27 @@ public class PartieVue{
 
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
            change.next();
-
-                for (Entite e : change.getAddedSubList()) {
-                    update(e);
+            for (Entite e : change.getAddedSubList()) {
+                if (e instanceof IA) {
+                    System.out.println("je fait spawn une IA");
                 }
+                update(e);
+            }
 
-                for (Entite e : change.getList()){
-                    update(e);
-                }
+            for (Entite e : change.getList()){
+                update(e);
+            }
 
-
-                for (Entite e : change.getRemoved()) {
-                    Iterator<Node> unIterateur = map.getChildren().iterator();
-                    while (unIterateur.hasNext()) {
-                        Node leNode = unIterateur.next();
-                        if (leNode.getUserData() == e) {
-                                unIterateur.remove();
-                            }
+            for (Entite e : change.getRemoved()) {
+                Iterator<Node> unIterateur = map.getChildren().iterator();
+                while (unIterateur.hasNext()) {
+                    Node leNode = unIterateur.next();
+                    if (leNode.getUserData() == e) {
+                            unIterateur.remove();
                         }
                     }
                 }
-
-
+            }
         );
 
         m.getLeCollisionneur().widthProperty().bind(map.widthProperty());
@@ -86,7 +86,7 @@ public class PartieVue{
         startButton.setVisible(false);
         ((Button)actionEvent.getSource()).getScene().setOnKeyPressed(m::testPressed);
         ((Button)actionEvent.getSource()).getScene().setOnKeyReleased(m::testRealesed);
-        m.startBoucleur();
+        m.startPartie();
     }
 
     private void update(Entite e){

@@ -34,6 +34,5 @@ public class DeplaceurSimple extends Deplaceur {
         if (leCollisionneur.canMove(e.getX()+pas, e.getY())){
             e.setPPerso(e.getX()+pas, e.getY());
         }
-
     }
 }

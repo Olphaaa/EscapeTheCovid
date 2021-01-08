@@ -70,7 +70,6 @@ public class Manager implements InvalidationListener {
         public void setScore(String score) {this.score.set(score);}
 
 
-
     public int getNivDiff() {return nivDiff;}
     public void setNivDiff(int i) {this.nivDiff = i;}
 
@@ -87,21 +86,28 @@ public class Manager implements InvalidationListener {
     private Ramasseur leRamasseur = new RamasseurSimple(carte);
     private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
     private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
+
     public Manager(){
+
+    }
+
+    public void startPartie(){
         perso = leCreateur.creerPersoPrincipal(carte);
         temps.set(String.valueOf(0));
         vie.setValue(String.valueOf(perso.getPv()));
         secondes.set(String.valueOf(0));
         score.set(String.valueOf(0));
+        //leCreateur.creerIA(carte);
+        startBoucleur();
     }
 
     public void startBoucleur(){
         leBoucleur.addListener(this);
         leBoucleurIA.addListener(this);
         leBoucleur.setActif(true);
-        leBoucleurIA.setActif(true);
+        //leBoucleurIA.setActif(true);
         new Thread(leBoucleur).start();
-        new Thread(leBoucleurIA).start();
+        //new Thread(leBoucleurIA).start();
     }
 
     public void stopBoucleur(){
@@ -115,22 +121,24 @@ public class Manager implements InvalidationListener {
         tps = Integer.parseInt(temps.get())+1;
         temps.set(String.valueOf(tps));
 
+        System.out.println("nombre d'entite: "+ carte.getLesEntites().stream().count());
+
         if (tps%10 == 0){
             secondes.set(String.valueOf(Integer.parseInt(secondes.get())+1));
             //sec = Integer.parseInt(secondes.get());
         }
         vie.set(String.valueOf(perso.getPv()));
         if((tps%50==0 && nbIA<=5+(nivDiff*3)-1)){
+            System.out.println("nouvel IA (nb ia: "+nbIA+")");
             leCreateur.creerIA(carte);
             ((IA)carte.getLesIA().get(0)).setInfect(true);
             nbIA++;
         }
         if (perso.getPv()==0){
             //todo faire en sorte d'afficher la page game over une fois la partie terminée
-
             stopBoucleur();
         }
-        if (tps%30 == 0){
+        if (/*tps%30 == 0*/ perso.getPv()==0){
             perso.setPv(0);
             score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10));
             try {
@@ -188,7 +196,7 @@ public class Manager implements InvalidationListener {
 
     private boolean up,down,left,right;
 
-    public void touche(){
+    private void touche(){
         if (up)        {
             leDeplaceur.deplacerHaut(perso);
         }
@@ -203,24 +211,37 @@ public class Manager implements InvalidationListener {
         }
     }
     public void testRealesed(KeyEvent k){
-        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP) up = false;
-        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT) left = false;
-        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN) down = false;
-        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT) right = false;
+        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){
+            up = false;
+        }
+        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){
+            left = false;
+        }
+        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN){
+            down = false;
+        }
+        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){
+            right = false;
+        }
         touche();
     }
     public void testPressed(KeyEvent k){
-
-        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP) up = true;
-        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT) left = true;
-        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN) down = true;
-        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT) right = true;
+        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){
+            up = true;
+        }
+        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){
+            left = true;
+        }
+        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN){
+            down = true;
+        }
+        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){
+            right = true;
+        }
         touche();
     }
 
     public Collisionneur getLeCollisionneur() {
         return leCollisionneur;
     }
-
-
 }
