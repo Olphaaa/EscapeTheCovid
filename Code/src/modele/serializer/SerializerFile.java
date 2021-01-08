@@ -19,7 +19,7 @@ public class SerializerFile extends Serializer {
     @Override
     public void SauvegarderDonnee(Score score) {
         try {
-            FileWriter leWritter = new FileWriter(System.getProperty("user.dir")+"/src/data/scores.txt", true);
+            FileWriter leWritter = new FileWriter("scores.txt", true);
             String ligneFichier = score.toStringFile();
             leWritter.write("\n"+ligneFichier);
             leWritter.close();
@@ -34,7 +34,7 @@ public class SerializerFile extends Serializer {
         TableauScore lesScores = new TableauScore();
 
         try {
-            File file = new File(System.getProperty("user.dir")+"/src/data/scores.txt");
+            File file = new File("scores.txt");
             if(!file.exists()){return null;}
             Scanner leScanner = new Scanner(file);
             while (leScanner.hasNextLine()) {

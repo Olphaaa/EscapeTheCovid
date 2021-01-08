@@ -28,10 +28,14 @@ import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
 import modele.ramasseur.Ramasseur;
 import modele.ramasseur.RamasseurSimple;
+import modele.score.Score;
+import modele.serializer.Serializer;
+import modele.serializer.SerializerFile;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 
 
@@ -86,7 +90,7 @@ public class Manager implements InvalidationListener {
     private Ramasseur leRamasseur = new RamasseurSimple(carte);
     private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
     private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
-
+    private Serializer leSerializer = new SerializerFile();
     public Manager(){
 
     }
@@ -138,7 +142,7 @@ public class Manager implements InvalidationListener {
             //todo faire en sorte d'afficher la page game over une fois la partie terminée
             stopBoucleur();
         }
-        if (/*tps%30 == 0*/ perso.getPv()==0){
+        if (tps%30 == 0 || perso.getPv()==0){
             perso.setPv(0);
             score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10));
             try {
@@ -162,6 +166,16 @@ public class Manager implements InvalidationListener {
     }
     @FXML
     private void partiePerdue() throws IOException {
+        String pseudoScore;
+        if(this.getPseudo() == null){
+            pseudoScore = "Joueur";
+        }else{
+            pseudoScore = this.getPseudo();
+        }
+        LocalDateTime date = LocalDateTime.now();
+        Score sc = new Score(Integer.parseInt(this.getScore()),pseudoScore, LocalDateTime.of(date.getYear(),date.getMonth(),date.getDayOfMonth(),date.getHour(),date.getMinute()));
+        leSerializer.SauvegarderDonnee(sc);
+
         Parent container = FXMLLoader.load(getClass().getResource("/GameOverView.fxml"));
         container.getStylesheets().add("css/style.css");
         Launch.fenetrePrincipale.setScene(new Scene(container));

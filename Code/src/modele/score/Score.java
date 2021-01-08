@@ -8,7 +8,7 @@ import javafx.beans.property.StringProperty;
 import java.time.LocalDateTime;
 
 
-public class Score {
+public class Score implements java.io.Serializable{
 
     private IntegerProperty score = new SimpleIntegerProperty();
         public Integer getScore(){return score.get();}
