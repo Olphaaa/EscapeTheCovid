@@ -12,7 +12,7 @@ import view.PartieVue;
 
 public class Launch extends Application{
     public static Stage fenetrePrincipale;
-    private static Manager m = new Manager();
+    //private static Manager m = new Manager();
 
     @Override
     public void start(Stage pS) throws Exception{
@@ -28,7 +28,7 @@ public class Launch extends Application{
 
     @Override
     public void stop() throws Exception {
-        PartieVue.m.stopBoucleur();
+        //PartieVue.m.stopBoucleur();
         super.stop();
     }
 }
