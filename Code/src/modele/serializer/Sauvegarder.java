@@ -3,9 +3,9 @@ package modele.serializer;
 import modele.score.Score;
 import modele.score.TableauScore;
 
-public abstract class Serializer {
+import java.io.FileNotFoundException;
 
-    public TableauScore chargerDonnee() {return null;}
+public abstract class Sauvegarder {
 
     public void SauvegarderDonnee(Score score){}
 
