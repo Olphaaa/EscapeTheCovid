@@ -8,6 +8,9 @@ import modele.serializer.Serializer;
 import modele.serializer.SerializerFile;
 import modele.serializer.SerializerJSON;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+
 public class Console {
     public static void main(String[] args) throws Exception{
         Serializer leSerializer = new SerializerFile();
@@ -19,6 +22,15 @@ public class Console {
 
         for (Score sc : scoreList.getListScoreObs()) {
             System.out.println(sc.toString());
+        }
+
+        Score sc = new Score(1245,"Xavier", LocalDateTime.of(2020, 11,23,0,0));
+        leSerializer.SauvegarderDonnee(sc);
+
+        scoreList = leSerializer.chargerDonnee();
+        System.out.println("---");
+        for (Score sco : scoreList.getListScoreObs()) {
+            System.out.println(sco.toString());
         }
     }
 }
