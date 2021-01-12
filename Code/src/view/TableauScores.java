@@ -10,12 +10,12 @@ import launch.Launch;
 import modele.score.TableauScore;
 
 import  javafx.scene.control.ListView;
-import modele.serializer.Serializer;
-import modele.serializer.SerializerFile;
+import modele.serializer.ChargeurFile;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class TableauScores {
+public class TableauScores implements Serializable {
     @FXML
     private ListView listeScores;
 
@@ -24,7 +24,7 @@ public class TableauScores {
     private TableauScore tabScore = stub.creerTableau();
 
     public void initialize(){
-        Serializer leSerializer = new SerializerFile();
+        ChargeurFile leSerializer = new ChargeurFile();
         TableauScore scoreList;
         scoreList = leSerializer.chargerDonnee();
         listeScores.itemsProperty().bind(scoreList.lesScoresProperty());

@@ -28,10 +28,13 @@ import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
 import modele.ramasseur.Ramasseur;
 import modele.ramasseur.RamasseurSimple;
+import modele.score.Score;
+import modele.serializer.SauvegarderFile;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 
 
@@ -86,7 +89,7 @@ public class Manager implements InvalidationListener {
     private Ramasseur leRamasseur = new RamasseurSimple(carte);
     private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
     private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
-
+    private SauvegarderFile leSerializer = new SauvegarderFile();
     public Manager(){
 
     }
@@ -121,7 +124,7 @@ public class Manager implements InvalidationListener {
         tps = Integer.parseInt(temps.get())+1;
         temps.set(String.valueOf(tps));
 
-        System.out.println("nombre d'entite: "+ carte.getLesEntites().stream().count());
+        //System.out.println("nombre d'entite: "+ carte.getLesEntites().stream().count());
 
         if (tps%10 == 0){
             secondes.set(String.valueOf(Integer.parseInt(secondes.get())+1));
@@ -134,11 +137,8 @@ public class Manager implements InvalidationListener {
             ((IA)carte.getLesIA().get(0)).setInfect(true);
             nbIA++;
         }
-        if (perso.getPv()==0){
-            //todo faire en sorte d'afficher la page game over une fois la partie terminée
-            stopBoucleur();
-        }
-        if (/*tps%30 == 0*/ perso.getPv()==0){
+
+        if (tps%30 == 0 || perso.getPv()==0){
             perso.setPv(0);
             score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10));
             try {
@@ -162,6 +162,16 @@ public class Manager implements InvalidationListener {
     }
     @FXML
     private void partiePerdue() throws IOException {
+        stopBoucleur();
+        String pseudoScore;
+        if(this.getPseudo() == null){
+            pseudoScore = "Joueur";
+        }else{
+            pseudoScore = this.getPseudo();
+        }
+        Score sc = new Score(Integer.parseInt(this.getScore()),pseudoScore, LocalDateTime.now());
+        leSerializer.SauvegarderDonnee(sc);
+
         Parent container = FXMLLoader.load(getClass().getResource("/GameOverView.fxml"));
         container.getStylesheets().add("css/style.css");
         Launch.fenetrePrincipale.setScene(new Scene(container));

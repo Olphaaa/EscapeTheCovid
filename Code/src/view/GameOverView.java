@@ -27,7 +27,6 @@ public class GameOverView {
         Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
         container.getStylesheets().add("css/style.css");
         Launch.fenetrePrincipale.setScene(new Scene(container));
-        System.out.printf("cliqué");
     }
 
 
