@@ -9,10 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Rocher extends Entite{
-    Random rand = new Random();
-    Rectangle rectz = new Rectangle();
-    Rectangle rectzd = new Rectangle();
-    Boolean truc = rectz.intersects(rectzd);
+    private Random rand = new Random();
     public Rocher(){
         float randX= rand.nextInt(900)+45;
         float randY= rand.nextInt(610)+45;

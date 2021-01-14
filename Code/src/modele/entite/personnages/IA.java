@@ -13,12 +13,12 @@ public class IA extends Personnage{
 
     private double destX;
     private double destY;
+    private Random rand = new Random();
+
 
     public boolean isInfect() {
         return isInfect;
     }
-
-    Random rand = new Random();
 
     public IA(){
         isInfect = false;

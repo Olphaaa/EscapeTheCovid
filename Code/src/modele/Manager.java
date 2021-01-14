@@ -13,7 +13,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import launch.Launch;
 import modele.boucleur.Boucleur;
-import modele.boucleur.BoucleurIA;
 import modele.boucleur.BoucleurSimple;
 import modele.collisionneur.Collisionneur;
 import modele.collisionneur.CollisionneurIA;
@@ -32,7 +31,6 @@ import modele.score.Score;
 import modele.serializer.SauvegarderFile;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
-import view.PartieVue;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -46,7 +44,10 @@ public class Manager implements InvalidationListener {
     private int nbProtection;
     //private int score;
 
-    public PersoPrincipal perso;
+    private PersoPrincipal perso;
+    public PersoPrincipal getPerso(){
+        return perso;
+    }
 
     private StringProperty secondes = new SimpleStringProperty();
         public String getSecondes() {return secondes.get();}
@@ -83,7 +84,7 @@ public class Manager implements InvalidationListener {
     private CreateurEntite leCreateur = new CreateurSimple();
     private Carte carte = new Carte();
     private Boucleur leBoucleur = new BoucleurSimple();
-    private Boucleur leBoucleurIA = new BoucleurIA();// todo a voir plus tard
+    //private Boucleur leBoucleurIA = new BoucleurIA();// todo a voir plus tard
     private Spawner leSpawner = new SpawnerSimple();
     private Collisionneur leCollisionneur = new CollisionneurSimple(carte,this);
     private Collisionneur leCollisionneurIA = new CollisionneurIA(carte,this);
@@ -91,8 +92,8 @@ public class Manager implements InvalidationListener {
     private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
     private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
     private SauvegarderFile leSerializer = new SauvegarderFile();
-    public Manager(){
 
+    public Manager(){
     }
 
     public void startPartie(){
@@ -105,9 +106,9 @@ public class Manager implements InvalidationListener {
         startBoucleur();
     }
 
-    public void startBoucleur(){
+    private void startBoucleur(){
         leBoucleur.addListener(this);
-        leBoucleurIA.addListener(this);
+        //leBoucleurIA.addListener(this);
         leBoucleur.setActif(true);
         //leBoucleurIA.setActif(true);
         new Thread(leBoucleur).start();
@@ -161,6 +162,7 @@ public class Manager implements InvalidationListener {
         }
         deplacementDesIa();
     }
+    //todo voir si c'est bien de mettre de la vue dans le manager
     @FXML
     private void partiePerdue() throws IOException {
         stopBoucleur();
@@ -178,7 +180,7 @@ public class Manager implements InvalidationListener {
         Launch.fenetrePrincipale.setScene(new Scene(container));
     }
 
-    public void deplacementDesIa() {
+    private void deplacementDesIa() {
         Iterator<IA> it = carte.getLesIA().iterator();
         while (it.hasNext()){
             Entite e = it.next();

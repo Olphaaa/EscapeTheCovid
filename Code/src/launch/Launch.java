@@ -28,7 +28,7 @@ public class Launch extends Application{
 
     @Override
     public void stop() throws Exception {
-        //PartieVue.m.stopBoucleur();
+        PartieVue.m.stopBoucleur();
         super.stop();
     }
 }

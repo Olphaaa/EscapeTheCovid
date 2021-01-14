@@ -16,27 +16,27 @@ import java.io.IOException;
 
 
 public class SetupPartie {
-    public static Stage game = Launch.fenetrePrincipale;
+    private static Stage game = Launch.fenetrePrincipale;
 
     @FXML
-    public TextField saisieSurnom;
+    private TextField saisieSurnom;
     
     @FXML
-    public ChoiceBox choiceDifficulty;
+    private ChoiceBox choiceDifficulty;
 
     public void initialize(){
         saisieSurnom.textProperty().bindBidirectional(PartieVue.m.pseudoProperty());
     }
 
     @FXML
-    public void clickRetour(ActionEvent actionEvent) throws IOException {
+    private void clickRetour(ActionEvent actionEvent) throws IOException {
         Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
         container.getStylesheets().add("css/style.css");
         Launch.fenetrePrincipale.getScene().setRoot(container);
     }
 
     @FXML
-    public void clickStart(ActionEvent actionEvent) throws IOException {
+    private void clickStart(ActionEvent actionEvent) throws IOException {
 
         if (choiceDifficulty.getValue().equals("Masque + visière  (1)"))
             PartieVue.m.setNivDiff(1);
