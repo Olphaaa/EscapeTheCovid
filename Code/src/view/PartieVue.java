@@ -52,16 +52,12 @@ public class PartieVue{
             update(entite);
         }
 
-
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
            change.next();
             for (Entite e : change.getAddedSubList()) {
-                if (e instanceof IA) {
-                    System.out.println("je fait spawn une IA");
-                }
+                System.out.println("je fait spawn : "+e.getClass());
                 update(e);
             }
-
             for (Entite e : change.getList()){
                 update(e);
             }
@@ -78,6 +74,25 @@ public class PartieVue{
             }
         );
 
+        /*m.getListeIA().addListener((ListChangeListener.Change<? extends IA> change) -> {
+                    change.next();
+                    for (Entite e : change.getAddedSubList()) {
+                        if (e instanceof IA) {
+                            System.out.println("je fait spawn une IA");
+                        }
+                        update(e);
+                    }
+
+                    for (Entite e : change.getList()){
+                        update(e);
+                    }
+
+                    for (Entite e : change.getRemoved()) {
+                        map.getChildren().removeIf(leNode -> leNode.getUserData() == e);
+                    }
+                }
+        );*/
+
         m.getLeCollisionneur().widthProperty().bind(map.widthProperty());
         m.getLeCollisionneur().heightProperty().bind(map.heightProperty());
     }
@@ -89,7 +104,7 @@ public class PartieVue{
         m.startPartie();
     }
 
-    private void update(Entite e){
+    public void update(Entite e){
         ImageView entiteAAfficher = new ImageView();
         entiteAAfficher.setUserData(e);
         entiteAAfficher.setImage(new Image(getClass().getResource(e.getImage()).toExternalForm()));

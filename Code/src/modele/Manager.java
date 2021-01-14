@@ -32,6 +32,7 @@ import modele.score.Score;
 import modele.serializer.SauvegarderFile;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
+import view.PartieVue;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -100,7 +101,7 @@ public class Manager implements InvalidationListener {
         vie.setValue(String.valueOf(perso.getPv()));
         secondes.set(String.valueOf(0));
         score.set(String.valueOf(0));
-        //leCreateur.creerIA(carte);
+        leCreateur.creerIA(carte);
         startBoucleur();
     }
 
@@ -138,7 +139,7 @@ public class Manager implements InvalidationListener {
             nbIA++;
         }
 
-        if (tps%30 == 0 || perso.getPv()==0){
+        if (/*tps%30 == 0 ||*/ perso.getPv()==0){
             perso.setPv(0);
             score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10));
             try {
@@ -202,6 +203,7 @@ public class Manager implements InvalidationListener {
 
 
     public ObservableList<Entite> getListeEntite() {return carte.getLesEntites();}
+    public ObservableList<IA> getListeIA() {return carte.getLesIA();}
 
 
     private boolean up,down,left,right;
