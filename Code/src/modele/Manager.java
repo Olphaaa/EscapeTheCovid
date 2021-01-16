@@ -1,5 +1,6 @@
 package modele;
 
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
@@ -32,6 +33,7 @@ import modele.score.Score;
 import modele.serializer.SauvegarderFile;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
+import view.PartieVue;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -90,6 +92,7 @@ public class Manager implements InvalidationListener {
     private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
     private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
     private SauvegarderFile leSerializer = new SauvegarderFile();
+
     public Manager(){
 
     }
@@ -100,7 +103,6 @@ public class Manager implements InvalidationListener {
         vie.setValue(String.valueOf(perso.getPv()));
         secondes.set(String.valueOf(0));
         score.set(String.valueOf(0));
-        //leCreateur.creerIA(carte);
         startBoucleur();
     }
 
@@ -108,37 +110,36 @@ public class Manager implements InvalidationListener {
         leBoucleur.addListener(this);
         leBoucleurIA.addListener(this);
         leBoucleur.setActif(true);
-        //leBoucleurIA.setActif(true);
+
         new Thread(leBoucleur).start();
-        //new Thread(leBoucleurIA).start();
     }
 
     public void stopBoucleur(){
         leBoucleur.setActif(false);
     }
 
-    //private int sec =0 ;
     private int tps;//todo mettre ici pour éviter de déclarer un int a chaque boucle (a voir)
+
     @Override
     public void invalidated(Observable observable) {
         tps = Integer.parseInt(temps.get())+1;
         temps.set(String.valueOf(tps));
 
-        //System.out.println("nombre d'entite: "+ carte.getLesEntites().stream().count());
 
         if (tps%10 == 0){
             secondes.set(String.valueOf(Integer.parseInt(secondes.get())+1));
-            //sec = Integer.parseInt(secondes.get());
         }
         vie.set(String.valueOf(perso.getPv()));
-        if((tps%50==0 && nbIA<=5+(nivDiff*3)-1)){
+
+        if(tps%50==0 /*&& nbIA<=5+(nivDiff*3)-1)*/){
             System.out.println("nouvel IA (nb ia: "+nbIA+")");
             leCreateur.creerIA(carte);
             ((IA)carte.getLesIA().get(0)).setInfect(true);
+            perso.nouvelIA();
             nbIA++;
         }
 
-        if (tps%30 == 0 || perso.getPv()==0){
+        if (perso.getPv()==0){
             perso.setPv(0);
             score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10));
             try {
@@ -148,12 +149,11 @@ public class Manager implements InvalidationListener {
             }
         }
 
-        if (perso.getPv() == 3 && perso.isEquiped()){
-            perso.setImage("/images/perso/ppRien.png");
-            perso.setProtection(null);
-            perso.setEquiped(false);
+        if (perso.getPv() <= 3 && perso.isEquiped()){
+            perso.desequipe();
             nbProtection = 0;
         }
+
         if (tps%20==0 && nbProtection<1 && !perso.isEquiped()){
             nbProtection = 1;
             leSpawner.spawnProtection((CreateurSimple) leCreateur, carte);
@@ -204,7 +204,7 @@ public class Manager implements InvalidationListener {
     public ObservableList<Entite> getListeEntite() {return carte.getLesEntites();}
 
 
-    private boolean up,down,left,right;
+    private boolean up,down,left,right,space;
 
     private void touche(){
         if (up)        {
@@ -218,6 +218,9 @@ public class Manager implements InvalidationListener {
         }
         if(right){
             leDeplaceur.deplacerDroit(perso);
+        }
+        if(space){
+            leDeplaceur.attaquer(perso);
         }
     }
     public void testRealesed(KeyEvent k){
@@ -253,5 +256,10 @@ public class Manager implements InvalidationListener {
 
     public Collisionneur getLeCollisionneur() {
         return leCollisionneur;
+    }
+
+    public void supprIA(IA ia) {
+
+        carte.supprimerEntites(ia);
     }
 }

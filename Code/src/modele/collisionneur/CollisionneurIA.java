@@ -36,6 +36,11 @@ public class CollisionneurIA extends Collisionneur{
         return true;
     }
 
+    @Override
+    public IA isPresentAttaq(double x, double y) {
+        return null;
+    }
+
     public void contaminerAuContacte(Entite entite){
         Iterator<Entite> it = laCarte.getLesEntites().iterator();
         while (it.hasNext()){

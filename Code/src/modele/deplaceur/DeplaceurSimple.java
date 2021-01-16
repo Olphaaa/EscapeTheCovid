@@ -2,6 +2,7 @@ package modele.deplaceur;
 
 import modele.collisionneur.Collisionneur;
 import modele.entite.Entite;
+import modele.entite.personnages.PersoPrincipal;
 import modele.ramasseur.Ramasseur;
 
 public class DeplaceurSimple extends Deplaceur {
@@ -33,6 +34,13 @@ public class DeplaceurSimple extends Deplaceur {
     public void deplacerDroit(Entite e){
         if (leCollisionneur.canMove(e.getX()+pas, e.getY())){
             e.setPPerso(e.getX()+pas, e.getY());
+        }
+    }
+
+    @Override
+    public void attaquer(PersoPrincipal perso) {
+        if(leCollisionneur.isPresentAttaq(perso.getX(),perso.getY()) != null){
+            perso.attaquer(leCollisionneur.isPresentAttaq(perso.getX(),perso.getY()));
         }
     }
 }

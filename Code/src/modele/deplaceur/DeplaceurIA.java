@@ -4,6 +4,7 @@ import modele.collisionneur.Collisionneur;
 import modele.collisionneur.CollisionneurIA;
 import modele.entite.Entite;
 import modele.entite.personnages.IA;
+import modele.entite.personnages.PersoPrincipal;
 import modele.ramasseur.Ramasseur;
 
 public class DeplaceurIA extends Deplaceur{
@@ -45,5 +46,10 @@ public class DeplaceurIA extends Deplaceur{
             ((CollisionneurIA)leCollisionneur).contaminerAuContacte(e);
         }else
             ((IA) e).resetDest();
+    }
+
+    @Override
+    public void attaquer(PersoPrincipal perso) {
+
     }
 }

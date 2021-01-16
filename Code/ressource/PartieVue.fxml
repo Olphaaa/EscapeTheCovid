@@ -24,5 +24,6 @@
                 </HBox>
             </VBox>
       </VBox>
-   <Button fx:id="startButton" alignment="CENTER" contentDisplay="CENTER" layoutX="480.0" layoutY="343.0" mnemonicParsing="false" text="Start" onAction="#onStart" />
+   <Button fx:id="startButton" alignment="CENTER" contentDisplay="CENTER" layoutX="480.0" layoutY="343.0" mnemonicParsing="false" onAction="#onStart" text="Start" />
+   <Label fx:id="attaq" layoutX="451.0" layoutY="491.0" prefHeight="27.0" prefWidth="98.0" text="Attaquer (space)" textFill="#fff8f8" />
 </Pane>

@@ -4,6 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import modele.Carte;
 import modele.Manager;
+import modele.entite.personnages.IA;
 
 public abstract class Collisionneur {
 
@@ -28,4 +29,6 @@ public abstract class Collisionneur {
 
     public abstract boolean canMove(double x, double y);
     public abstract boolean isPresent(double x, double y);
+
+    public abstract IA isPresentAttaq(double x, double y);
 }

@@ -16,15 +16,18 @@ public class Console {
 
         TableauScore scoreList;
 
-        scoreList = leChargeur.chargerDonnee();
+        /*scoreList = leChargeur.chargerDonnee();
 
         for (Score sc : scoreList.getListScoreObs()) {
             System.out.println(sc.toString());
-        }
+        }*/
 
         Score sc = new Score(1245,"Xavier", LocalDateTime.of(2020, 11,23,0,0));
+        Score sc2 = new Score(1245,"Jeremy", LocalDateTime.of(2020, 11,23,0,0));
 
         leSauvegardeur.SauvegarderDonnee(sc);
+        leSauvegardeur.SauvegarderDonnee(sc2);
+
 
         scoreList = leChargeur.chargerDonnee();
         System.out.println("---");

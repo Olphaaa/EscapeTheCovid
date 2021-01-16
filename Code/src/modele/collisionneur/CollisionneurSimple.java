@@ -8,7 +8,6 @@ import modele.entite.equipements.Equipement;
 import modele.entite.equipements.protections.Protection;
 import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
-import modele.entite.personnages.Personnage;
 
 import java.util.Iterator;
 
@@ -26,6 +25,22 @@ public class CollisionneurSimple extends Collisionneur {
     }
 
 
+    public IA isPresentAttaq(double x, double y){
+        Iterator<Entite> it = laCarte.getLesEntites().iterator();
+        while (it.hasNext()){
+            Entite e = it.next();
+            if (e instanceof PersoPrincipal)
+                continue;
+
+            if (x > e.getX()-100 && x < e.getX()+100 && y>e.getY()-100 && y<e.getY()+100) {
+                if (e instanceof Rocher || e instanceof Protection){
+                    continue;
+                }else{return (IA) e;}
+            }
+        }
+        return null;
+    }
+
     @Override
     public boolean isPresent(double x, double y) {
         Iterator<Entite> it = laCarte.getLesEntites().iterator();
@@ -33,6 +48,7 @@ public class CollisionneurSimple extends Collisionneur {
             Entite e = it.next();
             if (e instanceof PersoPrincipal)
                 continue;
+
             if (x > e.getX()-40 && x < e.getX()+40 && y>e.getY()-40 && y<e.getY()+40){
                 if (e instanceof Protection){
                     PersoPrincipal pp = super.leManager.perso;
@@ -52,6 +68,7 @@ public class CollisionneurSimple extends Collisionneur {
                 }
                 return false;
             }
+
         }
         return true;
     }

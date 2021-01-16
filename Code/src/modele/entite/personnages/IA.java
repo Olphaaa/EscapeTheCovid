@@ -1,18 +1,25 @@
 package modele.entite.personnages;
 
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class IA extends Personnage{
+public class IA extends Personnage implements Observable {
     private boolean isInfect;
-
     private double destX;
     private double destY;
+
+    private List<InvalidationListener> lesObservateurIA = new ArrayList<>();
+
 
     public boolean isInfect() {
         return isInfect;
@@ -47,5 +54,15 @@ public class IA extends Personnage{
     public void setInfect(boolean bool){
         isInfect = bool;
         super.setImage("/images/perso/iaMalade.png");
+        lesObservateurIA.forEach(o -> Platform.runLater(() -> o.invalidated(this)));
+
+    }
+
+    public void addListener(InvalidationListener invalidationListener) {
+        lesObservateurIA.add(invalidationListener);
+    }
+
+    public void removeListener(InvalidationListener invalidationListener) {
+        lesObservateurIA.remove(invalidationListener);
     }
 }
