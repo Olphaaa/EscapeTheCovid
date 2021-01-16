@@ -236,6 +236,9 @@ public class Manager implements InvalidationListener {
         if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){
             right = false;
         }
+        if(k.getCode() == KeyCode.SPACE){
+            space = false;
+        }
         touche();
     }
     public void testPressed(KeyEvent k){
@@ -250,6 +253,9 @@ public class Manager implements InvalidationListener {
         }
         if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){
             right = true;
+        }
+        if(k.getCode() == KeyCode.SPACE){
+            space = true;
         }
         touche();
     }
