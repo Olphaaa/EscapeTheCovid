@@ -28,17 +28,21 @@ public class IA extends Personnage implements Observable {
     Random rand = new Random();
 
     public IA(){
-        isInfect = false;
-        super.setImage("/images/perso/iaRien.png");
+        if(rand.nextFloat()>0.5){
+            isInfect = false;
+            super.setImage("/images/perso/iaRien.png");
+        }
+        else{
+            isInfect = true;
+            super.setImage("/images/perso/iaMalade.png");
+        }
+
         float randX= rand.nextInt(895 - 24)+24;
         float randY= rand.nextInt(605 - 24)+24;
         this.setPPerso(randX, randY);
         resetDest();
     }
 
-    public void disparition(){
-        /*PAS ENCORE FAIT*/
-    }
 
     public void resetDest(){
         destX = rand.nextInt(895 - 24)+24;

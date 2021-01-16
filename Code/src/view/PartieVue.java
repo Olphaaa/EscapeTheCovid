@@ -44,12 +44,11 @@ public class PartieVue implements InvalidationListener{
 
 
     public void initialize(){
-        kill.setText("0");
+        kill.textProperty().bind(m.killProperty());
         pseud.setText(m.getPseudo());
         temps.textProperty().bind(m.secondesProperty());
         vie.textProperty().bind(m.vieProperty());
 
-        attaq.setVisible(false);
 
         Spawner spw = new SpawnerSimple();
         spw.spawnRocher((CreateurSimple) m.getLeCreateur(),m.getCarte(),m.getNivDiff());
@@ -58,9 +57,6 @@ public class PartieVue implements InvalidationListener{
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
            change.next();
             for (Entite e : change.getAddedSubList()) {
-                if (e instanceof IA) {
-                    System.out.println("je fait spawn une IA");
-                }
                 update(e);
             }
 
@@ -98,7 +94,25 @@ public class PartieVue implements InvalidationListener{
 
 
     public void invalidated(Observable observable) {
-        //update(m.perso);
+        update(m.perso);
+        m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
+                    change.next();
+                    for (Entite e : change.getAddedSubList()) {
+                        update(e);
+                    }
+
+
+                    for (Entite e : change.getRemoved()) {
+                        Iterator<Node> unIterateur = map.getChildren().iterator();
+                        while (unIterateur.hasNext()) {
+                            Node leNode = unIterateur.next();
+                            if (leNode.getUserData() == e) {
+                                unIterateur.remove();
+                            }
+                        }
+                    }
+                }
+        );
     }
 
 

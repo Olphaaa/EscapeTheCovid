@@ -49,7 +49,6 @@ public class CollisionneurIA extends Collisionneur{
                 if (entite.getX() > e.getX()-40 && entite.getX() < e.getX()+40 && entite.getY()>e.getY()-40 && entite.getY()<e.getY()+40){
                     if (((IA) e).isInfect()){
                         ((IA) entite).setInfect(true);//todo l'image ne se met pas a jour au contacte (mais le chemin chamge)
-                        System.out.println(entite+ " est infecté!");
                     }
                 }
         }

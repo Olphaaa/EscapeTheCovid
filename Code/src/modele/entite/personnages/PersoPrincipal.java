@@ -101,8 +101,4 @@ public class PersoPrincipal extends Personnage implements Observable{
         lesObservateurPerso.forEach(o -> Platform.runLater(() -> o.invalidated(this)));
 
     }
-
-    public void nouvelIA() {
-        lesObservateurPerso.forEach(o -> Platform.runLater(() -> o.invalidated(this)));
-    }
 }

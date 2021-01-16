@@ -41,11 +41,9 @@ import java.util.Iterator;
 
 
 public class Manager implements InvalidationListener {
-    public int nbKill;
+
     private int nivDiff;
-    private int nbIA;
     private int nbProtection;
-    //private int score;
 
     public PersoPrincipal perso;
 
@@ -74,6 +72,10 @@ public class Manager implements InvalidationListener {
         public StringProperty scoreProperty() {return score;}
         public void setScore(String score) {this.score.set(score);}
 
+    private StringProperty kill = new SimpleStringProperty();
+        public String getKill() {return kill.get();}
+        public StringProperty killProperty() {return kill;}
+        public void setKill(String kill) {this.kill.set(kill);}
 
     public int getNivDiff() {return nivDiff;}
     public void setNivDiff(int i) {this.nivDiff = i;}
@@ -103,6 +105,7 @@ public class Manager implements InvalidationListener {
         vie.setValue(String.valueOf(perso.getPv()));
         secondes.set(String.valueOf(0));
         score.set(String.valueOf(0));
+        kill.set(String.valueOf(0));
         startBoucleur();
     }
 
@@ -131,17 +134,13 @@ public class Manager implements InvalidationListener {
         }
         vie.set(String.valueOf(perso.getPv()));
 
-        if(tps%50==0 /*&& nbIA<=5+(nivDiff*3)-1)*/){
-            System.out.println("nouvel IA (nb ia: "+nbIA+")");
+        if(tps%30==0){
             leCreateur.creerIA(carte);
-            ((IA)carte.getLesIA().get(0)).setInfect(true);
-            perso.nouvelIA();
-            nbIA++;
         }
 
         if (perso.getPv()==0){
             perso.setPv(0);
-            score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10));
+            score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10+Integer.parseInt(kill.get())*6));
             try {
                 partiePerdue();
             } catch (IOException e) {
@@ -181,7 +180,6 @@ public class Manager implements InvalidationListener {
         Iterator<IA> it = carte.getLesIA().iterator();
         while (it.hasNext()){
             Entite e = it.next();
-            //System.out.println(e.getX() + ", "+e.getY()+" → "+ ((IA) e).getDestX()+", "+((IA) e).getDestY());
             if (e.getX() < ((IA) e).getDestX()) {
                 leDeplaceurIA.deplacerDroit(e);
             }
@@ -265,7 +263,7 @@ public class Manager implements InvalidationListener {
     }
 
     public void supprIA(IA ia) {
-
+        kill.set(String.valueOf(Integer.parseInt(kill.get())+1));
         carte.supprimerEntites(ia);
     }
 }
