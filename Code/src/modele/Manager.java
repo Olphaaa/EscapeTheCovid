@@ -264,4 +264,5 @@ public class Manager implements InvalidationListener {
         kill.set(String.valueOf(Integer.parseInt(kill.get())+1));
         carte.supprimerEntites(ia);
     }
+
 }

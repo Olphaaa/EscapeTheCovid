@@ -39,7 +39,7 @@ public class PartieVue implements InvalidationListener{
     private Label vie;
 
 
-    public static final Manager m = new Manager();
+    public static Manager m = new Manager();
 
 
     public void initialize(){

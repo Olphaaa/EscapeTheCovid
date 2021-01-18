@@ -15,8 +15,7 @@ public class GameOverView {
 
 
 
-    public void initialize(){
-        score.textProperty().bind(PartieVue.m.scoreProperty());
+    public void initialize(){ score.textProperty().bind(PartieVue.m.scoreProperty());
     }
 
     public void onRetour(ActionEvent actionEvent) throws IOException {
