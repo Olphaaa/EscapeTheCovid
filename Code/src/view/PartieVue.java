@@ -22,10 +22,8 @@ import modele.spawner.SpawnerSimple;
 import java.util.Iterator;
 
 
-public class PartieVue implements InvalidationListener{
+public class PartieVue{
 
-    @FXML
-    public Label attaq;
     @FXML
     private Button startButton;
     @FXML
@@ -42,24 +40,26 @@ public class PartieVue implements InvalidationListener{
 
     public static final Manager m = new Manager();
 
-
     public void initialize(){
         kill.textProperty().bind(m.killProperty());
         pseud.setText(m.getPseudo());
         temps.textProperty().bind(m.secondesProperty());
         vie.textProperty().bind(m.vieProperty());
 
-
         Spawner spw = new SpawnerSimple();
         spw.spawnRocher((CreateurSimple) m.getLeCreateur(),m.getCarte(),m.getNivDiff());
 
+/*
+        for (Entite entite : m.getListeEntite()) {
+            update(entite);
+        }
+*/
 
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
            change.next();
             for (Entite e : change.getAddedSubList()) {
                 update(e);
             }
-
 
             for (Entite e : change.getRemoved()) {
                 Iterator<Node> unIterateur = map.getChildren().iterator();
@@ -88,13 +88,13 @@ public class PartieVue implements InvalidationListener{
         ((Button)actionEvent.getSource()).getScene().setOnKeyReleased(m::testRealesed);
         m.startPartie();
 
-        PersoPrincipal pp = m.perso;
-        pp.addListener(this);
+        PersoPrincipal pp = m.getPerso();
+        //pp.addListener((InvalidationListener) this);
     }
 
 
     public void invalidated(Observable observable) {
-        update(m.perso);
+        update(m.getPerso());
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
                     change.next();
                     for (Entite e : change.getAddedSubList()) {

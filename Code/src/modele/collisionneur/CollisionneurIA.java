@@ -4,7 +4,12 @@ import modele.Carte;
 import modele.Manager;
 import modele.entite.Entite;
 import modele.entite.Rocher;
+import modele.entite.equipements.Equipement;
+import modele.entite.equipements.protections.Protection;
 import modele.entite.personnages.IA;
+import modele.entite.personnages.PersoPrincipal;
+
+import java.util.Iterator;
 
 public class CollisionneurIA extends Collisionneur{
     public CollisionneurIA(Carte laCarte, Manager m) {
@@ -34,6 +39,14 @@ public class CollisionneurIA extends Collisionneur{
                         ((IA) entite).setInfect(true);//todo l'image ne se met pas a jour au contacte (mais le chemin chamge)
                     }
                 }
+                if (e instanceof PersoPrincipal){
+                    PersoPrincipal pp = super.leManager.getPerso();
+                    pp.seFaireToucher();
+                    pp.setX(45);
+                    pp.setY(375);
+                }
+            }
+
         }
     }
 

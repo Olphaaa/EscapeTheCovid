@@ -12,21 +12,21 @@ import java.io.IOException;
 public class MainWindow {
 
     @FXML
-    public void onInformations(ActionEvent actionEvent) throws IOException {
+    private void onInformations(ActionEvent actionEvent) throws IOException {
         Parent container = FXMLLoader.load(getClass().getResource("/Informations.fxml"));
         container.getStylesheets().add("css/style.css");
         Launch.fenetrePrincipale.setScene(new Scene(container));
     }
 
     @FXML
-    public void onTabScore(ActionEvent actionEvent) throws IOException {
+    private void onTabScore(ActionEvent actionEvent) throws IOException {
         Parent container = FXMLLoader.load(getClass().getResource("/TableauScores.fxml"));
         container.getStylesheets().add("css/style.css");
         Launch.fenetrePrincipale.setScene(new Scene(container));
     }
 
     @FXML//todo a été rajouté
-    public void onNewGame(ActionEvent actionEvent) throws IOException {
+    private void onNewGame(ActionEvent actionEvent) throws IOException {
         Parent container = FXMLLoader.load(getClass().getResource("/SetupPartie.fxml"));
         container.getStylesheets().add("css/style.css");
         Launch.fenetrePrincipale.setScene(new Scene(container));

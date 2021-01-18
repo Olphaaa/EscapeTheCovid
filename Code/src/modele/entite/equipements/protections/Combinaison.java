@@ -11,7 +11,7 @@ public class Combinaison extends Protection{
         float randY= ThreadLocalRandom.current().nextInt(45,710-100);
         super.setImage("/images/protection/combinaison.png");
 
-        this.setPPerso(randX,randY);
+        this.setPosiPerso(randX,randY);
     }
 
     @Override

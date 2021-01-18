@@ -14,27 +14,32 @@ public class DeplaceurSimple extends Deplaceur {
 
     public void deplacerHaut(Entite e){
         if (leCollisionneur.canMove(e.getX(), e.getY()-pas)){
-            e.setPPerso(e.getX(), e.getY()-pas);
+            e.setPosiPerso(e.getX(), e.getY()-pas);
         }
     }
 
 
     public void deplacerBas(Entite e){
         if (leCollisionneur.canMove(e.getX(), e.getY()+pas)){
-            e.setPPerso(e.getX(), e.getY()+pas);
+            e.setPosiPerso(e.getX(), e.getY()+pas);
         }
     }
 
     public void deplacerGauche(Entite e){
         if (leCollisionneur.canMove(e.getX()-pas, e.getY())){
-            e.setPPerso(e.getX()-pas, e.getY());
+            e.setPosiPerso(e.getX()-pas, e.getY());
         }
 
     }
     public void deplacerDroit(Entite e){
         if (leCollisionneur.canMove(e.getX()+pas, e.getY())){
-            e.setPPerso(e.getX()+pas, e.getY());
+            e.setPosiPerso(e.getX()+pas, e.getY());
         }
+    }
+
+    @Override
+    public void deplacerIA() {
+        return;
     }
 
     @Override

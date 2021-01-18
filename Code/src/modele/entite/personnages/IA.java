@@ -12,13 +12,13 @@ public class IA extends Personnage{
     private boolean isInfect;
     private double destX;
     private double destY;
+    private Random rand = new Random();
+
 
 
     public boolean isInfect() {
         return isInfect;
     }
-
-    Random rand = new Random();
 
     public IA(){
         if(rand.nextFloat()>0.5){
@@ -32,7 +32,7 @@ public class IA extends Personnage{
 
         float randX= rand.nextInt(895 - 24)+24;
         float randY= rand.nextInt(605 - 24)+24;
-        this.setPPerso(randX, randY);
+        this.setPosiPerso(randX, randY);
         resetDest();
     }
 

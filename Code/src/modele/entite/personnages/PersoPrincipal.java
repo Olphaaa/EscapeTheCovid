@@ -22,7 +22,7 @@ public class PersoPrincipal extends Personnage implements Observable{
     public PersoPrincipal(){
         this.p = null;
         this.setEquiped(false);
-        this.setImage("/images/perso/ppRien.png");
+        this.setImage("/images/perso/ppArme.png");
         this.setX(45);
         this.setY(375);
     }

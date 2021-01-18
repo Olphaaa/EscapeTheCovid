@@ -20,7 +20,7 @@ public abstract class Entite {
     protected int maxHeight=50;
 
 
-    public void setPPerso(double x, double y) {
+    public void setPosiPerso(double x, double y) {
         this.setX(x);
         this.setY(y);
     }

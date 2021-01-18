@@ -19,7 +19,7 @@ public class TableauScores implements Serializable {
     @FXML
     private ListView listeScores;
 
-    Stub stub = new Stub();
+    private Stub stub = new Stub();
 
     private TableauScore tabScore = stub.creerTableau();
 
@@ -31,7 +31,7 @@ public class TableauScores implements Serializable {
     }
 
     @FXML
-    public void clickRetour(ActionEvent actionEvent) throws IOException {
+    private void clickRetour(ActionEvent actionEvent) throws IOException {
         Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
         container.getStylesheets().add("css/style.css");
         Launch.fenetrePrincipale.setScene(new Scene(container));

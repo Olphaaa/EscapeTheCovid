@@ -1,6 +1,5 @@
 package modele;
 
-import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +13,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import launch.Launch;
 import modele.boucleur.Boucleur;
-import modele.boucleur.BoucleurIA;
 import modele.boucleur.BoucleurSimple;
 import modele.collisionneur.Collisionneur;
 import modele.collisionneur.CollisionneurIA;
@@ -33,7 +31,6 @@ import modele.score.Score;
 import modele.serializer.SauvegarderFile;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
-import view.PartieVue;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -41,11 +38,17 @@ import java.util.Iterator;
 
 
 public class Manager implements InvalidationListener {
-
+    public int nbKill;
     private int nivDiff;
+    private int nbIA;
     private int nbProtection;
+    private boolean up,down,left,right,space;
+    //private int score;
 
-    public PersoPrincipal perso;
+    private PersoPrincipal perso;
+    public PersoPrincipal getPerso(){
+        return perso;
+    }
 
     private StringProperty secondes = new SimpleStringProperty();
         public String getSecondes() {return secondes.get();}
@@ -86,7 +89,7 @@ public class Manager implements InvalidationListener {
     private CreateurEntite leCreateur = new CreateurSimple();
     private Carte carte = new Carte();
     private Boucleur leBoucleur = new BoucleurSimple();
-    private Boucleur leBoucleurIA = new BoucleurIA();// todo a voir plus tard
+    //private Boucleur leBoucleurIA = new BoucleurIA();// todo a voir plus tard
     private Spawner leSpawner = new SpawnerSimple();
     private Collisionneur leCollisionneur = new CollisionneurSimple(carte,this);
     private Collisionneur leCollisionneurIA = new CollisionneurIA(carte,this);
@@ -111,9 +114,7 @@ public class Manager implements InvalidationListener {
 
     public void startBoucleur(){
         leBoucleur.addListener(this);
-        leBoucleurIA.addListener(this);
         leBoucleur.setActif(true);
-
         new Thread(leBoucleur).start();
     }
 
@@ -136,9 +137,11 @@ public class Manager implements InvalidationListener {
 
         if(tps%30==0){
             leCreateur.creerIA(carte);
+            ((IA)carte.getLesIA().get(0)).setInfect(true);
+            nbIA++;
         }
 
-        if (perso.getPv()==0){
+        if (perso.getPv()<=0){
             perso.setPv(0);
             score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10+Integer.parseInt(kill.get())*6));
             try {
@@ -152,12 +155,11 @@ public class Manager implements InvalidationListener {
             perso.desequipe();
             nbProtection = 0;
         }
-
         if (tps%20==0 && nbProtection<1 && !perso.isEquiped()){
             nbProtection = 1;
             leSpawner.spawnProtection((CreateurSimple) leCreateur, carte);
         }
-        deplacementDesIa();
+        leDeplaceurIA.deplacerIA();
     }
     @FXML
     private void partiePerdue() throws IOException {
@@ -176,94 +178,39 @@ public class Manager implements InvalidationListener {
         Launch.fenetrePrincipale.setScene(new Scene(container));
     }
 
-    public void deplacementDesIa() {
-        Iterator<IA> it = carte.getLesIA().iterator();
-        while (it.hasNext()){
-            Entite e = it.next();
-            if (e.getX() < ((IA) e).getDestX()) {
-                leDeplaceurIA.deplacerDroit(e);
-            }
-            if (e.getX() > ((IA) e).getDestX()) {
-                leDeplaceurIA.deplacerGauche(e);
-            }
-            if (e.getY() < ((IA) e).getDestY()) {
-                leDeplaceurIA.deplacerBas(e);
-            }
-            if (e.getY() > ((IA) e).getDestY()) {
-                leDeplaceurIA.deplacerHaut(e);
-            }
-            if (e.getX() > ((IA) e).getDestX() - 40 && e.getX() < ((IA) e).getDestX() + 40 && e.getX() > ((IA) e).getDestX() - 40 && e.getX() < ((IA) e).getDestX() + 40) {
-                ((IA) e).resetDest();
-            }
-        }
-    }
-
-
     public ObservableList<Entite> getListeEntite() {return carte.getLesEntites();}
 
-
-    private boolean up,down,left,right,space;
-
     private void touche(){
-        if (up)        {
-            leDeplaceur.deplacerHaut(perso);
-        }
-        if (down){
-            leDeplaceur.deplacerBas(perso);
-        }
-        if (left){
-            leDeplaceur.deplacerGauche(perso);
-        }
-        if(right){
-            leDeplaceur.deplacerDroit(perso);
-        }
-        if(space){
-            leDeplaceur.attaquer(perso);
-        }
+        if (up){leDeplaceur.deplacerHaut(perso);}
+        if (down){leDeplaceur.deplacerBas(perso);}
+        if (left){leDeplaceur.deplacerGauche(perso);}
+        if (right){leDeplaceur.deplacerDroit(perso);}
+        if (space){leDeplaceur.attaquer(perso);}
     }
     public void testRealesed(KeyEvent k){
-        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){
-            up = false;
-        }
-        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){
-            left = false;
-        }
-        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN){
-            down = false;
-        }
-        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){
-            right = false;
-        }
-        if(k.getCode() == KeyCode.SPACE){
-            space = false;
-        }
+        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){up = false;}
+        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){left = false;}
+        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN){down = false;}
+        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){right = false;}
+        if(k.getCode() == KeyCode.SPACE){space = false;}
         touche();
     }
     public void testPressed(KeyEvent k){
-        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){
-            up = true;
-        }
-        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){
-            left = true;
-        }
-        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN){
-            down = true;
-        }
-        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){
-            right = true;
-        }
-        if(k.getCode() == KeyCode.SPACE){
-            space = true;
-        }
+        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){up = true;}
+        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){left = true;}
+        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN){down = true;}
+        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){right = true;}
+        if(k.getCode() == KeyCode.SPACE){space = true;}
         touche();
-    }
-
-    public Collisionneur getLeCollisionneur() {
-        return leCollisionneur;
     }
 
     public void supprIA(IA ia) {
         kill.set(String.valueOf(Integer.parseInt(kill.get())+1));
         carte.supprimerEntites(ia);
+        nbIA--;
+    }
+
+    public Collisionneur getLeCollisionneur() {
+        return leCollisionneur;
     }
 }

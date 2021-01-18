@@ -15,14 +15,14 @@ public class SauvegarderFile extends Sauvegarder {
     public void SauvegarderDonnee(Score score) {
         TableauScore lesScores = new TableauScore();
 
-        try (var in = new ObjectInputStream(new FileInputStream("scores.bin"))) {
+        /*try (var in = new ObjectInputStream(new FileInputStream("scores.bin"))) {
             while (in.available() > 0){
                 lesScores.ajouterScore((Score) in.readObject());
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
+*/
         lesScores.ajouterScore(score);
 
         try (var out = new ObjectOutputStream(new FileOutputStream("scores.bin"))) {

@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Informations {
 
     @FXML
-    public void clickRetour(ActionEvent actionEvent) throws IOException {
+    private void clickRetour(ActionEvent actionEvent) throws IOException {
         Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
         container.getStylesheets().add("css/style.css");
         Launch.fenetrePrincipale.setScene(new Scene(container));

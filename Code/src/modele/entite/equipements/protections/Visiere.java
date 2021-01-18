@@ -12,7 +12,7 @@ public class Visiere extends Protection {
         float randY= ThreadLocalRandom.current().nextInt(45,710-100);
         super.setImage("/images/protection/visiere.png");
 
-        this.setPPerso(randX,randY);
+        this.setPosiPerso(randX,randY);
     }
 
     @Override
