@@ -22,6 +22,7 @@ public class Score implements Serializable {
         public StringProperty pseudoProperty(){return pseudo;}
         public void setPseudo(String pseudo){this.pseudo.set(pseudo);}
 
+
     private LocalDateTime date;
 
     public Score (int score, String pseudo, LocalDateTime date){
@@ -32,7 +33,7 @@ public class Score implements Serializable {
 
     @Override
     public String toString() {
-        return pseudo.get() + ": " + score.get() + " fait le " + date.getDayOfMonth() + "/"+date.getMonth() + "/"+date.getYear() + "  "+date.getHour()+":"+date.getHour();
+        return pseudo.get() + ": " + score.get() + " fait le " + date.getDayOfMonth() + "/"+date.getMonth() + "/"+date.getYear() + "  "+date.getHour()+"h"+date.getHour();
     }
 
 }

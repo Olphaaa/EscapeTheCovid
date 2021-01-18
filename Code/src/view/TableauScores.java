@@ -6,7 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
+import javafx.util.Callback;
 import launch.Launch;
+import modele.score.CellScore;
+import modele.score.Score;
 import modele.score.TableauScore;
 
 import  javafx.scene.control.ListView;
@@ -26,8 +30,19 @@ public class TableauScores implements Serializable {
     public void initialize(){
         ChargeurFile leSerializer = new ChargeurFile();
         TableauScore scoreList;
-        scoreList = leSerializer.chargerDonnee();
-        listeScores.itemsProperty().bind(scoreList.lesScoresProperty());
+        //scoreList = leSerializer.chargerDonnee();
+        //listeScores.itemsProperty().bind(scoreList.lesScoresProperty());
+
+        listeScores.itemsProperty().bind(tabScore.lesScoresProperty());
+        listeScores.setCellFactory((param)->new CellScore());
+//// equivalent
+//        listeScores.setCellFactory(new Callback<ListView, ListCell>() {
+//            @Override
+//            public ListCell call(ListView listView) {
+//                return new ListCell();
+//            }
+//        });
+
     }
 
     @FXML

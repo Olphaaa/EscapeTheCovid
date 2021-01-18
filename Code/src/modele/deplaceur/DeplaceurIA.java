@@ -24,9 +24,9 @@ public class DeplaceurIA extends Deplaceur{
             e.setPosiPerso(e.getX(), e.getY()-pas);
             ((CollisionneurIA)leCollisionneur).contaminerAuContacte(e);
         }
-        else
+        else{
             ((IA) e).resetDest();
-
+        }
     }
 
     public void deplacerBas(Entite e){
@@ -57,7 +57,6 @@ public class DeplaceurIA extends Deplaceur{
         Iterator<IA> it = carte.getLesIA().iterator();
         while (it.hasNext()){
             Entite e = it.next();
-            //System.out.println(e.getX() + ", "+e.getY()+" → "+ ((IA) e).getDestX()+", "+((IA) e).getDestY());
             if (e.getX() < ((IA) e).getDestX()) {
                 deplacerDroit(e);
             }

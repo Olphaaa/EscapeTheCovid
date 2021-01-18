@@ -19,7 +19,6 @@ public class GameOverView {
 
 
     public void initialize(){
-        //score.setText(PartieVue.);
         score.textProperty().bind(PartieVue.m.scoreProperty());
     }
 

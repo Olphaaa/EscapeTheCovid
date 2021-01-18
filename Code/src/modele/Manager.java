@@ -41,7 +41,7 @@ import java.util.Iterator;
 public class Manager implements InvalidationListener {
     public int nbKill;
     private int nivDiff;
-    private int nbIA;
+    private int nbIA=1;
     private int nbProtection;
     private boolean up,down,left,right,space;
 
@@ -131,7 +131,6 @@ public class Manager implements InvalidationListener {
         }
         vie.set(String.valueOf(perso.getPv()));
         if((tps%50==0 && nbIA<=5+(nivDiff*3)-1)){
-            System.out.println("nouvel IA (nb ia: "+nbIA+")");
             leCreateur.creerIA(carte);
             ((IA)carte.getLesIA().get(0)).setInfect(true);
             nbIA++;
