@@ -22,8 +22,6 @@ public class CreateurSimple extends CreateurEntite{
     @Override
     public void creerRocher(Carte carte) {carte.ajouterEntites(new Rocher());}
 
-    @Override
-    public void creerArme(Carte carte) {}
 
     @Override
     public void creerCombinaison(Carte carte) {carte.ajouterEntites(new Combinaison());}

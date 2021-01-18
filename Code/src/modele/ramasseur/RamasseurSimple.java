@@ -8,7 +8,6 @@ import modele.entite.equipements.protections.Protection;
 import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
 
-import java.util.Iterator;
 
 public class RamasseurSimple extends Ramasseur{
 
@@ -18,14 +17,12 @@ public class RamasseurSimple extends Ramasseur{
 
     @Override
     public boolean isPresent(double x, double y) {
-        Iterator<Entite> it = laCarte.getLesEntites().iterator();
-        while (it.hasNext()){
-            Entite e = it.next();
+        for (Entite e : laCarte.getLesEntites()) {
             if (e instanceof PersoPrincipal || e instanceof IA || e instanceof Rocher)
                 continue;
 
-            if (x > e.getX()-40 && x < e.getX()+40 && y>e.getY()-40 && y<e.getY()+40){
-                PersoPrincipal pp = ((PersoPrincipal)  laCarte.getLesEntites().get(0));
+            if (x > e.getX() - 40 && x < e.getX() + 40 && y > e.getY() - 40 && y < e.getY() + 40) {
+                PersoPrincipal pp = ((PersoPrincipal) laCarte.getLesEntites().get(0));
                 laCarte.supprimerEntites(e);
                 pp.ajouterEquipement((Equipement) e);
                 pp.setX(45);

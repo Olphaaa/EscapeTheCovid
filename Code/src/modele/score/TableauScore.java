@@ -5,12 +5,10 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.io.Serializable;
 
 public class TableauScore implements Serializable{
 
-    //private ObservableList<Score> listeScore; // new ?
     private ObservableList<Score> listScoreObs = FXCollections.observableArrayList();
 
     private transient ListProperty<Score> lesScores = new SimpleListProperty<>(listScoreObs);

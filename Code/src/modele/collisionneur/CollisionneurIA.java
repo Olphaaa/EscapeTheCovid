@@ -4,12 +4,7 @@ import modele.Carte;
 import modele.Manager;
 import modele.entite.Entite;
 import modele.entite.Rocher;
-import modele.entite.equipements.Equipement;
-import modele.entite.equipements.protections.Protection;
 import modele.entite.personnages.IA;
-import modele.entite.personnages.PersoPrincipal;
-
-import java.util.Iterator;
 
 public class CollisionneurIA extends Collisionneur{
     public CollisionneurIA(Carte laCarte, Manager m) {
@@ -18,20 +13,15 @@ public class CollisionneurIA extends Collisionneur{
 
     @Override
     public boolean canMove(double x, double y) {
-        if (isPresent(x,y)){
-            return true;
-        }
-        return false;
+        return isPresent(x, y);
     }
 
     @Override
     public boolean isPresent(double x, double y) {
-        Iterator<Entite> it = laCarte.getLesEntites().iterator();
-        while (it.hasNext()){
-            Entite e = it.next();
+        for (Entite e : laCarte.getLesEntites()) {
             if (e instanceof Rocher)
-                if (x > e.getX()-40 && x < e.getX()+40 && y>e.getY()-40 && y<e.getY()+40)
-                    return  false;
+                if (x > e.getX() - 40 && x < e.getX() + 40 && y > e.getY() - 40 && y < e.getY() + 40)
+                    return false;
         }
         return true;
     }
@@ -60,5 +50,10 @@ public class CollisionneurIA extends Collisionneur{
             }
 
         }
+    }
+
+    @Override
+    public IA isPresentAttaq(double x, double y) {
+        return null;
     }
 }

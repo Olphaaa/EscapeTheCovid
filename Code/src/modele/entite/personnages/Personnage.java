@@ -1,11 +1,6 @@
 package modele.entite.personnages;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import modele.entite.Entite;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Personnage extends Entite {
     public int pointsDeVie;

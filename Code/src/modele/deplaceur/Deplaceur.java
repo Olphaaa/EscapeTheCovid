@@ -10,9 +10,8 @@ public abstract class Deplaceur {
 
     protected int pas;
     protected Collisionneur leCollisionneur;
-    protected Ramasseur leRamasseur;
 
-    public Deplaceur(Collisionneur leCollisionneur, Ramasseur leRamasseur){
+    public Deplaceur(Collisionneur leCollisionneur){
         this.leCollisionneur = leCollisionneur;
     }
 

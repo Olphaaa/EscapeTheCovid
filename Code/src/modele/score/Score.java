@@ -22,7 +22,6 @@ public class Score implements Serializable {
         public StringProperty pseudoProperty(){return pseudo;}
         public void setPseudo(String pseudo){this.pseudo.set(pseudo);}
 
-    //comment faire une propriété sur une date ?
     private LocalDateTime date;
 
     public Score (int score, String pseudo, LocalDateTime date){
@@ -36,7 +35,4 @@ public class Score implements Serializable {
         return pseudo.get() + ": " + score.get() + " fait le " + date.getDayOfMonth() + "/"+date.getMonth() + "/"+date.getYear() + "  "+date.getHour()+":"+date.getHour();
     }
 
-    public LocalDateTime getDate() {
-        return this.date;
-    }
 }

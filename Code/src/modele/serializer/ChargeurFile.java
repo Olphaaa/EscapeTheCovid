@@ -2,10 +2,10 @@ package modele.serializer;
 
 import modele.score.Score;
 import modele.score.TableauScore;
-
 import java.io.*;
 
 public class ChargeurFile extends Chargeur {
+
     @Override
     public TableauScore chargerDonnee(){
         TableauScore lesScores = new TableauScore();
