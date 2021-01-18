@@ -38,12 +38,9 @@ public class SetupPartie {
     @FXML
     private void clickStart(ActionEvent actionEvent) throws IOException {
 
-        if (choiceDifficulty.getValue().equals("Masque + visière  (1)"))
-            PartieVue.m.setNivDiff(1);
-        else if (choiceDifficulty.getValue().equals("Masque    (2)"))
-            PartieVue.m.setNivDiff(2);
-        else
-            PartieVue.m.setNivDiff(3);
+        if (choiceDifficulty.getValue().equals("Masque + visière  (1)")){PartieVue.m.setNivDiff(1);}
+        else if (choiceDifficulty.getValue().equals("Masque    (2)")){PartieVue.m.setNivDiff(2);}
+        else{PartieVue.m.setNivDiff(3);}
 
         game.getIcons().add(new Image("images/icone.png"));
         game.setTitle("Escape the Covid");

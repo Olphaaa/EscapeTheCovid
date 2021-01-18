@@ -43,6 +43,15 @@ public class DeplaceurSimple extends Deplaceur {
     }
 
     @Override
+    public void deplacerPersonnage(boolean up, boolean down, boolean right, boolean left, boolean space, PersoPrincipal perso) {
+        if (up){deplacerHaut(perso);}
+        if (down){deplacerBas(perso);}
+        if (left){deplacerGauche(perso);}
+        if (right){deplacerDroit(perso);}
+        if (space){attaquer(perso);}
+    }
+
+    @Override
     public void attaquer(PersoPrincipal perso) {
         if(leCollisionneur.isPresentAttaq(perso.getX(),perso.getY()) != null){
             perso.attaquer(leCollisionneur.isPresentAttaq(perso.getX(),perso.getY()));

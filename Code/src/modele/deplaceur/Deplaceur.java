@@ -21,6 +21,7 @@ public abstract class Deplaceur {
     public abstract void deplacerGauche(Entite e);
     public abstract void deplacerDroit(Entite e);
     public abstract void deplacerIA();
+    public abstract void deplacerPersonnage(boolean up, boolean down, boolean right, boolean left, boolean space, PersoPrincipal perso);
 
     public abstract void attaquer(PersoPrincipal perso);
 }

@@ -78,6 +78,12 @@ public class DeplaceurIA extends Deplaceur{
     }
 
     @Override
+    public void deplacerPersonnage(boolean up, boolean down, boolean right, boolean left, boolean space, PersoPrincipal perso) {
+        return;
+    }
+
+
+    @Override
     public void attaquer(PersoPrincipal perso) {
 
     }

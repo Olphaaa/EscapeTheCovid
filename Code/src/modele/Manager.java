@@ -44,7 +44,6 @@ public class Manager implements InvalidationListener {
     private int nbIA;
     private int nbProtection;
     private boolean up,down,left,right,space;
-    //private int score;
 
     private PersoPrincipal perso;
     public PersoPrincipal getPerso(){
@@ -90,12 +89,11 @@ public class Manager implements InvalidationListener {
     private CreateurEntite leCreateur = new CreateurSimple();
     private Carte carte = new Carte();
     private Boucleur leBoucleur = new BoucleurSimple();
-    //private Boucleur leBoucleurIA = new BoucleurIA();// todo a voir plus tard
     private Spawner leSpawner = new SpawnerSimple();
     private Collisionneur leCollisionneur = new CollisionneurSimple(carte,this);
     private Collisionneur leCollisionneurIA = new CollisionneurIA(carte,this);
     private Ramasseur leRamasseur = new RamasseurSimple(carte);
-    private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
+    private Deplaceur leDeplaceurSim = new DeplaceurSimple(leCollisionneur, leRamasseur);
     private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA,carte);// todo voir s'il faut bien le ramasseur
     private SauvegarderFile leSerializer = new SauvegarderFile();
 
@@ -122,18 +120,14 @@ public class Manager implements InvalidationListener {
         leBoucleur.setActif(false);
     }
 
-    //private int sec =0 ;
     private int tps;//todo mettre ici pour éviter de déclarer un int a chaque boucle (a voir)
     @Override
     public void invalidated(Observable observable) {
         tps = Integer.parseInt(temps.get())+1;
         temps.set(String.valueOf(tps));
 
-        //System.out.println("nombre d'entite: "+ carte.getLesEntites().stream().count());
-
         if (tps%10 == 0){
             secondes.set(String.valueOf(Integer.parseInt(secondes.get())+1));
-            //sec = Integer.parseInt(secondes.get());
         }
         vie.set(String.valueOf(perso.getPv()));
         if((tps%50==0 && nbIA<=5+(nivDiff*3)-1)){
@@ -143,7 +137,7 @@ public class Manager implements InvalidationListener {
             nbIA++;
         }
 
-        if ( perso.getPv()==0){
+        if ( perso.getPv()<=0){
             perso.setPv(0);
             score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10+Integer.parseInt(kill.get())*6));
             try {
@@ -182,13 +176,6 @@ public class Manager implements InvalidationListener {
 
     public ObservableList<Entite> getListeEntite() {return carte.getLesEntites();}
 
-    private void touche(){
-        if (up){leDeplaceur.deplacerHaut(perso);}
-        if (down){leDeplaceur.deplacerBas(perso);}
-        if (left){leDeplaceur.deplacerGauche(perso);}
-        if (right){leDeplaceur.deplacerDroit(perso);}
-        if (space){leDeplaceur.attaquer(perso);}
-    }
     public void testRealesed(KeyEvent k){
         if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){up = false;}
         if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){left = false;}
@@ -204,6 +191,9 @@ public class Manager implements InvalidationListener {
         if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){right = true;}
         if(k.getCode() == KeyCode.SPACE){space = true;}
         touche();
+    }
+    private void touche(){
+        leDeplaceurSim.deplacerPersonnage(up,down,right,left,space,perso);
     }
 
     public void supprIA(IA ia) {

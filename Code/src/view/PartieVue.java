@@ -22,7 +22,7 @@ import modele.spawner.SpawnerSimple;
 import java.util.Iterator;
 
 
-public class PartieVue{
+public class PartieVue implements InvalidationListener{
 
     @FXML
     private Button startButton;
@@ -49,11 +49,11 @@ public class PartieVue{
         Spawner spw = new SpawnerSimple();
         spw.spawnRocher((CreateurSimple) m.getLeCreateur(),m.getCarte(),m.getNivDiff());
 
-/*
+        /*
         for (Entite entite : m.getListeEntite()) {
             update(entite);
         }
-*/
+        */
 
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
            change.next();
@@ -89,9 +89,8 @@ public class PartieVue{
         m.startPartie();
 
         PersoPrincipal pp = m.getPerso();
-        //pp.addListener((InvalidationListener) this);
+        pp.addListener(this);
     }
-
 
     public void invalidated(Observable observable) {
         update(m.getPerso());
@@ -117,13 +116,13 @@ public class PartieVue{
 
 
     private void update(Entite e){
-        ImageView entiteAAfficher = new ImageView();
-        entiteAAfficher.setUserData(e);
-        entiteAAfficher.setImage(new Image(getClass().getResource(e.getImage()).toExternalForm()));
-        entiteAAfficher.layoutXProperty().bind(e.xProperty());
-        entiteAAfficher.layoutYProperty().bind(e.yProperty());
-        entiteAAfficher.setFitHeight(e.getMaxHeight());
-        entiteAAfficher.setFitWidth(e.getMaxWidth());
-        map.getChildren().add(entiteAAfficher);
+        ImageView entiteAffichee = new ImageView();
+        entiteAffichee.setUserData(e);
+        entiteAffichee.setImage(new Image(getClass().getResource(e.getImage()).toExternalForm()));
+        entiteAffichee.layoutXProperty().bind(e.xProperty());
+        entiteAffichee.layoutYProperty().bind(e.yProperty());
+        entiteAffichee.setFitHeight(e.getMaxHeight());
+        entiteAffichee.setFitWidth(e.getMaxWidth());
+        map.getChildren().add(entiteAffichee);
     }
 }
