@@ -6,9 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import launch.Launch;
-
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 public class GameOverView {
@@ -19,7 +16,6 @@ public class GameOverView {
 
 
     public void initialize(){
-        //score.setText(PartieVue.);
         score.textProperty().bind(PartieVue.m.scoreProperty());
     }
 

@@ -14,7 +14,6 @@ import javafx.scene.layout.Pane;
 import modele.Manager;
 import modele.createur.CreateurSimple;
 import modele.entite.Entite;
-import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;

@@ -1,7 +1,5 @@
 package modele.boucleur;
 
-import modele.Manager;
-
 public class BoucleurIA extends Boucleur{
 
     @Override

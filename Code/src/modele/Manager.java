@@ -1,6 +1,5 @@
 package modele;
 
-import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
@@ -33,7 +32,6 @@ import modele.score.Score;
 import modele.serializer.SauvegarderFile;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
-import view.PartieVue;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

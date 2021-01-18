@@ -1,10 +1,5 @@
 package modele.entite.personnages;
 
-import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 

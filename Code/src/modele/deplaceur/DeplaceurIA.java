@@ -4,7 +4,6 @@ import modele.collisionneur.CollisionneurIA;
 import modele.entite.Entite;
 import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
-import modele.ramasseur.Ramasseur;
 
 public class DeplaceurIA extends Deplaceur{
 
