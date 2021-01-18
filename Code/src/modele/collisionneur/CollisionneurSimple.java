@@ -24,7 +24,6 @@ public class CollisionneurSimple extends Collisionneur {
         return false;
     }
 
-
     public IA isPresentAttaq(double x, double y){
         Iterator<Entite> it = laCarte.getLesEntites().iterator();
         while (it.hasNext()){
@@ -59,16 +58,8 @@ public class CollisionneurSimple extends Collisionneur {
                     laCarte.supprimerEntites(e);
                     return true;
                 }
-                if (e instanceof IA && ((IA) e).isInfect()){
-                    //PersoPrincipal pp = ((PersoPrincipal)  laCarte.getLesEntites().get(0));
-                    PersoPrincipal pp = super.leManager.getPerso();
-                    pp.seFaireToucher();
-                    pp.setX(45);
-                    pp.setY(375);
-                }
                 return false;
             }
-
         }
         return true;
     }

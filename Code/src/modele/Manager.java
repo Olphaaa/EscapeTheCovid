@@ -11,9 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import launch.Launch;
 import modele.boucleur.Boucleur;
-import modele.boucleur.BoucleurIA;
 import modele.boucleur.BoucleurSimple;
 import modele.collisionneur.Collisionneur;
 import modele.collisionneur.CollisionneurIA;
@@ -43,6 +43,7 @@ public class Manager implements InvalidationListener {
     private int nivDiff;
     private int nbIA;
     private int nbProtection;
+    private boolean up,down,left,right,space;
     //private int score;
 
     private PersoPrincipal perso;
@@ -95,10 +96,10 @@ public class Manager implements InvalidationListener {
     private Collisionneur leCollisionneurIA = new CollisionneurIA(carte,this);
     private Ramasseur leRamasseur = new RamasseurSimple(carte);
     private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
-    private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
+    private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA,carte);// todo voir s'il faut bien le ramasseur
     private SauvegarderFile leSerializer = new SauvegarderFile();
-    public Manager(){
 
+    public Manager(){
     }
 
     public void startPartie(){
@@ -113,11 +114,8 @@ public class Manager implements InvalidationListener {
 
     public void startBoucleur(){
         leBoucleur.addListener(this);
-        //leBoucleurIA.addListener(this);
         leBoucleur.setActif(true);
-        //leBoucleurIA.setActif(true);
         new Thread(leBoucleur).start();
-        //new Thread(leBoucleurIA).start();
     }
 
     public void stopBoucleur(){
@@ -145,7 +143,7 @@ public class Manager implements InvalidationListener {
             nbIA++;
         }
 
-        if (tps%30 == 0 || perso.getPv()==0){
+        if ( perso.getPv()==0){
             perso.setPv(0);
             score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10+Integer.parseInt(kill.get())*6));
             try {
@@ -163,7 +161,7 @@ public class Manager implements InvalidationListener {
             nbProtection = 1;
             leSpawner.spawnProtection((CreateurSimple) leCreateur, carte);
         }
-        deplacementDesIa();
+        leDeplaceurIA.deplacerIA();
     }
     @FXML
     private void partiePerdue() throws IOException {
@@ -182,95 +180,39 @@ public class Manager implements InvalidationListener {
         Launch.fenetrePrincipale.setScene(new Scene(container));
     }
 
-    public void deplacementDesIa() {
-        Iterator<IA> it = carte.getLesIA().iterator();
-        while (it.hasNext()){
-            Entite e = it.next();
-            //System.out.println(e.getX() + ", "+e.getY()+" → "+ ((IA) e).getDestX()+", "+((IA) e).getDestY());
-            if (e.getX() < ((IA) e).getDestX()) {
-                leDeplaceurIA.deplacerDroit(e);
-            }
-            if (e.getX() > ((IA) e).getDestX()) {
-                leDeplaceurIA.deplacerGauche(e);
-            }
-            if (e.getY() < ((IA) e).getDestY()) {
-                leDeplaceurIA.deplacerBas(e);
-            }
-            if (e.getY() > ((IA) e).getDestY()) {
-                leDeplaceurIA.deplacerHaut(e);
-            }
-            if (e.getX() > ((IA) e).getDestX() - 40 && e.getX() < ((IA) e).getDestX() + 40 && e.getX() > ((IA) e).getDestX() - 40 && e.getX() < ((IA) e).getDestX() + 40) {
-                ((IA) e).resetDest();
-            }
-        }
-    }
-
-
     public ObservableList<Entite> getListeEntite() {return carte.getLesEntites();}
 
-
-    private boolean up,down,left,right,space;
-
     private void touche(){
-        if (up)        {
-            leDeplaceur.deplacerHaut(perso);
-        }
-        if (down){
-            leDeplaceur.deplacerBas(perso);
-        }
-        if (left){
-            leDeplaceur.deplacerGauche(perso);
-        }
-        if(right){
-            leDeplaceur.deplacerDroit(perso);
-        }
-        if(space){
-            leDeplaceur.attaquer(perso);
-        }
+        if (up){leDeplaceur.deplacerHaut(perso);}
+        if (down){leDeplaceur.deplacerBas(perso);}
+        if (left){leDeplaceur.deplacerGauche(perso);}
+        if (right){leDeplaceur.deplacerDroit(perso);}
+        if (space){leDeplaceur.attaquer(perso);}
     }
     public void testRealesed(KeyEvent k){
-        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){
-            up = false;
-        }
-        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){
-            left = false;
-        }
-        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN){
-            down = false;
-        }
-        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){
-            right = false;
-        }
-        if(k.getCode() == KeyCode.SPACE){
-            space = false;
-        }
+        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){up = false;}
+        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){left = false;}
+        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN){down = false;}
+        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){right = false;}
+        if(k.getCode() == KeyCode.SPACE){space = false;}
         touche();
     }
     public void testPressed(KeyEvent k){
-        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){
-            up = true;
-        }
-        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){
-            left = true;
-        }
-        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN){
-            down = true;
-        }
-        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){
-            right = true;
-        }
-        if(k.getCode() == KeyCode.SPACE){
-            space = true;
-        }
+        if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){up = true;}
+        if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){left = true;}
+        if(k.getCode() == KeyCode.S || k.getCode() == KeyCode.DOWN){down = true;}
+        if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){right = true;}
+        if(k.getCode() == KeyCode.SPACE){space = true;}
         touche();
-    }
-
-    public Collisionneur getLeCollisionneur() {
-        return leCollisionneur;
     }
 
     public void supprIA(IA ia) {
         kill.set(String.valueOf(Integer.parseInt(kill.get())+1));
         carte.supprimerEntites(ia);
+        nbIA--;
+    }
+
+    public Collisionneur getLeCollisionneur() {
+        return leCollisionneur;
     }
 }

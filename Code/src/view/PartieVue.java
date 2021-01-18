@@ -88,13 +88,13 @@ public class PartieVue{
         ((Button)actionEvent.getSource()).getScene().setOnKeyReleased(m::testRealesed);
         m.startPartie();
 
-        PersoPrincipal pp = m.perso;
-        pp.addListener(this);
+        PersoPrincipal pp = m.getPerso();
+        //pp.addListener((InvalidationListener) this);
     }
 
 
     public void invalidated(Observable observable) {
-        update(m.perso);
+        update(m.getPerso());
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
                     change.next();
                     for (Entite e : change.getAddedSubList()) {

@@ -39,7 +39,7 @@ public class IA extends Personnage implements Observable {
 
         float randX= rand.nextInt(895 - 24)+24;
         float randY= rand.nextInt(605 - 24)+24;
-        this.setPPerso(randX, randY);
+        this.setPosiPerso(randX, randY);
         resetDest();
     }
 
