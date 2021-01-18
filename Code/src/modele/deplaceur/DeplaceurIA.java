@@ -1,5 +1,6 @@
 package modele.deplaceur;
 
+import modele.Carte;
 import modele.collisionneur.Collisionneur;
 import modele.collisionneur.CollisionneurIA;
 import modele.entite.Entite;
@@ -11,8 +12,10 @@ import java.util.Iterator;
 
 public class DeplaceurIA extends Deplaceur{
 
-    public DeplaceurIA(CollisionneurIA leCollisionneur){//todo voir s'il faut quand meme le ramasseur
+    private Carte carte;
+    public DeplaceurIA(CollisionneurIA leCollisionneur, Carte carte){//todo voir s'il faut quand meme le ramasseur
         super(leCollisionneur);
+        this.carte = carte;
         pas = 10;
     }
 

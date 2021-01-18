@@ -47,7 +47,7 @@ public class CollisionneurSimple extends Collisionneur {
 
             if (x > e.getX() - 40 && x < e.getX() + 40 && y > e.getY() - 40 && y < e.getY() + 40) {
                 if (e instanceof Protection) {
-                    PersoPrincipal pp = super.leManager.perso;
+                    PersoPrincipal pp = super.leManager.getPerso();
                     pp.ajouterEquipement((Equipement) e);
                     pp.setPv(pp.getPv() + pp.getProtection().niveauProtection);
                     leManager.setVie(String.valueOf(pp.getPv() + pp.getProtection().niveauProtection));
@@ -55,7 +55,7 @@ public class CollisionneurSimple extends Collisionneur {
                     return true;
                 }
                 if (e instanceof IA && ((IA) e).isInfect()) {
-                    PersoPrincipal pp = super.leManager.perso;
+                    PersoPrincipal pp = super.leManager.getPerso();
                     pp.seFaireToucher();
                     pp.setX(45);
                     pp.setY(375);

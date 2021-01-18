@@ -5,6 +5,7 @@ import modele.Manager;
 import modele.entite.Entite;
 import modele.entite.Rocher;
 import modele.entite.personnages.IA;
+import modele.entite.personnages.PersoPrincipal;
 
 public class CollisionneurIA extends Collisionneur{
     public CollisionneurIA(Carte laCarte, Manager m) {
@@ -32,9 +33,7 @@ public class CollisionneurIA extends Collisionneur{
     }
 
     public void contaminerAuContacte(Entite entite){
-        Iterator<Entite> it = laCarte.getLesEntites().iterator();
-        while (it.hasNext()){
-            Entite e = it.next();
+        for(Entite e: laCarte.getLesEntites()){
             if (entite.getX() > e.getX()-40 && entite.getX() < e.getX()+40 && entite.getY()>e.getY()-40 && entite.getY()<e.getY()+40){
                 if (e instanceof IA && !entite.equals(e) && !((IA)entite).isInfect()){
                     if (((IA) e).isInfect()){
@@ -52,8 +51,4 @@ public class CollisionneurIA extends Collisionneur{
         }
     }
 
-    @Override
-    public IA isPresentAttaq(double x, double y) {
-        return null;
-    }
 }
