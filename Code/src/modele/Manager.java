@@ -91,8 +91,8 @@ public class Manager implements InvalidationListener {
     private Collisionneur leCollisionneur = new CollisionneurSimple(carte,this);
     private Collisionneur leCollisionneurIA = new CollisionneurIA(carte,this);
     private Ramasseur leRamasseur = new RamasseurSimple(carte);
-    private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
-    private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
+    private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur);
+    private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA);// todo voir s'il faut bien le ramasseur
     private SauvegarderFile leSerializer = new SauvegarderFile();
 
     public Manager(){

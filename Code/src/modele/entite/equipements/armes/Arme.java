@@ -1,5 +1,4 @@
 package modele.entite.equipements.armes;
-
 import modele.entite.equipements.Equipement;
 
 public abstract class Arme extends Equipement {

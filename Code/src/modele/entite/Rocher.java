@@ -1,18 +1,12 @@
 package modele.entite;
 
-import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
 import java.util.Random;
-import java.lang.Object;
-import java.util.concurrent.ThreadLocalRandom;
 
 
 
 public class Rocher extends Entite{
     Random rand = new Random();
-    Rectangle rectz = new Rectangle();
-    Rectangle rectzd = new Rectangle();
-    Boolean truc = rectz.intersects(rectzd);
+
     public Rocher(){
         float randX= rand.nextInt(900)+45;
         float randY= rand.nextInt(610)+45;

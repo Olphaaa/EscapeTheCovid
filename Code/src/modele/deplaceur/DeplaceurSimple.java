@@ -7,8 +7,8 @@ import modele.ramasseur.Ramasseur;
 
 public class DeplaceurSimple extends Deplaceur {
 
-    public DeplaceurSimple(Collisionneur leCollisionneur, Ramasseur leRamasseur){
-        super(leCollisionneur, leRamasseur);
+    public DeplaceurSimple(Collisionneur leCollisionneur){
+        super(leCollisionneur);
         pas=7;
     }
 
