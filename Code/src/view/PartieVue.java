@@ -14,7 +14,6 @@ import javafx.scene.layout.Pane;
 import modele.Manager;
 import modele.createur.CreateurSimple;
 import modele.entite.Entite;
-import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
@@ -38,7 +37,7 @@ public class PartieVue implements InvalidationListener{
     private Label vie;
 
 
-    public static final Manager m = new Manager();
+    public static Manager m = new Manager();
 
     public void initialize(){
         kill.textProperty().bind(m.killProperty());

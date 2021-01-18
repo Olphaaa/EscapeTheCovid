@@ -6,7 +6,6 @@ import modele.collisionneur.CollisionneurIA;
 import modele.entite.Entite;
 import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
-import modele.ramasseur.Ramasseur;
 
 import java.util.Iterator;
 

@@ -3,7 +3,6 @@ package modele.deplaceur;
 import modele.collisionneur.Collisionneur;
 import modele.entite.Entite;
 import modele.entite.personnages.PersoPrincipal;
-import modele.ramasseur.Ramasseur;
 
 
 public abstract class Deplaceur {

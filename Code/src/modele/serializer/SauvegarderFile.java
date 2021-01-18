@@ -1,11 +1,7 @@
 package modele.serializer;
 
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import modele.score.Score;
 import modele.score.TableauScore;
-
 import java.io.*;
 
 

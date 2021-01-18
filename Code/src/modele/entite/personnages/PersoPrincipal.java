@@ -52,6 +52,7 @@ public class PersoPrincipal extends Personnage implements Observable{
                 break;
 
             default:
+                this.setImage("/images/perso/ppRien.png");
                 break;
         }
         lesObservateurPerso.forEach(o -> Platform.runLater(() -> o.invalidated( this)));

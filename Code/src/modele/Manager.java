@@ -204,4 +204,5 @@ public class Manager implements InvalidationListener {
     public Collisionneur getLeCollisionneur() {
         return leCollisionneur;
     }
+
 }
