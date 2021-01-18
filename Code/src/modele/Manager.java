@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import launch.Launch;
 import modele.boucleur.Boucleur;
+import modele.boucleur.BoucleurIA;
 import modele.boucleur.BoucleurSimple;
 import modele.collisionneur.Collisionneur;
 import modele.collisionneur.CollisionneurIA;
@@ -74,6 +75,10 @@ public class Manager implements InvalidationListener {
         public StringProperty scoreProperty() {return score;}
         public void setScore(String score) {this.score.set(score);}
 
+    private StringProperty kill = new SimpleStringProperty();
+        public String getKill() {return kill.get();}
+        public StringProperty killProperty() {return kill;}
+        public void setKill(String kill) {this.kill.set(kill);}
 
     public int getNivDiff() {return nivDiff;}
     public void setNivDiff(int i) {this.nivDiff = i;}
@@ -92,8 +97,8 @@ public class Manager implements InvalidationListener {
     private Deplaceur leDeplaceur = new DeplaceurSimple(leCollisionneur, leRamasseur);
     private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA, leRamasseur);// todo voir s'il faut bien le ramasseur
     private SauvegarderFile leSerializer = new SauvegarderFile();
-
     public Manager(){
+
     }
 
     public void startPartie(){
@@ -102,11 +107,11 @@ public class Manager implements InvalidationListener {
         vie.setValue(String.valueOf(perso.getPv()));
         secondes.set(String.valueOf(0));
         score.set(String.valueOf(0));
-        leCreateur.creerIA(carte);
+        kill.set(String.valueOf(0));
         startBoucleur();
     }
 
-    private void startBoucleur(){
+    public void startBoucleur(){
         leBoucleur.addListener(this);
         //leBoucleurIA.addListener(this);
         leBoucleur.setActif(true);
@@ -140,9 +145,9 @@ public class Manager implements InvalidationListener {
             nbIA++;
         }
 
-        if (/*tps%30 == 0 ||*/ perso.getPv()==0){
+        if (tps%30 == 0 || perso.getPv()==0){
             perso.setPv(0);
-            score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10));
+            score.set(String.valueOf(Integer.parseInt(score.get())+tps * 10+Integer.parseInt(kill.get())*6));
             try {
                 partiePerdue();
             } catch (IOException e) {
@@ -150,10 +155,8 @@ public class Manager implements InvalidationListener {
             }
         }
 
-        if (perso.getPv() == 3 && perso.isEquiped()){
-            perso.setImage("/images/perso/ppRien.png");
-            perso.setProtection(null);
-            perso.setEquiped(false);
+        if (perso.getPv() <= 3 && perso.isEquiped()){
+            perso.desequipe();
             nbProtection = 0;
         }
         if (tps%20==0 && nbProtection<1 && !perso.isEquiped()){
@@ -162,7 +165,6 @@ public class Manager implements InvalidationListener {
         }
         deplacementDesIa();
     }
-    //todo voir si c'est bien de mettre de la vue dans le manager
     @FXML
     private void partiePerdue() throws IOException {
         stopBoucleur();
@@ -180,7 +182,7 @@ public class Manager implements InvalidationListener {
         Launch.fenetrePrincipale.setScene(new Scene(container));
     }
 
-    private void deplacementDesIa() {
+    public void deplacementDesIa() {
         Iterator<IA> it = carte.getLesIA().iterator();
         while (it.hasNext()){
             Entite e = it.next();
@@ -205,10 +207,9 @@ public class Manager implements InvalidationListener {
 
 
     public ObservableList<Entite> getListeEntite() {return carte.getLesEntites();}
-    public ObservableList<IA> getListeIA() {return carte.getLesIA();}
 
 
-    private boolean up,down,left,right;
+    private boolean up,down,left,right,space;
 
     private void touche(){
         if (up)        {
@@ -223,6 +224,9 @@ public class Manager implements InvalidationListener {
         if(right){
             leDeplaceur.deplacerDroit(perso);
         }
+        if(space){
+            leDeplaceur.attaquer(perso);
+        }
     }
     public void testRealesed(KeyEvent k){
         if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){
@@ -236,6 +240,9 @@ public class Manager implements InvalidationListener {
         }
         if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){
             right = false;
+        }
+        if(k.getCode() == KeyCode.SPACE){
+            space = false;
         }
         touche();
     }
@@ -252,10 +259,18 @@ public class Manager implements InvalidationListener {
         if(k.getCode() == KeyCode.D || k.getCode() == KeyCode.RIGHT){
             right = true;
         }
+        if(k.getCode() == KeyCode.SPACE){
+            space = true;
+        }
         touche();
     }
 
     public Collisionneur getLeCollisionneur() {
         return leCollisionneur;
+    }
+
+    public void supprIA(IA ia) {
+        kill.set(String.valueOf(Integer.parseInt(kill.get())+1));
+        carte.supprimerEntites(ia);
     }
 }

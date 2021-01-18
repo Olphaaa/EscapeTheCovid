@@ -1,5 +1,7 @@
 package view;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import modele.Manager;
 import modele.createur.CreateurSimple;
 import modele.entite.Entite;
 import modele.entite.personnages.IA;
+import modele.entite.personnages.PersoPrincipal;
 import modele.spawner.Spawner;
 import modele.spawner.SpawnerSimple;
 
@@ -38,8 +41,7 @@ public class PartieVue{
     public static final Manager m = new Manager();
 
     public void initialize(){
-
-        kill.setText("0");
+        kill.textProperty().bind(m.killProperty());
         pseud.setText(m.getPseudo());
         temps.textProperty().bind(m.secondesProperty());
         vie.textProperty().bind(m.vieProperty());
@@ -47,18 +49,15 @@ public class PartieVue{
         Spawner spw = new SpawnerSimple();
         spw.spawnRocher((CreateurSimple) m.getLeCreateur(),m.getCarte(),m.getNivDiff());
 
-
+/*
         for (Entite entite : m.getListeEntite()) {
             update(entite);
         }
+*/
 
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
            change.next();
             for (Entite e : change.getAddedSubList()) {
-                System.out.println("je fait spawn : "+e.getClass());
-                update(e);
-            }
-            for (Entite e : change.getList()){
                 update(e);
             }
 
@@ -79,11 +78,43 @@ public class PartieVue{
     }
 
     public void onStart(ActionEvent actionEvent) {
+        for (Entite entite : m.getListeEntite()) {
+            update(entite);
+        }
+
+
         startButton.setVisible(false);
         ((Button)actionEvent.getSource()).getScene().setOnKeyPressed(m::testPressed);
         ((Button)actionEvent.getSource()).getScene().setOnKeyReleased(m::testRealesed);
         m.startPartie();
+
+        PersoPrincipal pp = m.perso;
+        pp.addListener(this);
     }
+
+
+    public void invalidated(Observable observable) {
+        update(m.perso);
+        m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
+                    change.next();
+                    for (Entite e : change.getAddedSubList()) {
+                        update(e);
+                    }
+
+
+                    for (Entite e : change.getRemoved()) {
+                        Iterator<Node> unIterateur = map.getChildren().iterator();
+                        while (unIterateur.hasNext()) {
+                            Node leNode = unIterateur.next();
+                            if (leNode.getUserData() == e) {
+                                unIterateur.remove();
+                            }
+                        }
+                    }
+                }
+        );
+    }
+
 
     private void update(Entite e){
         ImageView entiteAAfficher = new ImageView();

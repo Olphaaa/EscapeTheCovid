@@ -26,10 +26,10 @@ public class RamasseurSimple extends Ramasseur{
 
             if (x > e.getX()-40 && x < e.getX()+40 && y>e.getY()-40 && y<e.getY()+40){
                 PersoPrincipal pp = ((PersoPrincipal)  laCarte.getLesEntites().get(0));
+                laCarte.supprimerEntites(e);
                 pp.ajouterEquipement((Equipement) e);
                 pp.setX(45);
                 pp.setY(375);
-
                 return e instanceof Protection;
             }
         }

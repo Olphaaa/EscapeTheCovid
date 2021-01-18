@@ -1,16 +1,24 @@
 package modele.entite.personnages;
 
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import modele.entite.equipements.Equipement;
 import modele.entite.equipements.armes.Arme;
 import modele.entite.equipements.protections.Combinaison;
 import modele.entite.equipements.protections.Masque;
 import modele.entite.equipements.protections.Protection;
 import modele.entite.equipements.protections.Visiere;
+import view.PartieVue;
 
-public class PersoPrincipal extends Personnage{
+import java.util.ArrayList;
+import java.util.List;
+
+public class PersoPrincipal extends Personnage implements Observable{
     private Arme a;
     private Protection p;
     private boolean isEquiped;
+    public List<InvalidationListener> lesObservateurPerso = new ArrayList<>();
 
 
     public PersoPrincipal(){
@@ -49,6 +57,7 @@ public class PersoPrincipal extends Personnage{
             default:
                 break;
         }
+        lesObservateurPerso.forEach(o -> Platform.runLater(() -> o.invalidated( this)));
     }
 
     public void retirerEquipement() {
@@ -67,11 +76,9 @@ public class PersoPrincipal extends Personnage{
     public Protection getProtection(){return p;}
 
 
-    public void attaquer(Arme a, IA ia){
-        int pdvAdvers = ia.getPv();
-        pdvAdvers -= a.getPdd();
-        if(pdvAdvers <= 0){ia.setIsDead(true); ia.disparition();}
-        else ia.setPv(pdvAdvers);
+    public void attaquer(IA ia){
+        ia.setIsDead(true);
+        PartieVue.m.supprIA(ia);
     }
 
     public boolean isEquiped() {
@@ -79,4 +86,19 @@ public class PersoPrincipal extends Personnage{
     }
 
 
+    public void addListener(InvalidationListener invalidationListener) {
+        lesObservateurPerso.add(invalidationListener);
+    }
+
+    public void removeListener(InvalidationListener invalidationListener) {
+        lesObservateurPerso.remove(invalidationListener);
+    }
+
+    public void desequipe() {
+        this.setImage("/images/perso/ppRien.png");
+        this.setProtection(null);
+        this.setEquiped(false);
+        lesObservateurPerso.forEach(o -> Platform.runLater(() -> o.invalidated(this)));
+
+    }
 }
