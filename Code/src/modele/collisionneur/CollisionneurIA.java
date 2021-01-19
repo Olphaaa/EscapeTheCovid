@@ -7,7 +7,18 @@ import modele.entite.Rocher;
 import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
 
+/**
+ * The type Collisionneur ia.
+ */
+
 public class CollisionneurIA extends Collisionneur{
+
+    /**
+     * Classe fille du collisionneur pour nos IA qui 
+     *
+     * @param laCarte the la carte
+     * @param m
+     */
     public CollisionneurIA(Carte laCarte, Manager m) {
         super(laCarte, m);
     }
@@ -32,6 +43,11 @@ public class CollisionneurIA extends Collisionneur{
         return null;
     }
 
+    /**
+     * Contaminer au contacte.
+     *
+     * @param entite the entite
+     */
     public void contaminerAuContacte(Entite entite){
         for(Entite e: laCarte.getLesEntites()){
             if (entite.getX() > e.getX()-40 && entite.getX() < e.getX()+40 && entite.getY()>e.getY()-40 && entite.getY()<e.getY()+40){
