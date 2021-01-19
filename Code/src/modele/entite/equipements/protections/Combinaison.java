@@ -1,12 +1,12 @@
 package modele.entite.equipements.protections;
 import java.util.concurrent.ThreadLocalRandom;
-
+/**
+ * Classe fille de Protection
+ * Elle créer une protection de type Combinaison de niveau 4;
+ */
 public class Combinaison extends Protection{
 
-    /**
-     * Classe fille de Protection
-     * Elle créer une protection de type Combinaison de niveau 4;
-     */
+
 
     public Combinaison(){
         this.niveauProtection = 4;

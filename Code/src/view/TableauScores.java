@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * The type Tableau scores.
+ * The type Tableau scores view.
  */
 public class TableauScores implements Serializable {
     @FXML

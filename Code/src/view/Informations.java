@@ -10,7 +10,7 @@ import launch.Launch;
 import java.io.IOException;
 
 /**
- * Informations.
+ * Informations view.
  */
 public class Informations {
     /**

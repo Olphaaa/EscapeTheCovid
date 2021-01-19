@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import modele.entite.Entite;
 import modele.entite.personnages.IA;
 
+import java.util.Iterator;
+
 /**
  * Carte.
  */
@@ -47,6 +49,27 @@ public class Carte {
      *
      * @param e entite a supprimer
      */
-    public void supprimerEntites(Entite e){lesEntites.remove(e);}
+    public void supprimerEntites(Entite e){
+        lesEntites.remove(e);
+        if (e instanceof IA){
+            lesIA.remove(e);
+        }
+    }
+
+    /**
+     * Supprime toutes les IA et Entites lors de la fin de partie
+     */
+    public void supprimerToutEntites(){
+        Iterator<Entite> it1 = lesEntites.iterator();
+        while(it1.hasNext()){
+            Entite e = it1.next();
+            it1.remove();
+        }
+        Iterator<IA> it2 = lesIA.iterator();
+        while(it2.hasNext()){
+            Entite e = it2.next();
+            it2.remove();
+        }
+    }
 
 }

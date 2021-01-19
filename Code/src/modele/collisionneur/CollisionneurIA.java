@@ -54,10 +54,10 @@ public class CollisionneurIA extends Collisionneur{
             if (entite.getX() > e.getX()-40 && entite.getX() < e.getX()+40 && entite.getY()>e.getY()-40 && entite.getY()<e.getY()+40){
                 if (e instanceof IA && !entite.equals(e) && !((IA)entite).isInfect()){
                     if (((IA) e).isInfect()){
-                        ((IA) entite).setInfect(true);//todo l'image ne se met pas a jour au contacte (mais le chemin chamge)
+                        ((IA) entite).setInfect(true);
                     }
                 }
-                if (e instanceof PersoPrincipal){
+                if (e instanceof PersoPrincipal && ((IA)entite).isInfect()){
                     PersoPrincipal pp = super.leManager.getPerso();
                     pp.seFaireToucher();
                     pp.setX(45);

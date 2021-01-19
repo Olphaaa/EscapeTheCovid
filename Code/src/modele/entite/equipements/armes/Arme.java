@@ -1,7 +1,9 @@
 package modele.entite.equipements.armes;
 import modele.entite.equipements.Equipement;
 
-
+/**
+ * Permet d'attaquer une IA
+ */
 public abstract class Arme extends Equipement {
     private final int ptsDegat;
 

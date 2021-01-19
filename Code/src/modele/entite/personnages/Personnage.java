@@ -1,15 +1,12 @@
 package modele.entite.personnages;
 
 import modele.entite.Entite;
-
+/**
+ * Classe Personnage
+ * Elle permet de créer notre type d'entité "visible" tel que l'IA ou le personnage principal
+ *
+ */
 public abstract class Personnage extends Entite {
-    
-    /**
-     * Classe Personnage
-     * Elle permet de créer notre type d'entité "visible" tel que l'IA ou le personnage principal
-     *
-     */
-
     public int pointsDeVie;
 
     private boolean isDead;

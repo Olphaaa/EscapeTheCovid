@@ -44,7 +44,7 @@ import java.util.Iterator;
 public class Manager implements InvalidationListener {
     public int nbKill;
     private int nivDiff;
-    private int nbIA=1;
+    private int nbIA;
     private int nbProtection;
     private boolean up,down,left,right,space;
 
@@ -128,6 +128,9 @@ public class Manager implements InvalidationListener {
         score.set(String.valueOf(0));
         kill.set(String.valueOf(0));
         startBoucleur();
+        leDeplaceurSim = new DeplaceurSimple(leCollisionneur);
+        leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA,carte);
+        //leBoucleur = new BoucleurSimple();
     }
 
     /**
@@ -163,9 +166,9 @@ public class Manager implements InvalidationListener {
             secondes.set(String.valueOf(Integer.parseInt(secondes.get())+1));
         }
         vie.set(String.valueOf(perso.getPv()));
-        if((tps%50==0 && nbIA<=5+(nivDiff*3)-1)){
+        if((tps%30==0 && nbIA<=5+(nivDiff*3)-1)){
             leCreateur.creerIA(carte);
-            ((IA)carte.getLesIA().get(0)).setInfect(true);
+            //((IA)carte.getLesIA().get(0)).setInfect(true);
             nbIA++;
         }
 
@@ -183,12 +186,22 @@ public class Manager implements InvalidationListener {
             perso.desequipe();
             nbProtection = 0;
         }
-        if (tps%20==0 && nbProtection<1 && !perso.isEquiped()){
+        if (tps%100==0 && nbProtection<1 && !perso.isEquiped()){
             nbProtection = 1;
             leSpawner.spawnProtection((CreateurSimple) leCreateur, carte);
         }
         leDeplaceurIA.deplacerIA();
     }
+
+    /**
+     * Permet de réinitialiser une partie
+     * Ne fonctionne pas
+     */
+    private void reinit(){
+        stopBoucleur();
+        carte.supprimerToutEntites();
+    }
+
     /**
      * Affichage de la vue GameOver dès la partie terminée
      */

@@ -15,7 +15,7 @@ import java.io.IOException;
 
 
 /**
- * Setup partie.
+ * Setup partie view.
  */
 public class SetupPartie {
     private static Stage game = Launch.fenetrePrincipale;

@@ -22,10 +22,6 @@
                     <Label text="Vie: " />
                     <Label fx:id="vie" text="/" />
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <Label text="Test: " />
-                    <Label fx:id="test" text="${pseud.text}" />
-                </HBox>
             </VBox>
       </VBox>
    <Button fx:id="startButton" alignment="CENTER" contentDisplay="CENTER" layoutX="480.0" layoutY="343.0" mnemonicParsing="false" onAction="#onStart" text="Start" />

@@ -9,7 +9,7 @@ import launch.Launch;
 import java.io.IOException;
 
 /**
- * The type Game over view.
+ * Game over view.
  */
 public class GameOverView {
 

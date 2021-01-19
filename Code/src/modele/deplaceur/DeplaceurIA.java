@@ -8,16 +8,16 @@ import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
 
 import java.util.Iterator;
-
+/**
+ * Classe fille du deplaceur pour nos IA
+ * Elle permet de gérer le déplacement aléatoire de nos IA.
+ */
 public class DeplaceurIA extends Deplaceur{
 
-    /**
-     * Classe fille du deplaceur pour nos IA
-     * Elle permet de gérer le déplacement aléatoire de nos IA.
-     */
+
 
     private Carte carte;
-    public DeplaceurIA(CollisionneurIA leCollisionneur, Carte carte){//todo voir s'il faut quand meme le ramasseur
+    public DeplaceurIA(CollisionneurIA leCollisionneur, Carte carte){
         super(leCollisionneur);
         this.carte = carte;
         pas = 10;
@@ -57,6 +57,10 @@ public class DeplaceurIA extends Deplaceur{
             ((IA) e).resetDest();
     }
 
+    /**
+     * Déplace une IA en fonction de son lieu de rende-vous
+     * si elle est bloqué ou qu'elle est arrivé à destination, alors son lieu de position change
+     */
     public void deplacerIA(){
         Iterator<IA> it = carte.getLesIA().iterator();
         while (it.hasNext()){

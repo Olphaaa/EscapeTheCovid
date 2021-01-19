@@ -12,14 +12,14 @@ import view.PartieVue;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Classe fille de personnage
+ * Elle permet de gérer les points de vie restant du personnage principal ainsi que son équipement
+ * Et ses attaques.
+ */
 
 public class PersoPrincipal extends Personnage implements Observable{
 
-    /**
-     * Classe fille de personnage
-     * Elle permet de gérer les points de vie restant du personnage principal ainsi que son équipement
-     * Et ses attaques.
-     */
 
     private Protection p;
     private boolean isEquiped;
@@ -34,6 +34,10 @@ public class PersoPrincipal extends Personnage implements Observable{
         this.setY(375);
     }
 
+    /**
+     * Permet d'ajouter un equipement a au personnage principal
+     * @param e le personnage principal
+     */
     public void ajouterEquipement(Equipement e){
         switch (e.getNom()){
           case "Masque":
@@ -74,17 +78,26 @@ public class PersoPrincipal extends Personnage implements Observable{
     }
     public Protection getProtection(){return p;}
 
-
+    /**
+     * Permet d'attaquer une IA
+     * @param ia qui est attaqué
+     */
     public void attaquer(IA ia){
         ia.setIsDead(true);
         PartieVue.m.supprIA(ia);
     }
 
+    /**
+     * Permet de savoir si le personnage est equipé
+     * @return true s'il est equipe d'une protection
+     */
     public boolean isEquiped() {
         return isEquiped;
     }
 
-
+    /**
+     * Permet de desiquiper une protection du personnage princpale
+     */
     public void desequipe() {
         this.setImage("/images/perso/ppRien.png");
         this.setProtection(null);

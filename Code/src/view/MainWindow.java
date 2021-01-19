@@ -10,7 +10,7 @@ import launch.Launch;
 import java.io.IOException;
 
 /**
- * Main window.
+ * Main window view.
  */
 public class MainWindow {
     /**

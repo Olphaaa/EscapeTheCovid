@@ -5,13 +5,13 @@ import modele.score.TableauScore;
 import java.io.*;
 
 
-
+/**
+ * Classe fille de Sauvegarder
+ * Elle permet de sauvegarder un tableau de score dans un fichier binaire.
+ */
 public class SauvegarderFile extends Sauvegarder {
 
-    /**
-     * Classe fille de Sauvegarder
-     * Elle permet de sauvegarder un tableau de score dans un fichier binaire.
-     */
+
 
     @Override
     public void SauvegarderDonnee(Score score) {

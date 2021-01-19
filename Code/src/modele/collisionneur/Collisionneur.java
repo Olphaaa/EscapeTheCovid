@@ -5,14 +5,14 @@ import javafx.beans.property.SimpleDoubleProperty;
 import modele.Carte;
 import modele.Manager;
 import modele.entite.personnages.IA;
-
+/**
+ * Classe mère du Collisionneur:
+ * Elle permet de savoir lorsque l'on rentre en contact avec un rocher, une IA ou une Protection
+ * Elle à deux propriété qui sont la hauteur et la largeur qui permette de connaître la taille de la fenêtre.
+ */
 public abstract class Collisionneur {
 
-    /**
-     * Classe mère du Collisionneur:
-     * Elle permet de savoir lorsque l'on rentre en contact avec un rocher, une IA ou une Protection
-     * Elle à deux propriété qui sont la hauteur et la largeur qui permette de connaître la taille de la fenêtre.
-     */
+
 
     private DoubleProperty width = new SimpleDoubleProperty();
         public double getWidth() {return width.get();}
@@ -33,12 +33,28 @@ public abstract class Collisionneur {
         this.leManager = m;
     }
 
-    //Est-ce que l'on peut avancer dans la direction souhaitée ? Cette fonction répond à la question
+    /**
+     * Est-ce que l'on peut avancer dans la direction souhaitée ? Cette fonction répond à la question
+     * @param x position
+     * @param y position
+     * @return true s'il peut bouger
+     */
     public abstract boolean canMove(double x, double y);
 
-    //Cette fonction permet de savoir si nous somme en collision avec une IA ou une Protection
+
+    /**
+     *Cette methode permet de savoir si nous somme en collision avec une IA ou une Protection
+     * @param x position
+     * @param y position
+     * @return true s'il est présent
+     */
     public abstract boolean isPresent(double x, double y);
 
-    //Cette fonction permet de savoir si une IA se situe dans le rayon d'attaque du personnage.
+    /**
+     * Cette methode permet de savoir si une IA se situe dans le rayon d'attaque du personnage.
+     * @param x position
+     * @param y position
+     * @return l'ia en question
+     */
     public abstract IA isPresentAttaq(double x, double y);
 }

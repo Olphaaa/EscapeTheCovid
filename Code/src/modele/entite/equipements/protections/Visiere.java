@@ -1,13 +1,13 @@
 package modele.entite.equipements.protections;
 
 import java.util.concurrent.ThreadLocalRandom;
-
+/**
+ * Classe fille de Protection
+ * Elle créer une protection de type Visiere de niveau 2;
+ */
 public class Visiere extends Protection {
 
-    /**
-     * Classe fille de Protection
-     * Elle créer une protection de type Visiere de niveau 2;
-     */
+
 
     public Visiere(){
         this.niveauProtection = 2;

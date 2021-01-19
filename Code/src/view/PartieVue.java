@@ -22,7 +22,7 @@ import java.util.Iterator;
 
 
 /**
- * Partie vue.
+ * Partie vue view.
  */
 public class PartieVue implements InvalidationListener{
 

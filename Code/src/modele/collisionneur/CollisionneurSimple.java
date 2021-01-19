@@ -21,8 +21,8 @@ public class CollisionneurSimple extends Collisionneur {
      * Elle permet de savoir lorsque nous rentrons en collision avec un rocher ou le bord de la map.
      * Elle permet aussi de savoir s'il on peut attaquer une IA, si elle est assez proche de nous.
      *
-     * @param laCarte the la carte
-     * @param m       the m
+     * @param laCarte la carte
+     * @param m       le manager
      */
     public CollisionneurSimple(Carte laCarte, Manager m) {
         super(laCarte,m);
@@ -38,12 +38,13 @@ public class CollisionneurSimple extends Collisionneur {
         for (Entite e : laCarte.getLesEntites()) {
             if (e instanceof PersoPrincipal)
                 continue;
-
-            if (x > e.getX() - 100 && x < e.getX() + 100 && y > e.getY() - 100 && y < e.getY() + 100) {
-                if (e instanceof Rocher || e instanceof Protection) {
-                    continue;
-                } else {
-                    return (IA) e;
+            if (e instanceof IA && ((IA)e).isInfect()){
+                if (x > e.getX() - 75 && x < e.getX() + 75 && y > e.getY() - 75 && y < e.getY() + 75) {
+                    if (e instanceof Rocher || e instanceof Protection) {
+                        continue;
+                    } else {
+                        return (IA) e;
+                    }
                 }
             }
         }
