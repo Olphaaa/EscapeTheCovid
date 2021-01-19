@@ -6,6 +6,11 @@ import java.io.*;
 
 public class ChargeurFile extends Chargeur {
 
+    /**
+     * Classe fille de Chargeur
+     * Elle permet de charger un tableau de score à partir d'un fichier binaire.
+     */
+
     @Override
     public TableauScore chargerDonnee(){
         TableauScore lesScores = new TableauScore();

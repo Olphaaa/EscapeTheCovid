@@ -3,6 +3,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Combinaison extends Protection{
 
+    /**
+     * Classe fille de Protection
+     * Elle créer une protection de type Combinaison de niveau 4;
+     */
+
     public Combinaison(){
         this.niveauProtection = 4;
         this.tauxApparition = (float) 0.10;

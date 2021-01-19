@@ -14,6 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersoPrincipal extends Personnage implements Observable{
+
+    /**
+     * Classe fille de personnage
+     * Elle permet de gérer les points de vie restant du personnage principal ainsi que son équipement
+     * Et ses attaques.
+     */
+
     private Protection p;
     private boolean isEquiped;
     public List<InvalidationListener> lesObservateurPerso = new ArrayList<>();

@@ -4,6 +4,12 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 public abstract class Entite {
 
+    /**
+     * Classe principale du modèle en effet c'est la classe mère de toute entite de notre jeu que ce soit une protection ou une ia
+     * C'est le premier point d'extension du modèle.
+     * On y retrouve la position de l'entite.
+     */
+
     protected DoubleProperty x = new SimpleDoubleProperty();
         public double getX() {return x.get();}
         public DoubleProperty xProperty() {return x;}

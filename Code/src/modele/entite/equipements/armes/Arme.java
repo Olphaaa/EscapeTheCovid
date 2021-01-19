@@ -1,8 +1,15 @@
 package modele.entite.equipements.armes;
 import modele.entite.equipements.Equipement;
 
+
 public abstract class Arme extends Equipement {
     private final int ptsDegat;
+
+    /**
+     * Points d'extension pour ajouter des armes par la suite.
+     *
+     * @param ptsDegat
+     */
 
     public Arme(int ptsDegat){
         super.setIdEquipement(2);

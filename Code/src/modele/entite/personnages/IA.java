@@ -4,6 +4,11 @@ import java.util.Random;
 
 
 public class IA extends Personnage{
+    /**
+     * Classe fille de Personnage
+     * Elle permet de gérer l'infection d'une ia ainsi que sont niveaux de vie et sa zone de spawn.
+     * Une ia peut être infectée dès son apparition ou bien après contact avec une ia infectée.
+     */
     private boolean isInfect;
     private double destX;
     private double destY;

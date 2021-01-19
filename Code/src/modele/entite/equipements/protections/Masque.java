@@ -3,6 +3,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Masque extends Protection {
 
+    /**
+     * Classe fille de Protection
+     * Elle créer une protection de type Masque de niveau 1;
+     */
+
     public Masque(){
         this.niveauProtection = 1;
         this.tauxApparition = (float) 0.60;

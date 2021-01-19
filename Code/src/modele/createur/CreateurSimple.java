@@ -8,6 +8,9 @@ import modele.entite.equipements.protections.Visiere;
 import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
 
+/**
+ * Classe fille du Createur d'entite.
+ */
 public class CreateurSimple extends CreateurEntite{
     @Override
     public PersoPrincipal creerPersoPrincipal(Carte carte) {

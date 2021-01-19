@@ -6,6 +6,12 @@ import modele.entite.personnages.PersoPrincipal;
 
 public class DeplaceurSimple extends Deplaceur {
 
+    /**
+     * Classe fille du deplaceur
+     * Elle permet de vérifier si le personnage n'est pas en collison et puis effectue le mouvement demandé.
+     *
+     * @param leCollisionneur
+     */
     public DeplaceurSimple(Collisionneur leCollisionneur){
         super(leCollisionneur);
         pas=7;

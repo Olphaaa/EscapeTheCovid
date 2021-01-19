@@ -9,6 +9,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Rocher extends Entite{
+    /**
+     * Classe fille d'entite
+     * Elle permet d'afficher un rocher afin de créer un obstacle à notre personnage principal.
+     */
     private Random rand = new Random();
     public Rocher(){
         float randX= rand.nextInt(900)+45;

@@ -8,6 +8,11 @@ import java.io.*;
 
 public class SauvegarderFile extends Sauvegarder {
 
+    /**
+     * Classe fille de Sauvegarder
+     * Elle permet de sauvegarder un tableau de score dans un fichier binaire.
+     */
+
     @Override
     public void SauvegarderDonnee(Score score) {
         TableauScore lesScores = new TableauScore();

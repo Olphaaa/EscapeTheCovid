@@ -11,8 +11,19 @@ import modele.entite.personnages.PersoPrincipal;
 
 import java.util.Iterator;
 
+/**
+ * Classe Collisionneur simple.
+ */
 public class CollisionneurSimple extends Collisionneur {
 
+    /**
+     * Classe fille du Collisionneur.
+     * Elle permet de savoir lorsque nous rentrons en collision avec un rocher ou le bord de la map.
+     * Elle permet aussi de savoir s'il on peut attaquer une IA, si elle est assez proche de nous.
+     *
+     * @param laCarte the la carte
+     * @param m       the m
+     */
     public CollisionneurSimple(Carte laCarte, Manager m) {
         super(laCarte,m);
     }

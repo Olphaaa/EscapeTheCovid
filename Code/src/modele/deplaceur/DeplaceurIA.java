@@ -11,6 +11,11 @@ import java.util.Iterator;
 
 public class DeplaceurIA extends Deplaceur{
 
+    /**
+     * Classe fille du deplaceur pour nos IA
+     * Elle permet de gérer le déplacement aléatoire de nos IA.
+     */
+
     private Carte carte;
     public DeplaceurIA(CollisionneurIA leCollisionneur, Carte carte){//todo voir s'il faut quand meme le ramasseur
         super(leCollisionneur);
