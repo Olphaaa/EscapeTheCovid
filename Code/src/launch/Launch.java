@@ -10,9 +10,13 @@ import modele.Manager;
 import view.PartieVue;
 
 
+/**
+ * Classe principale du jeu en effet c'est de la qu'est lancé l'application
+ * Elle initilise nos premiers composants et notre première scène.
+ */
+
 public class Launch extends Application{
     public static Stage fenetrePrincipale;
-    //private static Manager m = new Manager();
 
     @Override
     public void start(Stage pS) throws Exception{

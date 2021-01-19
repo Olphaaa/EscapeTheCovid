@@ -5,6 +5,11 @@ import modele.score.TableauScore;
 import java.time.LocalDateTime;
 import java.time.Month;
 
+/**
+* Simple classe qui nous permet de stocker des données en dure au même endroit pour éviter
+* de les réecrire à chaque fois.
+*/
+
 public class Stub {
     public TableauScore creerTableau(){
         TableauScore retour = new TableauScore();
