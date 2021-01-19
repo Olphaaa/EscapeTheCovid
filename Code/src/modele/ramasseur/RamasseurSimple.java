@@ -8,13 +8,26 @@ import modele.entite.equipements.protections.Protection;
 import modele.entite.personnages.IA;
 import modele.entite.personnages.PersoPrincipal;
 
-
+/**
+ * Permet de rammasser des objets
+ * Le rammaseur n'est pas utilisé
+ */
 public class RamasseurSimple extends Ramasseur{
 
+    /**
+     * Instanciation du ramasseur Simple
+     * @param laCarte
+     */
     public RamasseurSimple(Carte laCarte) {
         super(laCarte);
     }
 
+    /**
+     * Permet de savoir si une entité est présente
+     * @param x position
+     * @param y position
+     * @return true si une entité est présente aux coordonnées, fals sinon
+     */
     @Override
     public boolean isPresent(double x, double y) {
         for (Entite e : laCarte.getLesEntites()) {
@@ -33,6 +46,9 @@ public class RamasseurSimple extends Ramasseur{
         return true;
     }
 
+    /**
+     * Permet de ramasser une protection
+     */
     @Override
     public void Ramasser() {
     }

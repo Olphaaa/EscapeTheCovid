@@ -38,6 +38,9 @@ import java.time.LocalDateTime;
 import java.util.Iterator;
 
 
+/**
+ * Manager.
+ */
 public class Manager implements InvalidationListener {
     public int nbKill;
     private int nivDiff;
@@ -46,6 +49,12 @@ public class Manager implements InvalidationListener {
     private boolean up,down,left,right,space;
 
     private PersoPrincipal perso;
+
+    /**
+     * Get perso perso principal.
+     *
+     * @return the perso principal
+     */
     public PersoPrincipal getPerso(){
         return perso;
     }
@@ -82,8 +91,13 @@ public class Manager implements InvalidationListener {
 
     public int getNivDiff() {return nivDiff;}
     public void setNivDiff(int i) {this.nivDiff = i;}
-
     public CreateurEntite getLeCreateur() {return leCreateur;}
+
+    /**
+     * Get carte.
+     *
+     * @return la carte
+     */
     public Carte getCarte() {return carte;}
 
     private CreateurEntite leCreateur = new CreateurSimple();
@@ -92,14 +106,20 @@ public class Manager implements InvalidationListener {
     private Spawner leSpawner = new SpawnerSimple();
     private Collisionneur leCollisionneur = new CollisionneurSimple(carte,this);
     private Collisionneur leCollisionneurIA = new CollisionneurIA(carte,this);
-    private Ramasseur leRamasseur = new RamasseurSimple(carte);
+    //private Ramasseur leRamasseur = new RamasseurSimple(carte);
     private Deplaceur leDeplaceurSim = new DeplaceurSimple(leCollisionneur);
-    private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA,carte);// todo voir s'il faut bien le ramasseur
+    private Deplaceur leDeplaceurIA = new DeplaceurIA((CollisionneurIA) leCollisionneurIA,carte);
     private SauvegarderFile leSerializer = new SauvegarderFile();
 
+    /**
+     * Instanciation du Manager.
+     */
     public Manager(){
     }
 
+    /**
+     * Debut de la partie
+     */
     public void startPartie(){
         perso = leCreateur.creerPersoPrincipal(carte);
         temps.set(String.valueOf(0));
@@ -110,17 +130,30 @@ public class Manager implements InvalidationListener {
         startBoucleur();
     }
 
+    /**
+     * Début du boucleur
+     */
     public void startBoucleur(){
         leBoucleur.addListener(this);
         leBoucleur.setActif(true);
         new Thread(leBoucleur).start();
     }
 
+    /**
+     * Met fin au boucleur
+     */
     public void stopBoucleur(){
         leBoucleur.setActif(false);
     }
+    /**
+     * variable tps pour gérer le temps
+     */
+    private int tps;
 
-    private int tps;//todo mettre ici pour éviter de déclarer un int a chaque boucle (a voir)
+    /**
+     * Code executé a chaque tour de boucle
+     * @param observable Objet observable
+     */
     @Override
     public void invalidated(Observable observable) {
         tps = Integer.parseInt(temps.get())+1;
@@ -156,6 +189,9 @@ public class Manager implements InvalidationListener {
         }
         leDeplaceurIA.deplacerIA();
     }
+    /**
+     * Affichage de la vue GameOver dès la partie terminée
+     */
     @FXML
     private void partiePerdue() throws IOException {
         stopBoucleur();
@@ -173,8 +209,18 @@ public class Manager implements InvalidationListener {
         Launch.fenetrePrincipale.setScene(new Scene(container));
     }
 
+    /**
+     * get La liste d'entité
+     *
+     * @return la liste d'entités
+     */
     public ObservableList<Entite> getListeEntite() {return carte.getLesEntites();}
 
+    /**
+     * Met les valeurs de la direction en fonciton des touches relachées
+     *
+     * @param k l'évenement du clavier
+     */
     public void testRealesed(KeyEvent k){
         if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){up = false;}
         if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){left = false;}
@@ -183,6 +229,11 @@ public class Manager implements InvalidationListener {
         if(k.getCode() == KeyCode.SPACE){space = false;}
         touche();
     }
+    /**
+     * Met les valeurs de la direction en fonciton des touches appuyées
+     *
+     * @param k l'évenement du clavier
+     */
     public void testPressed(KeyEvent k){
         if(k.getCode() == KeyCode.Z || k.getCode() == KeyCode.UP){up = true;}
         if(k.getCode() == KeyCode.Q || k.getCode() == KeyCode.LEFT){left = true;}
@@ -191,9 +242,18 @@ public class Manager implements InvalidationListener {
         if(k.getCode() == KeyCode.SPACE){space = true;}
         touche();
     }
+    /**
+     * Execute le déplacement du Personnage Princpal une fois une touche activée
+     */
     private void touche(){
         leDeplaceurSim.deplacerPersonnage(up,down,right,left,space,perso);
     }
+
+    /**
+     * Supprime une IA lors de l'attaque
+     *
+     * @param ia IA en question
+     */
 
     public void supprIA(IA ia) {
         kill.set(String.valueOf(Integer.parseInt(kill.get())+1));
@@ -201,6 +261,10 @@ public class Manager implements InvalidationListener {
         nbIA--;
     }
 
+    /**
+     * get le collisionneur
+     * @return le Collisionneur
+     */
     public Collisionneur getLeCollisionneur() {
         return leCollisionneur;
     }

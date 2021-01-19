@@ -82,6 +82,6 @@ public class DeplaceurIA extends Deplaceur{
 
     @Override
     public void attaquer(PersoPrincipal perso) {
-
+        return;
     }
 }

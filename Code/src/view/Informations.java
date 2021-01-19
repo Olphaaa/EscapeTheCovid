@@ -9,8 +9,15 @@ import launch.Launch;
 
 import java.io.IOException;
 
+/**
+ * Informations.
+ */
 public class Informations {
-
+    /**
+     * Affichage de la vue MainWindow au click du bouton
+     *
+     * @param actionEvent the action event
+     */
     @FXML
     private void clickRetour(ActionEvent actionEvent) throws IOException {
         Parent container = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));

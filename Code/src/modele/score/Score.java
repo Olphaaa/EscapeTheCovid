@@ -8,7 +8,10 @@ import javafx.beans.property.StringProperty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-
+/**
+ * Score.
+ * Classe qui définie ce qu'est un score
+ */
 public class Score implements Serializable {
 
     private transient IntegerProperty score = new SimpleIntegerProperty();
@@ -25,6 +28,12 @@ public class Score implements Serializable {
 
     private LocalDateTime date;
 
+    /**
+     * Définition d'un socre
+     * @param score
+     * @param pseudo
+     * @param date du jour
+     */
     public Score (int score, String pseudo, LocalDateTime date){
         this.score.set(score);
         this.pseudo.set(pseudo);

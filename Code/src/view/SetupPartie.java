@@ -14,7 +14,9 @@ import launch.Launch;
 import java.io.IOException;
 
 
-
+/**
+ * Setup partie.
+ */
 public class SetupPartie {
     private static Stage game = Launch.fenetrePrincipale;
 
@@ -24,6 +26,9 @@ public class SetupPartie {
     @FXML
     private ChoiceBox choiceDifficulty;
 
+    /**
+     * Initialize.
+     */
     public void initialize(){
         saisieSurnom.textProperty().bindBidirectional(PartieVue.m.pseudoProperty());
     }

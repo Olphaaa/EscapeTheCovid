@@ -19,6 +19,9 @@ import modele.serializer.ChargeurFile;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * The type Tableau scores.
+ */
 public class TableauScores implements Serializable {
     @FXML
     private ListView listeScores;
@@ -27,6 +30,9 @@ public class TableauScores implements Serializable {
 
     private TableauScore tabScore = stub.creerTableau();
 
+    /**
+     * Initialisation.
+     */
     public void initialize(){
         ChargeurFile leSerializer = new ChargeurFile();
         TableauScore scoreList;

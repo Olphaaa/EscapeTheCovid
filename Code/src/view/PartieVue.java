@@ -21,6 +21,9 @@ import modele.spawner.SpawnerSimple;
 import java.util.Iterator;
 
 
+/**
+ * Partie vue.
+ */
 public class PartieVue implements InvalidationListener{
 
     @FXML
@@ -37,8 +40,14 @@ public class PartieVue implements InvalidationListener{
     private Label vie;
 
 
+    /**
+     * The constant m.
+     */
     public static Manager m = new Manager();
 
+    /**
+     * Initialize.
+     */
     public void initialize(){
         kill.textProperty().bind(m.killProperty());
         pseud.setText(m.getPseudo());
@@ -76,6 +85,11 @@ public class PartieVue implements InvalidationListener{
         m.getLeCollisionneur().heightProperty().bind(map.heightProperty());
     }
 
+    /**
+     * On start.
+     *
+     * @param actionEvent the action event
+     */
     public void onStart(ActionEvent actionEvent) {
         for (Entite entite : m.getListeEntite()) {
             update(entite);
@@ -90,7 +104,11 @@ public class PartieVue implements InvalidationListener{
         PersoPrincipal pp = m.getPerso();
         pp.addListener(this);
     }
-
+    /**
+     * invalidated, ce qui est executé a chaque beep du boucleur
+     *
+     * @param observable Objet observable
+     */
     public void invalidated(Observable observable) {
         update(m.getPerso());
         m.getListeEntite().addListener((ListChangeListener.Change<? extends Entite> change) -> {
@@ -113,7 +131,12 @@ public class PartieVue implements InvalidationListener{
         );
     }
 
-
+    /**
+     * update.
+     * Permet de mettre a jour l'affichage d'une entite
+     *
+     * @param e Entite en question
+     */
     private void update(Entite e){
         ImageView entiteAffichee = new ImageView();
         entiteAffichee.setUserData(e);
